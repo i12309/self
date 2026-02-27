@@ -4,7 +4,7 @@ lang: ru
 timezone: Europe/Moscow
 
 # вместо theme: minima
-remote_theme: "mmistakes/minimal-mistakes"
+theme: minima
 
 plugins:
   - jekyll-feed
