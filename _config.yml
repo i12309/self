@@ -12,7 +12,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-include-cache
 
-minimal_mistakes_skin: "default"   # можно "air", "contrast", "dark" и т.п.
+minimal_mistakes_skin: "dark"   # можно "air", "contrast", "dark" и т.п.
 
 paginate: 10
 paginate_path: /page:num/
