@@ -1,0 +1,5 @@
+main:
+  - title: "Рассказы"
+    url: /
+  - title: "Обо мне"
+    url: /about/
