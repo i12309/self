@@ -1,47 +1,65 @@
+---
+---
 @import "minima";
 
-html, body {
-  background-color: #0f1115;
-  color: #d7dde7;
+$anthracite-bg: #262a31;
+$anthracite-border: #3b424d;
+$text-main: #e1e6ef;
+$text-muted: #b4bdca;
+
+html,
+body {
+  background-color: $anthracite-bg;
+  color: $text-main;
 }
 
 .site-header,
 .site-footer,
 .page-content {
-  background-color: #0f1115;
+  background-color: $anthracite-bg;
 }
 
 .site-header,
 .site-footer {
-  border-color: #252a33;
+  border-color: $anthracite-border;
 }
 
 a {
-  color: #8ab4f8;
+  color: #9cc2ff;
 }
 
 a:visited {
-  color: #b39ddb;
+  color: #c2b3e8;
 }
 
 .post-meta {
-  color: #9aa4b2;
+  color: $text-muted;
 }
 
 blockquote {
-  color: #b8c0cc;
-  border-left-color: #3b4250;
+  color: #c8d0dd;
+  border-left-color: #5b6472;
+  background-color: rgba(255, 255, 255, 0.02);
 }
 
 .story-content-sm {
-  font-size: 0.95rem;
-  line-height: 1.6;
+  font-size: 0.9rem !important;
+  line-height: 1.65;
 }
 
 .story-content-sm p,
 .story-content-sm li,
-.story-content-sm blockquote {
+.story-content-sm blockquote,
+.story-content-sm td,
+.story-content-sm th {
   font-size: 1em;
+}
+
+.story-content-sm h1,
+.story-content-sm h2,
+.story-content-sm h3,
+.story-content-sm h4 {
+  line-height: 1.3;
 }
 
 /* Make content area wider and side gutters smaller than Minima defaults */
