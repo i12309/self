@@ -32,6 +32,18 @@ a:visited {
   color: #c2b3e8;
 }
 
+/* Minima hover colors assume light background; override for dark theme. */
+a:hover,
+a:focus {
+  color: #e8f1ff;
+  text-decoration: underline;
+}
+
+a:visited:hover,
+a:visited:focus {
+  color: #e7ddff;
+}
+
 .post-meta {
   color: $text-muted;
 }
