@@ -3,8 +3,8 @@ description: "Короткие истории.."
 lang: ru
 timezone: Europe/Moscow
 
-# вместо theme: minima
 theme: minima
+minima:
   skin: dark
 
 plugins:
