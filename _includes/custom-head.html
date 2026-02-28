@@ -1,0 +1,43 @@
+{% comment %}
+This file is included by Minima in <head>. We use it for two things:
+1) Cache-bust the stylesheet on GitHub Pages (Fastly caches /assets/main.css).
+2) Provide a tiny set of hard overrides so the site stays anthracite even if CSS is cached.
+{% endcomment %}
+
+{% if site.github.build_revision %}
+  <link rel="stylesheet" href="{{ '/assets/main.css' | relative_url }}?v={{ site.github.build_revision }}">
+{% else %}
+  <link rel="stylesheet" href="{{ '/assets/main.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+{% endif %}
+
+<style>
+  :root {
+    --bg: #2b2f36;
+    --border: #3b424d;
+    --text: #e1e6ef;
+    --muted: #b4bdca;
+    --link: #9cc2ff;
+    --link-visited: #c2b3e8;
+  }
+
+  html, body {
+    background-color: var(--bg) !important;
+    color: var(--text) !important;
+    color-scheme: dark;
+  }
+
+  .page-content, .site-header, .site-footer {
+    background-color: var(--bg) !important;
+  }
+
+  .site-header, .site-footer {
+    border-color: var(--border) !important;
+  }
+
+  a { color: var(--link) !important; }
+  a:visited { color: var(--link-visited) !important; }
+  .post-meta { color: var(--muted) !important; }
+
+  /* Ensure story body size is consistent even if main.css is cached. */
+  .story-content-sm { font-size: 0.9rem !important; line-height: 1.65; }
+</style>
