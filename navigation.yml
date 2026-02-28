@@ -1,5 +1,3 @@
 ﻿main:
-  - title: "Истории"
+  - title: "Тексты"
     url: /stories/
-  - title: "Обо мне"
-    url: /about/

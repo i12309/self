@@ -7,6 +7,9 @@ theme: minima
 minima:
   skin: dark
 
+header_pages:
+  - index.md
+
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
