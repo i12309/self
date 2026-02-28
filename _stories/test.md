@@ -1,6 +1,6 @@
 ---
 title: "dsfgdfgdfgsdsfgdfg"
-layout: post
+layout: story
 ---
 # TEвапвапвапST 
 
