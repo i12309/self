@@ -34,6 +34,24 @@ This file is included by Minima in <head>. We use it for two things:
     border-color: var(--border) !important;
   }
 
+  .site-title,
+  .site-title:visited,
+  .site-nav .page-link,
+  .site-nav .page-link:visited {
+    color: var(--text) !important;
+  }
+
+  .site-nav .menu-icon > svg path {
+    fill: var(--text) !important;
+  }
+
+  @media screen and (max-width: 600px) {
+    .site-nav {
+      background-color: var(--bg) !important;
+      border-color: var(--border) !important;
+    }
+  }
+
   a { color: var(--link) !important; }
   a:visited { color: var(--link-visited) !important; }
   .post-meta { color: var(--muted) !important; }
