@@ -1,9 +1,9 @@
-title: "SIGN"
-description: "Короткие истории.."
+﻿title: "SIGN"
+description: "РљРѕСЂРѕС‚РєРёРµ РёСЃС‚РѕСЂРёРё.."
 lang: ru
 timezone: Europe/Moscow
 
-theme: jekyll-theme-minima
+theme: minima
 minima:
   skin: dark
 
@@ -35,3 +35,4 @@ defaults:
       type: pages
     values:
       layout: page
+

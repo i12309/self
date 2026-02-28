@@ -2,6 +2,39 @@
 ---
 @import "minima";
 
+html, body {
+  background-color: #0f1115;
+  color: #d7dde7;
+}
+
+.site-header,
+.site-footer,
+.page-content {
+  background-color: #0f1115;
+}
+
+.site-header,
+.site-footer {
+  border-color: #252a33;
+}
+
+a {
+  color: #8ab4f8;
+}
+
+a:visited {
+  color: #b39ddb;
+}
+
+.post-meta {
+  color: #9aa4b2;
+}
+
+blockquote {
+  color: #b8c0cc;
+  border-left-color: #3b4250;
+}
+
 .story-content-sm {
   font-size: 0.5rem;
   line-height: 1.6;
