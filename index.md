@@ -1,6 +1,6 @@
 ﻿---
 layout: page
-title: "Главная"
+title: "Список"
 permalink: /
 ---
 
