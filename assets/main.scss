@@ -36,8 +36,14 @@ blockquote {
 }
 
 .story-content-sm {
-  font-size: 0.5rem;
+  font-size: 0.95rem;
   line-height: 1.6;
+}
+
+.story-content-sm p,
+.story-content-sm li,
+.story-content-sm blockquote {
+  font-size: 1em;
 }
 
 /* Make content area wider and side gutters smaller than Minima defaults */
