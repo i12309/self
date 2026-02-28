@@ -1,7 +1,6 @@
 {% comment %}
-This file is included by Minima in <head>. We use it for two things:
-1) Cache-bust the stylesheet on GitHub Pages (Fastly caches /assets/main.css).
-2) Provide a tiny set of hard overrides so the site stays anthracite even if CSS is cached.
+Minima includes this file inside <head>. Keep a tiny set of hard overrides here
+so the header/menu stays readable even if CSS is cached.
 {% endcomment %}
 
 {% if site.github.build_revision %}
@@ -16,8 +15,6 @@ This file is included by Minima in <head>. We use it for two things:
     --border: #3b424d;
     --text: #e1e6ef;
     --muted: #b4bdca;
-    --link: #9cc2ff;
-    --link-visited: #c2b3e8;
   }
 
   html, body {
@@ -34,10 +31,8 @@ This file is included by Minima in <head>. We use it for two things:
     border-color: var(--border) !important;
   }
 
-  .site-title,
-  .site-title:visited,
-  .site-nav .page-link,
-  .site-nav .page-link:visited {
+  .site-title, .site-title:visited,
+  .site-nav .page-link, .site-nav .page-link:visited {
     color: var(--text) !important;
   }
 
@@ -51,11 +46,4 @@ This file is included by Minima in <head>. We use it for two things:
       border-color: var(--border) !important;
     }
   }
-
-  a { color: var(--link) !important; }
-  a:visited { color: var(--link-visited) !important; }
-  .post-meta { color: var(--muted) !important; }
-
-  /* Ensure story body size is consistent even if main.css is cached. */
-  .story-content-sm { font-size: 0.9rem !important; line-height: 1.65; }
 </style>

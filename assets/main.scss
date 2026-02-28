@@ -42,6 +42,30 @@ blockquote {
   background-color: rgba(255, 255, 255, 0.02);
 }
 
+/* Header/nav: Minima defaults assume light background. */
+.site-header {
+  border-top-color: $anthracite-border;
+}
+
+.site-title,
+.site-title:visited,
+.site-nav .page-link,
+.site-nav .page-link:visited {
+  color: $text-main !important;
+}
+
+.site-nav .menu-icon > svg,
+.site-nav .menu-icon > svg path {
+  fill: $text-main !important;
+}
+
+@media screen and (max-width: 600px) {
+  .site-nav {
+    background-color: $anthracite-bg !important;
+    border-color: $anthracite-border !important;
+  }
+}
+
 .story-content-sm {
   font-size: 0.9rem !important;
   line-height: 1.65;
