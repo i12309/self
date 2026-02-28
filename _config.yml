@@ -3,7 +3,7 @@ description: "Короткие истории.."
 lang: ru
 timezone: Europe/Moscow
 
-theme: minima
+theme: jekyll-theme-minima
 minima:
   skin: dark
 
