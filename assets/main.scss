@@ -42,6 +42,19 @@ blockquote {
   background-color: rgba(255, 255, 255, 0.02);
 }
 
+pre {
+  background-color: #353c48;
+  border: 1px solid #475062;
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+pre code {
+  background: transparent;
+  color: #d7dfeb;
+  font-style: italic;
+}
+
 /* Header/nav: Minima defaults assume light background. */
 .site-header {
   border-top-color: $anthracite-border;
