@@ -28,7 +28,7 @@ defaults:
       path: ""
       type: stories
     values:
-      layout: post
+      layout: story
   - scope:
       path: ""
       type: pages
