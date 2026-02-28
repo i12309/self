@@ -7,12 +7,8 @@ timezone: Europe/Moscow
 theme: minima
 
 plugins:
-  - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
-  - jekyll-include-cache
-
-minimal_mistakes_skin: "dark"   # можно "air", "contrast", "dark" и т.п.
 
 paginate: 10
 paginate_path: /page:num/
@@ -20,3 +16,21 @@ paginate_path: /page:num/
 collections:
   stories:
     output: true
+    permalink: /stories/:path/
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+  - scope:
+      path: ""
+      type: stories
+    values:
+      layout: post
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: page

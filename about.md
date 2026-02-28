@@ -1,7 +1,7 @@
 ---
 title: "Обо мне"
 permalink: /about/
-layout: single
+layout: page
 ---
 
 Коротко о сайте.
