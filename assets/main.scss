@@ -42,16 +42,44 @@ blockquote {
   background-color: rgba(255, 255, 255, 0.02);
 }
 
-pre {
-  background-color: #353c48;
-  border: 1px solid #475062;
-  border-radius: 12px;
-  padding: 14px 16px;
+/* Code blocks (Rouge/Minima) */
+.highlighter-rouge {
+  background: transparent;
+  border: 0;
 }
 
+.highlight,
+.highlighter-rouge .highlight,
+pre,
+pre.highlight {
+  background-color: #1f2430;
+  border: 1px solid #2f3747;
+  border-radius: 6px;
+}
+
+.highlight {
+  padding: 0;
+}
+
+.highlight pre,
+.highlighter-rouge .highlight pre,
+pre {
+  margin: 0;
+  padding: 12px 14px;
+  overflow: auto;
+}
+
+.highlight pre code,
+.highlighter-rouge .highlight pre code,
 pre code {
   background: transparent;
   color: #d7dfeb;
+  font-style: italic;
+}
+
+.highlight pre code span,
+.highlighter-rouge .highlight pre code span,
+pre code span {
   font-style: italic;
 }
 
