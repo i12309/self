@@ -6,3 +6,18 @@
   font-size: 0.5rem;
   line-height: 1.6;
 }
+
+/* Make content area wider and side gutters smaller than Minima defaults */
+.wrapper {
+  max-width: calc(980px - (20px * 2));
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+@media screen and (max-width: 800px) {
+  .wrapper {
+    max-width: calc(980px - (16px * 2));
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
