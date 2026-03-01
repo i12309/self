@@ -1,7 +1,7 @@
 ---
 title: "Друзья"
 layout: story
-theme: light
+theme: noir
 order: 60
 excerpt: >-
   История о друге, его красавице жене и их дочери, которые приходят в гости
