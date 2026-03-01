@@ -44,21 +44,39 @@ body.theme-light {
 
 /* Optional per-page style: soften image edges (used via `soft_images: true`). */
 body.soft-images .story-content-sm img {
-  border-radius: 14px;
-  -webkit-mask-image: radial-gradient(
-    farthest-side,
-    rgba(0, 0, 0, 1) 86%,
-    rgba(0, 0, 0, 0) 100%
-  );
-  mask-image: radial-gradient(
-    farthest-side,
-    rgba(0, 0, 0, 1) 86%,
-    rgba(0, 0, 0, 0) 100%
-  );
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-size: 100% 100%;
-  mask-size: 100% 100%;
+  --edge-fade: 18px;
+
+  border-radius: 0;
+  -webkit-mask-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0) 0,
+      rgba(0, 0, 0, 1) var(--edge-fade),
+      rgba(0, 0, 0, 1) calc(100% - var(--edge-fade)),
+      rgba(0, 0, 0, 0) 100%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0,
+      rgba(0, 0, 0, 1) var(--edge-fade),
+      rgba(0, 0, 0, 1) calc(100% - var(--edge-fade)),
+      rgba(0, 0, 0, 0) 100%
+    );
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0) 0,
+      rgba(0, 0, 0, 1) var(--edge-fade),
+      rgba(0, 0, 0, 1) calc(100% - var(--edge-fade)),
+      rgba(0, 0, 0, 0) 100%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0,
+      rgba(0, 0, 0, 1) var(--edge-fade),
+      rgba(0, 0, 0, 1) calc(100% - var(--edge-fade)),
+      rgba(0, 0, 0, 0) 100%
+    );
+  mask-composite: intersect;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
 }
 
