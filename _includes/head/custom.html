@@ -16,6 +16,9 @@ header stay readable even if CSS is cached.
   {% elsif _theme == 'black' %}
     :root { --bg: #0b0d10; --border: #1f2630; --text: #f3f6fb; --muted: #a2acbb; }
     html, body { color-scheme: dark; }
+  {% elsif _theme == 'noir' %}
+    :root { --bg: #141820; --border: #2a3444; --text: #f3f6fb; --muted: #a2acbb; }
+    html, body { color-scheme: dark; }
   {% else %}
     :root { --bg: #2b2f36; --border: #3b424d; --text: #e1e6ef; --muted: #b4bdca; }
     html, body { color-scheme: dark; }

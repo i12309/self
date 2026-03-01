@@ -64,6 +64,27 @@ body.theme-black {
   --code-text: #e6edf7;
 }
 
+html.theme-noir,
+body.theme-noir {
+  --bg: #141820;
+  --border: #2a3444;
+  --text: #f3f6fb;
+  --muted: #a2acbb;
+
+  --link: #8ab4ff;
+  --link-visited: #c6a9ff;
+  --link-hover: #ffffff;
+  --link-visited-hover: #f2ebff;
+
+  --blockquote-text: #dbe3f1;
+  --blockquote-border: #5ee08a;
+  --blockquote-bg: rgba(255, 255, 255, 0.03);
+
+  --code-bg: #0e1117;
+  --code-border: #2a3444;
+  --code-text: #e6edf7;
+}
+
 html,
 body {
   background-color: var(--bg);
