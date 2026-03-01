@@ -2,56 +2,91 @@
 ---
 @import "minima";
 
-$anthracite-bg: #2b2f36;
-$anthracite-border: #3b424d;
-$text-main: #e1e6ef;
-$text-muted: #b4bdca;
+:root {
+  --bg: #2b2f36;
+  --border: #3b424d;
+  --text: #e1e6ef;
+  --muted: #b4bdca;
+
+  --link: #9cc2ff;
+  --link-visited: #c2b3e8;
+  --link-hover: #e8f1ff;
+  --link-visited-hover: #e7ddff;
+
+  --blockquote-text: #c8d0dd;
+  --blockquote-border: #3fb950;
+  --blockquote-bg: rgba(255, 255, 255, 0.02);
+
+  --code-bg: #1f2430;
+  --code-border: #2f3747;
+  --code-text: #d7dfeb;
+}
+
+body.theme-light {
+  --bg: #ffffff;
+  --border: #e6e6e6;
+  --text: #111827;
+  --muted: #6b7280;
+
+  --link: #2563eb;
+  --link-visited: #6d28d9;
+  --link-hover: #1d4ed8;
+  --link-visited-hover: #5b21b6;
+
+  --blockquote-text: #111827;
+  --blockquote-border: #2563eb;
+  --blockquote-bg: rgba(0, 0, 0, 0.03);
+
+  --code-bg: #f6f8fa;
+  --code-border: #e5e7eb;
+  --code-text: #111827;
+}
 
 html,
 body {
-  background-color: $anthracite-bg;
-  color: $text-main;
+  background-color: var(--bg);
+  color: var(--text);
 }
 
 .site-header,
 .site-footer,
 .page-content {
-  background-color: $anthracite-bg;
+  background-color: var(--bg);
 }
 
 .site-header,
 .site-footer {
-  border-color: $anthracite-border;
+  border-color: var(--border);
 }
 
 a {
-  color: #9cc2ff;
+  color: var(--link);
 }
 
 a:visited {
-  color: #c2b3e8;
+  color: var(--link-visited);
 }
 
 /* Minima hover colors assume light background; override for dark theme. */
 a:hover,
 a:focus {
-  color: #e8f1ff;
+  color: var(--link-hover);
   text-decoration: underline;
 }
 
 a:visited:hover,
 a:visited:focus {
-  color: #e7ddff;
+  color: var(--link-visited-hover);
 }
 
 .post-meta {
-  color: $text-muted;
+  color: var(--muted);
 }
 
 blockquote {
-  color: #c8d0dd;
-  border-left: 4px solid #3fb950;
-  background-color: rgba(255, 255, 255, 0.02);
+  color: var(--blockquote-text);
+  border-left: 4px solid var(--blockquote-border);
+  background-color: var(--blockquote-bg);
   padding: 10px 14px;
   border-radius: 6px;
   line-height: 1.75;
@@ -72,8 +107,8 @@ blockquote > :last-child {
 .highlighter-rouge .highlight,
 pre,
 pre.highlight {
-  background-color: #1f2430;
-  border: 1px solid #2f3747;
+  background-color: var(--code-bg);
+  border: 1px solid var(--code-border);
   border-radius: 6px;
 }
 
@@ -93,7 +128,7 @@ pre {
 .highlighter-rouge .highlight pre code,
 pre code {
   background: transparent;
-  color: #d7dfeb;
+  color: var(--code-text);
   font-style: italic;
 }
 
@@ -105,25 +140,25 @@ pre code span {
 
 /* Header/nav: Minima defaults assume light background. */
 .site-header {
-  border-top-color: $anthracite-border;
+  border-top-color: var(--border);
 }
 
 .site-title,
 .site-title:visited,
 .site-nav .page-link,
 .site-nav .page-link:visited {
-  color: $text-main !important;
+  color: var(--text) !important;
 }
 
 .site-nav .menu-icon > svg,
 .site-nav .menu-icon > svg path {
-  fill: $text-main !important;
+  fill: var(--text) !important;
 }
 
 @media screen and (max-width: 600px) {
   .site-nav {
-    background-color: $anthracite-bg !important;
-    border-color: $anthracite-border !important;
+    background-color: var(--bg) !important;
+    border-color: var(--border) !important;
   }
 }
 
