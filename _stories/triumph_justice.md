@@ -33,3 +33,4 @@ cover: "/assets/img/triumph/poster.png"
 
 ![описание]({{ "/assets/img/triumph/3.png" | relative_url }})
 
+![описание]({{ "/assets/img/sign4.png" | relative_url }})
