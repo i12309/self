@@ -167,10 +167,16 @@ body.theme-light .catalog-card:focus-visible .catalog-card__cta {
 
 @media (min-width: 900px) {
   .catalog-card {
+    height: auto;
+    aspect-ratio: 11 / 5;
     border-radius: 18px;
   }
 
   .catalog-card__content {
     padding: 28px 28px 24px;
+  }
+
+  .catalog-card__bg {
+    background-position: center 30%;
   }
 }
