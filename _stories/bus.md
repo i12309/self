@@ -1,7 +1,7 @@
 ---
 title: "Автобусы"
 layout: story
-theme: black
+theme: light
 order: 50
 excerpt: >-
   С девушками как с автобусами: пока бежишь за одним, пропускаешь другие.

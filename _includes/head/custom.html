@@ -9,12 +9,10 @@ so the header/menu stays readable even if CSS is cached.
   <link rel="stylesheet" href="{{ '/assets/main.css' | relative_url }}?v={{ site.time | date: '%s' }}">
 {% endif %}
 
-{% if page.catalog %}
-  {% if site.github.build_revision %}
-    <link rel="stylesheet" href="{{ '/assets/css/catalog.css' | relative_url }}?v={{ site.github.build_revision }}">
-  {% else %}
-    <link rel="stylesheet" href="{{ '/assets/css/catalog.css' | relative_url }}?v={{ site.time | date: '%s' }}">
-  {% endif %}
+{% if site.github.build_revision %}
+  <link rel="stylesheet" href="{{ '/assets/css/catalog.css' | relative_url }}?v={{ site.github.build_revision }}">
+{% else %}
+  <link rel="stylesheet" href="{{ '/assets/css/catalog.css' | relative_url }}?v={{ site.time | date: '%s' }}">
 {% endif %}
 
 <style>
