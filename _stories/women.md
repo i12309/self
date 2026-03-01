@@ -53,4 +53,4 @@ cover: "/assets/img/women/poster.png"
 Она ему про его состояние. А он ей про свою цель! Так и живут.
 
 
-![описание]({{ "/assets/img/sign3.png" | relative_url }})
+![описание]({{ "/assets/img/sign1.png" | relative_url }})

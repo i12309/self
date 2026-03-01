@@ -88,4 +88,4 @@ cover: "/assets/img/bus/poster.png"
 > Так что не бегайте за деву.. за автобусами!
 > Стойте спокойно и ждите следующий, пока расписание не закончилось.
 
-![описание]({{ "/assets/img/sign6.png" | relative_url }})
+![описание]({{ "/assets/img/sign3.png" | relative_url }})

@@ -70,4 +70,4 @@ cover: "/assets/img/friends/poster.png"
 Дверь, которая вела в шумный мир наполненный жизнью!
 И вот, робко и не решительно, я подошёл к ней, и так же робко и со страхом приоткрыл её..
 
-![описание]({{ "/assets/img/sign5.png" | relative_url }})
+![описание]({{ "/assets/img/sign2.png" | relative_url }})
