@@ -1,7 +1,7 @@
 ---
 title: "Автобусы"
 layout: story
-theme: light
+theme: black
 ---
 
 С девушками, это как с автобусами! 
