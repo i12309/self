@@ -15,7 +15,7 @@ cover: "/assets/img/bus/poster.png"
 
 Стоишь ты на остановке. Весь такой, ну такой, модный.
 
-![описание]({{ "/assets/img/bus/0.png" | relative_url }})
+![описание]({{ "/assets/img/bus/0_p.png" | relative_url }})
 
 И тут подходит она! 
 ```
