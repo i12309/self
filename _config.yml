@@ -8,7 +8,7 @@ minima:
   skin: dark
 
 header_pages:
-  - index.md
+  - stories.md
 
 plugins:
   - jekyll-seo-tag
@@ -20,7 +20,7 @@ paginate_path: /page:num/
 collections:
   stories:
     output: true
-    permalink: /stories/:path/
+    permalink: /stories/:name/
 
 defaults:
   - scope:

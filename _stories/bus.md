@@ -1,7 +1,12 @@
 ---
 title: "Автобусы"
 layout: story
-theme: light
+theme: black
+order: 50
+excerpt: >-
+  С девушками как с автобусами: пока бежишь за одним, пропускаешь другие.
+  А расписание — оно не ждёт.
+cover: "/assets/img/bus/poster.png"
 ---
 ```
 С девушками, это как с автобусами! 

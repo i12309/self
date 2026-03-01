@@ -9,18 +9,30 @@ so the header/menu stays readable even if CSS is cached.
   <link rel="stylesheet" href="{{ '/assets/main.css' | relative_url }}?v={{ site.time | date: '%s' }}">
 {% endif %}
 
+{% if page.catalog %}
+  {% if site.github.build_revision %}
+    <link rel="stylesheet" href="{{ '/assets/css/catalog.css' | relative_url }}?v={{ site.github.build_revision }}">
+  {% else %}
+    <link rel="stylesheet" href="{{ '/assets/css/catalog.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+  {% endif %}
+{% endif %}
+
 <style>
-  :root {
-    --bg: #2b2f36;
-    --border: #3b424d;
-    --text: #e1e6ef;
-    --muted: #b4bdca;
-  }
+  {% assign _theme = page.theme | default: 'dark' %}
+  {% if _theme == 'light' %}
+    :root { --bg: #ffffff; --border: #e6e6e6; --text: #111827; --muted: #6b7280; }
+    html, body { color-scheme: light; }
+  {% elsif _theme == 'black' %}
+    :root { --bg: #0b0d10; --border: #1f2630; --text: #f3f6fb; --muted: #a2acbb; }
+    html, body { color-scheme: dark; }
+  {% else %}
+    :root { --bg: #2b2f36; --border: #3b424d; --text: #e1e6ef; --muted: #b4bdca; }
+    html, body { color-scheme: dark; }
+  {% endif %}
 
   html, body {
     background-color: var(--bg) !important;
     color: var(--text) !important;
-    color-scheme: dark;
   }
 
   .page-content, .site-header, .site-footer {

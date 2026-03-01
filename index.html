@@ -1,0 +1,40 @@
+---
+layout: default
+title: "Каталог"
+permalink: /
+theme: black
+catalog: true
+---
+
+{% assign stories_with_order = site.stories | where_exp: "s", "s.order != nil" | sort: "order" %}
+{% assign stories_without_order = site.stories | where_exp: "s", "s.order == nil" | sort: "title" %}
+{% assign stories = stories_with_order | concat: stories_without_order %}
+
+<div class="catalog">
+  <header class="catalog__header">
+    <h1 class="catalog__title">{{ page.title }}</h1>
+    <p class="catalog__subtitle">Большие карточки-обложки: выбирай историю и читай.</p>
+  </header>
+
+  {% if stories.size > 0 %}
+    <ul class="catalog-list">
+      {% for story in stories %}
+        {% assign cover = story.cover | default: "/assets/covers/default.jpg" %}
+        <li>
+          <a class="catalog-card" href="{{ story.url | relative_url }}">
+            <span class="catalog-card__bg" style="background-image: url('{{ cover | relative_url }}');"></span>
+            <span class="catalog-card__overlay"></span>
+            <span class="catalog-card__content">
+              <h2 class="catalog-card__title">{{ story.title | escape }}</h2>
+              {% if story.tagline %}<p class="catalog-card__tagline">{{ story.tagline | escape }}</p>{% endif %}
+              {% if story.excerpt %}<p class="catalog-card__excerpt">{{ story.excerpt | escape }}</p>{% endif %}
+              <span class="catalog-card__cta">Читать</span>
+            </span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Пока нет историй.</p>
+  {% endif %}
+</div>
