@@ -1,0 +1,13 @@
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  {%- seo -%}
+
+  {% assign _ver = site.github.build_revision | default: site.time | date: '%s' %}
+  <link rel="stylesheet" href="{{ '/assets/main.css' | relative_url }}?v={{ _ver }}">
+  <link type="application/atom+xml" rel="alternate" href="{{ '/feed.xml' | relative_url }}" title="{{ site.title }}" />
+
+  {%- include head/custom.html -%}
+</head>
