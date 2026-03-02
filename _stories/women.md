@@ -28,11 +28,12 @@ cover: "/assets/img/women/poster.png"
 Ну вы поняли. 
 ```
 Набираешься сил на следующую цель. 
+
+![описание]({{ "/assets/img/women/w1_p.png" | relative_url }})
+
 ```
 Раз два три.. побежали. 
 ```
-![описание]({{ "/assets/img/women/w1_p.png" | relative_url }})
-
 А вот женщина, это совсем не про цель. Она про **процесс**! 
 Сидишь ждешь, пока он бегает. 
 
@@ -91,4 +92,4 @@ cover: "/assets/img/women/poster.png"
 Она ему про его **состояние**. А он ей про свою **цель**! Так и живут.
 
 
-![описание]({{ "/assets/img/sign1.png" | relative_url }})
+[![описание]({{ "/assets/img/sign1.png" | relative_url }})]({{ "/" | relative_url }})
