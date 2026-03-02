@@ -71,4 +71,4 @@ cover: "/assets/img/cage/poster.png"
 Я безукоризненно чист, я выглажен и от меня благоухает новым одеколоном.
 Проходящие мимо люди никогда не догадаются что творится в моей голове...
 
-![описание]({{ "/assets/img/sign2.png" | relative_url }})
+[![описание]({{ "/assets/img/sign2.png" | relative_url }})]({{ "/" | relative_url }})
