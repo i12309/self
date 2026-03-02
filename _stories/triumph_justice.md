@@ -17,7 +17,7 @@ cover: "/assets/img/triumph/poster.png"
       <path d="M16.8 6.2a7.8 7.8 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
     </svg>
   </span>
-  <span class="bg-audio-label">Дождь: включить</span>
+  <span class="bg-audio-label">Фон: включить</span>
 </button>
 <audio id="rain-audio" preload="auto" loop>
   <source src="{{ '/assets/triumph/rain.mp3' | relative_url }}" type="audio/mpeg">
@@ -73,7 +73,7 @@ cover: "/assets/img/triumph/poster.png"
     audio.volume = 0.35;
 
     function setLabel() {
-      label.textContent = audio.paused ? "Дождь: включить" : "Дождь: выключить";
+      label.textContent = audio.paused ? "Фон: включить" : "Фон: выключить";
     }
 
     async function start() {
