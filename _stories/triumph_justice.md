@@ -8,6 +8,76 @@ excerpt: >-
   тебя холодной скалой.
 cover: "/assets/img/triumph/poster.png"
 ---
+
+<button class="bg-audio-toggle" id="rain-toggle" type="button">Дождь: включить</button>
+<audio id="rain-audio" preload="auto" loop>
+  <source src="{{ '/assets/triumph/rain.mp3' | relative_url }}" type="audio/mpeg">
+</audio>
+<style>
+  .bg-audio-toggle {
+    position: sticky;
+    top: 12px;
+    z-index: 5;
+    margin: 6px 0 14px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(0, 0, 0, 0.18);
+    color: var(--text);
+    backdrop-filter: blur(6px);
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  html.theme-light .bg-audio-toggle,
+  body.theme-light .bg-audio-toggle {
+    background: rgba(255, 255, 255, 0.55);
+  }
+</style>
+<script>
+  (function () {
+    const audio = document.getElementById("rain-audio");
+    const btn = document.getElementById("rain-toggle");
+    const storageKey = "bg_rain_enabled";
+
+    audio.volume = 0.35;
+
+    function setLabel() {
+      btn.textContent = audio.paused ? "Дождь: включить" : "Дождь: выключить";
+    }
+
+    async function start() {
+      try {
+        await audio.play();
+        localStorage.setItem(storageKey, "1");
+      } catch (e) {
+        // Autoplay can be blocked; user can start via the button.
+      } finally {
+        setLabel();
+      }
+    }
+
+    function stop() {
+      audio.pause();
+      localStorage.setItem(storageKey, "0");
+      setLabel();
+    }
+
+    btn.addEventListener("click", () => {
+      if (audio.paused) start();
+      else stop();
+    });
+
+    const remembered = localStorage.getItem(storageKey);
+    if (remembered === "1") start();
+    else {
+      setLabel();
+      // Try to autoplay once; if blocked, button remains.
+      if (remembered === null) start();
+    }
+  })();
+</script>
+
 > Женщина.. Иногда, всё что ей нужно - поплакать и выговориться. И она снова как новенькая.
 
 ![описание]({{ "/assets/img/triumph/1.png" | relative_url }})
