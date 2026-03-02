@@ -1,20 +1,100 @@
-/* Комиксная типографика для историй */
-.comic {
-  max-width: 48rem;
-  margin: 0 auto;
-  line-height: 1.35;
+.story-content .comic-line {
+  margin: 0.9em 0;
   letter-spacing: 0.2px;
 }
 
-.comic p { margin: 0.7em 0; }
+.story-content .comic-setup {
+  font-size: 1.12em;
+  font-weight: 650;
+}
 
-.huge   { font-size: clamp(2.2rem, 5vw, 4.2rem); font-weight: 800; line-height: 1.05; }
-.big    { font-size: clamp(1.5rem, 2.8vw, 2.3rem); font-weight: 700; }
-.normal { font-size: clamp(1.05rem, 1.3vw, 1.2rem); }
-.small  { font-size: clamp(0.9rem, 1.1vw, 1.05rem); opacity: 0.9; }
-.tiny   { font-size: clamp(0.75rem, 0.95vw, 0.9rem); opacity: 0.85; }
+.story-content .comic-hook {
+  font-size: 1.18em;
+  font-weight: 800;
+  letter-spacing: 0.35px;
+}
 
-.whisper { font-size: clamp(0.85rem, 1vw, 1rem); font-style: italic; opacity: 0.85; }
-.punch   { text-transform: uppercase; letter-spacing: 0.06em; }
-.tight   { margin-top: 0.2em; }
-.spread  { margin-top: 1.3em; }
+.story-content .comic-whisper {
+  opacity: 0.9;
+  font-size: 1.02em;
+  letter-spacing: 0.45px;
+}
+
+.story-content .comic-staccato {
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 0.98em;
+  letter-spacing: 1.4px;
+  opacity: 0.95;
+}
+
+.story-content .comic-title {
+  font-weight: 950;
+  font-size: clamp(2.2rem, 5.2vw, 3.4rem);
+  letter-spacing: 0.4px;
+  line-height: 1.05;
+  text-transform: uppercase;
+  text-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.45),
+    0 0 18px rgba(251, 191, 36, 0.18);
+}
+
+.story-content .comic-title::first-letter {
+  font-size: 1.25em;
+  letter-spacing: -0.02em;
+}
+
+.story-content .comic-slam {
+  font-weight: 950;
+  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  line-height: 1.08;
+  text-shadow:
+    0 0 0.8px rgba(0, 0, 0, 0.9),
+    0 0 18px rgba(248, 113, 113, 0.16);
+}
+
+.story-content .comic-panel {
+  margin: 1.05em 0;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background:
+    radial-gradient(120% 120% at 20% 10%, rgba(251, 191, 36, 0.09) 0%, rgba(0, 0, 0, 0) 55%),
+    radial-gradient(120% 120% at 90% 70%, rgba(138, 180, 255, 0.08) 0%, rgba(0, 0, 0, 0) 58%),
+    rgba(255, 255, 255, 0.02);
+}
+
+body.theme-light .story-content .comic-panel {
+  background:
+    radial-gradient(120% 120% at 20% 10%, rgba(37, 99, 235, 0.08) 0%, rgba(0, 0, 0, 0) 55%),
+    radial-gradient(120% 120% at 90% 70%, rgba(217, 70, 239, 0.08) 0%, rgba(0, 0, 0, 0) 58%),
+    rgba(0, 0, 0, 0.02);
+}
+
+.story-content .comic-cta {
+  font-weight: 850;
+  letter-spacing: 0.35px;
+}
+
+.story-content .comic-yes {
+  font-weight: 750;
+  letter-spacing: 0.2px;
+  padding-left: 12px;
+  border-left: 3px solid rgba(251, 191, 36, 0.55);
+}
+
+.story-content .comic-world {
+  font-weight: 950;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  letter-spacing: 0.9px;
+  text-transform: uppercase;
+  text-shadow: 0 0 16px rgba(138, 180, 255, 0.18);
+}
+
+.story-content .comic-epilogue {
+  opacity: 0.92;
+  font-size: 1.06em;
+  letter-spacing: 0.25px;
+}
