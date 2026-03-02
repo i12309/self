@@ -22,6 +22,7 @@
   --code-text: #d7dfeb;
 }
 
+html.theme-light,
 body.theme-light {
   --bg: #ffffff;
   --border: #e6e6e6;
@@ -42,6 +43,7 @@ body.theme-light {
   --code-text: #111827;
 }
 
+html.theme-black,
 body.theme-black {
   --bg: #0b0d10;
   --border: #1f2630;
@@ -54,11 +56,32 @@ body.theme-black {
   --link-visited-hover: #f2ebff;
 
   --blockquote-text: #dbe3f1;
-  --blockquote-border: #5ee08a;
+  --blockquote-border: #d0d0d0;
   --blockquote-bg: rgba(255, 255, 255, 0.03);
 
   --code-bg: #07090c;
   --code-border: #1f2630;
+  --code-text: #e6edf7;
+}
+
+html.theme-noir,
+body.theme-noir {
+  --bg: #141820;
+  --border: #2a3444;
+  --text: #f3f6fb;
+  --muted: #a2acbb;
+
+  --link: #8ab4ff;
+  --link-visited: #c6a9ff;
+  --link-hover: #ffffff;
+  --link-visited-hover: #f2ebff;
+
+  --blockquote-text: #dbe3f1;
+  --blockquote-border: #fbbf24;
+  --blockquote-bg: rgba(255, 255, 255, 0.03);
+
+  --code-bg: #0e1117;
+  --code-border: #2a3444;
   --code-text: #e6edf7;
 }
 
@@ -170,6 +193,25 @@ pre code span {
   color: var(--text) !important;
 }
 
+.site-title--stacked {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  text-decoration: none;
+}
+
+.site-title__brand {
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.site-title__tagline {
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.25;
+  opacity: 0.92;
+}
+
 .site-nav .menu-icon > svg,
 .site-nav .menu-icon > svg path {
   fill: var(--text) !important;
@@ -200,6 +242,31 @@ pre code span {
 .story-content-sm h3,
 .story-content-sm h4 {
   line-height: 1.3;
+}
+
+.story-header {
+  margin: 10px 0 18px;
+}
+
+.story-title {
+  margin: 0 0 8px;
+}
+
+.story-tagline {
+  margin: 0 0 10px;
+  color: var(--muted);
+}
+
+.story-excerpt {
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+body.theme-light .story-excerpt {
+  background-color: rgba(0, 0, 0, 0.03);
 }
 
 /* Make content area wider and side gutters smaller than Minima defaults */

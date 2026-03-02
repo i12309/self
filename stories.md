@@ -1,10 +1,12 @@
 ---
 layout: page
-title: "Истории"
+title: "Список"
 permalink: /stories/
 ---
 
-{% assign stories = site.stories | sort: "path" | reverse %}
+{% assign stories_with_order = site.stories | where_exp: "s", "s.order != nil" | sort: "order" %}
+{% assign stories_without_order = site.stories | where_exp: "s", "s.order == nil" | sort: "title" %}
+{% assign stories = stories_with_order | concat: stories_without_order %}
 {% if stories.size > 0 %}
 <ul>
 {% for story in stories %}

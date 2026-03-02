@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}" class="theme-{{ page.theme | default: 'dark' }}">
   {%- include head.html -%}
 
   <body class="theme-{{ page.theme | default: 'dark' }}{% if page.soft_images %} soft-images{% endif %}">
-    {%- include header.html -%}
+    {%- unless page.hide_header -%}
+      {%- include header.html -%}
+    {%- endunless -%}
 
     <main class="page-content" aria-label="Content">
       <div class="wrapper">
