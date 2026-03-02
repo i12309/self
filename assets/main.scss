@@ -193,6 +193,25 @@ pre code span {
   color: var(--text) !important;
 }
 
+.site-title--stacked {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  text-decoration: none;
+}
+
+.site-title__brand {
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.site-title__tagline {
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.25;
+  opacity: 0.92;
+}
+
 .site-nav .menu-icon > svg,
 .site-nav .menu-icon > svg path {
   fill: var(--text) !important;
