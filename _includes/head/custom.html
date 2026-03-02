@@ -8,6 +8,10 @@ header stay readable even if CSS is cached.
   <link rel="stylesheet" href="{{ '/assets/css/catalog.css' | relative_url }}?v={{ _ver }}">
 {% endif %}
 
+{% if page.story_css %}
+  <link rel="stylesheet" href="{{ '/assets/css/' | append: page.story_css | append: '.css' | relative_url }}?v={{ _ver }}">
+{% endif %}
+
 <style>
   {% assign _theme = page.theme | default: 'dark' %}
   {% if _theme == 'light' %}
