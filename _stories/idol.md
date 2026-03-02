@@ -6,7 +6,7 @@ order: 60
 story_css: idol
 excerpt: >-
   В шаббат… нельзя ни хлопать в ладоши, ни хлопать по бёдрам, ни танцевать.
-cover: "/assets/img/friends/poster.png"
+cover: "/assets/img/idol/poster.png"
 ---
 
 В нашем мире много страшных вещей. 
