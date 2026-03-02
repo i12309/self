@@ -12,7 +12,9 @@ cover: "/assets/img/triumph/poster.png"
 <button class="bg-audio-toggle" id="rain-toggle" type="button">
   <span class="bg-audio-icon" aria-hidden="true">
     <svg viewBox="0 0 24 24" width="18" height="18" focusable="false" aria-hidden="true">
-      <path d="M12 2a7 7 0 0 0-7 7v1H4a1 1 0 0 0 0 2h1v7a1 1 0 1 0 2 0v-7h10v7a3 3 0 0 1-6 0 1 1 0 1 0-2 0 5 5 0 0 0 10 0v-7h1a1 1 0 1 0 0-2h-1V9a7 7 0 0 0-7-7Zm5 8H7V9a5 5 0 0 1 10 0v1Z"/>
+      <path d="M11 5L6.5 8.5H3v7h3.5L11 19V5Z" fill="currentColor"/>
+      <path d="M14.5 8.5a4.5 4.5 0 0 1 0 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M16.8 6.2a7.8 7.8 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
     </svg>
   </span>
   <span class="bg-audio-label">Дождь: включить</span>
@@ -52,7 +54,8 @@ cover: "/assets/img/triumph/poster.png"
   }
 
   .bg-audio-icon svg {
-    fill: var(--rain-accent);
+    display: block;
+    color: var(--rain-accent);
   }
 
   .bg-audio-toggle:focus-visible {
