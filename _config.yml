@@ -7,8 +7,7 @@ theme: minima
 minima:
   skin: dark
 
-header_pages:
-  - stories.md
+header_pages: []
 
 plugins:
   - jekyll-seo-tag

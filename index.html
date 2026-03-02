@@ -2,8 +2,9 @@
 layout: default
 title: "Каталог"
 permalink: /
-theme: black
+theme: noir
 catalog: true
+hide_header: true
 ---
 
 {% assign stories_with_order = site.stories | where_exp: "s", "s.order != nil" | sort: "order" %}
