@@ -1,7 +1,7 @@
 ---
 layout: page
-title: "Каталог"
-permalink: /
+title: "Список"
+permalink: /stories/
 ---
 
 {% assign stories_with_order = site.stories | where_exp: "s", "s.order != nil" | sort: "order" %}
