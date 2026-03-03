@@ -11,7 +11,7 @@ cover: "/assets/img/idol/poster.png"
 В нашем мире много страшных вещей. 
 {: .comic-line .comic-setup}
 
-Но одна из них самая пугающая. 
+Но одна из них самая пугающая.
 {: .comic-line .comic-hook}
 
 Остальные меркнет перед ней. 
