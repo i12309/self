@@ -102,7 +102,7 @@ cover: "/assets/img/idol/poster_i.png"
 ![описание]({{ "/assets/img/idol/4_1.png" | relative_url }})
 
 Спастись от греха можно, сказав лишь одно слово – **ДА**! 
-{: .comic-panel .comic-cta}
+
 
 **Да**, я грешник. 
 {: .comic-line .comic-yes}
