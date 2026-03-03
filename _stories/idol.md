@@ -1,7 +1,7 @@
 ---
 title: "Идея!"
 layout: story
-theme: light
+theme: noir
 order: 60
 story_css: idol
 excerpt: >-
@@ -86,10 +86,9 @@ cover: "/assets/img/idol/poster.png"
 Только что бы вы поверили. 
 {: .comic-line .comic-whisper}
 
+![описание]({{ "/assets/img/idol/5_1.png" | relative_url }})
 Так Идея становилась вашим Богом. 
 {: .comic-line .comic-slam}
-
-![описание]({{ "/assets/img/idol/5_1.png" | relative_url }})
 
 Ради неё вы готовы на всё, теряя свободу.
 {: .comic-line}
@@ -102,16 +101,16 @@ cover: "/assets/img/idol/poster.png"
 
 ![описание]({{ "/assets/img/idol/4_1.png" | relative_url }})
 
-Спастись от греха можно лишь сказав одно слово – да! 
+Спастись от греха можно лишь сказав одно слово – **ДА**! 
 {: .comic-panel .comic-cta}
 
-Да я грешник. 
+**Да** я грешник. 
 {: .comic-line .comic-yes}
 
-Да я хочу облегчить душу. 
+**Да** я хочу облегчить душу. 
 {: .comic-line .comic-yes}
 
-Да меня нужно спасти. 
+**Да** меня нужно спасти. 
 {: .comic-line .comic-yes}
 
 Если вы читаете это, знайте что вас избрали. 
@@ -137,10 +136,6 @@ cover: "/assets/img/idol/poster.png"
 
 ![описание]({{ "/assets/img/idol/7.png" | relative_url }})
 
- 
-
-> Иисус сказал что спасёт грешников, а не праведников!
-{: .comic-line .comic-epilogue}
 
 
 [![описание]({{ "/assets/img/sign3.png" | relative_url }})]({{ "/" | relative_url }})
