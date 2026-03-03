@@ -10,7 +10,7 @@ cover: "/assets/img/sock/poster.png"
 Однажды.. у меня порвался носок!
 Ну, порвался и порвался. С кем не бывает. 
 
-![описание]({{ "/assets/img/sock/1.png" | relative_url }})
+![описание]({{ "/assets/img/sock/1_p.png" | relative_url }})
 
 Но вот, я задумался.
 > Носков же двое?  
@@ -26,7 +26,7 @@ cover: "/assets/img/sock/poster.png"
 И никак иначе. 
 ```
 
-![описание]({{ "/assets/img/sock/2.png" | relative_url }})
+![описание]({{ "/assets/img/sock/2_p.png" | relative_url }})
 
 Другое мне в голову даже не пришло.
 
@@ -55,7 +55,7 @@ cover: "/assets/img/sock/poster.png"
 
 Ты там рождаешься.
 
-![описание]({{ "/assets/img/sock/3.png" | relative_url }})
+![описание]({{ "/assets/img/sock/3_p.png" | relative_url }})
 
 Тебя покупают. 
 
@@ -90,7 +90,7 @@ cover: "/assets/img/sock/poster.png"
 Трагедия.
 ```
 
-![описание]({{ "/assets/img/sock/4.png" | relative_url }})
+![описание]({{ "/assets/img/sock/4_p.png" | relative_url }})
 
 Постойте, но ведь их было двое! 
 А как мы помним, одного из них зовут **Кеша**, а второго **Жора**.
@@ -120,7 +120,7 @@ cover: "/assets/img/sock/poster.png"
 
 Либо его хлопковое бездыханное тело лежит где-то на свалке либо едет в специальной машине, на переработку, в далекое Подмосковье.
 
-![описание]({{ "/assets/img/sock/5.png" | relative_url }})
+![описание]({{ "/assets/img/sock/5_p.png" | relative_url }})
 
 И более того. Он едет туда не один. 
 А с другими, такими же порванными ранее **Кешами**.
@@ -131,6 +131,6 @@ cover: "/assets/img/sock/poster.png"
 
 Такой он, "**носковый**" день сурка.
 
-![описание]({{ "/assets/img/sock/6.png" | relative_url }})
+![описание]({{ "/assets/img/sock/6_p.png" | relative_url }})
 
-[![описание]({{ "/assets/img/sign2.png" | relative_url }})]({{ "/" | relative_url }})
+[![описание]({{ "/assets/img/sign2_p.png" | relative_url }})]({{ "/" | relative_url }})
