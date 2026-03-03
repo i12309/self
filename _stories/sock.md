@@ -133,4 +133,4 @@ cover: "/assets/img/sock/poster.png"
 
 ![описание]({{ "/assets/img/sock/6_p.png" | relative_url }})
 
-[![описание]({{ "/assets/img/sign2_p.png" | relative_url }})]({{ "/" | relative_url }})
+[![описание]({{ "/assets/img/sign2.png" | relative_url }})]({{ "/" | relative_url }})
