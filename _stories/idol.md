@@ -1,7 +1,7 @@
 ---
 title: "Идея!"
 layout: story
-theme: noir
+theme: light
 order: 60
 story_css: idol
 excerpt: >-
@@ -87,6 +87,7 @@ cover: "/assets/img/idol/poster.png"
 {: .comic-line .comic-whisper}
 
 ![описание]({{ "/assets/img/idol/5_1.png" | relative_url }})
+
 Так Идея становилась вашим Богом. 
 {: .comic-line .comic-slam}
 
@@ -101,8 +102,7 @@ cover: "/assets/img/idol/poster.png"
 
 ![описание]({{ "/assets/img/idol/4_1.png" | relative_url }})
 
-Спастись от греха можно лишь сказав одно слово – **ДА**! 
-{: .comic-panel .comic-cta}
+> Спастись от греха можно лишь сказав одно слово – **ДА**! 
 
 **Да** я грешник. 
 {: .comic-line .comic-yes}
