@@ -1,11 +1,11 @@
 ---
-title: "Идея!"
+title: "Не бойтесь!"
 layout: story
 theme: light
 order: 60
 story_css: idol
 excerpt: >-
-  надо придумать
+  Вам не нужно ничего делать. 
 cover: "/assets/img/idol/poster.png"
 ---
 В нашем мире много страшных вещей. 
