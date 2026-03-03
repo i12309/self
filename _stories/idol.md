@@ -6,7 +6,7 @@ order: 60
 story_css: idol
 excerpt: >-
   Вам не нужно ничего делать. 
-cover: "/assets/img/idol/poster.png"
+cover: "/assets/img/idol/poster_i.png"
 ---
 В нашем мире много страшных вещей. 
 {: .comic-line .comic-setup}
