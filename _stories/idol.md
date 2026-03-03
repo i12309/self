@@ -23,7 +23,7 @@ cover: "/assets/img/idol/poster.png"
 Ее не возможно потрогать, увидеть, почувствовать. 
 {: .comic-line .comic-whisper}
 
-![описание]({{ "/assets/img/idol/1_p.png" | relative_url }}) 
+![описание]({{ "/assets/img/idol/1.png" | relative_url }}) 
 
 Она не существует! 
 {: .comic-line .comic-slam}
