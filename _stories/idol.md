@@ -11,7 +11,7 @@ cover: "/assets/img/idol/poster.png"
 В нашем мире много страшных вещей. 
 {: .comic-line .comic-setup}
 
-Но одна из них самая пугающая.
+Но одна из них самая пугающая. 
 {: .comic-line .comic-hook}
 
 Остальные меркнет перед ней. 
@@ -87,7 +87,6 @@ cover: "/assets/img/idol/poster.png"
 {: .comic-line .comic-whisper}
 
 ![описание]({{ "/assets/img/idol/5_1.png" | relative_url }})
-
 Так Идея становилась вашим Богом. 
 {: .comic-line .comic-slam}
 
@@ -102,7 +101,8 @@ cover: "/assets/img/idol/poster.png"
 
 ![описание]({{ "/assets/img/idol/4_1.png" | relative_url }})
 
-> Спастись от греха можно лишь сказав одно слово – **ДА**! 
+Спастись от греха можно лишь сказав одно слово – **ДА**! 
+{: .comic-panel .comic-cta}
 
 **Да** я грешник. 
 {: .comic-line .comic-yes}
