@@ -23,6 +23,8 @@ cover: "/assets/img/idol/poster.png"
 Ее не возможно потрогать, увидеть, почувствовать. 
 {: .comic-line .comic-whisper}
 
+![описание]({{ "/assets/img/idol/1.png" | relative_url }})
+
 Она не существует! 
 {: .comic-line .comic-slam}
 
@@ -43,6 +45,7 @@ cover: "/assets/img/idol/poster.png"
 
 Идея! 
 {: .comic-line .comic-title}
+![описание]({{ "/assets/img/idol/6.png" | relative_url }})
 
 Рождается в головах людей случайно. 
 {: .comic-line}
@@ -55,12 +58,15 @@ cover: "/assets/img/idol/poster.png"
 
 И если ей повезёт зародиться в удачливой голове, вы не сможете её остановить. 
 {: .comic-line}
+![описание]({{ "/assets/img/idol/2.png" | relative_url }})
 
 Она будет распространяться. 
 {: .comic-line}
 
 Быстро, безжалостно, захватывать головы людей.
 {: .comic-line .comic-slam}
+
+![описание]({{ "/assets/img/idol/3_1.png" | relative_url }})
 
 Люди слабые. 
 {: .comic-line .comic-staccato}
@@ -83,6 +89,8 @@ cover: "/assets/img/idol/poster.png"
 Так Идея становилась вашим Богом. 
 {: .comic-line .comic-slam}
 
+![описание]({{ "/assets/img/idol/5_1.png" | relative_url }})
+
 Ради неё вы готовы на всё, теряя свободу.
 {: .comic-line}
 
@@ -91,6 +99,8 @@ cover: "/assets/img/idol/poster.png"
 
 Мы можем вам помочь.
 {: .comic-line .comic-hook}
+
+![описание]({{ "/assets/img/idol/4_1.png" | relative_url }})
 
 Спастись от греха можно лишь сказав одно слово – да! 
 {: .comic-panel .comic-cta}
@@ -125,7 +135,12 @@ cover: "/assets/img/idol/poster.png"
 Вас ждёт новый мир!
 {: .comic-line .comic-world}
 
+![описание]({{ "/assets/img/idol/7.png" | relative_url }})
+
  
 
-Иисус сказал что спасёт грешников, а не праведников!
+> Иисус сказал что спасёт грешников, а не праведников!
 {: .comic-line .comic-epilogue}
+
+
+[![описание]({{ "/assets/img/sign3.png" | relative_url }})]({{ "/" | relative_url }})
