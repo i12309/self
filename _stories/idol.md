@@ -1,7 +1,7 @@
 ---
 title: "Идея!"
 layout: story
-theme: lignt
+theme: light
 order: 60
 story_css: idol
 excerpt: >-
