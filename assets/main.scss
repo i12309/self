@@ -285,6 +285,36 @@ body.theme-light .story-excerpt {
   margin-bottom: 0;
 }
 
+/* End-of-story SIGN mark: subtle "parallax" hover zoom */
+.story-content a > img[src*="assets/img/sign"] {
+  display: block;
+  transform: translateZ(0);
+  transform-origin: center;
+  will-change: transform;
+  transition:
+    transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.story-content a:hover > img[src*="assets/img/sign"],
+.story-content a:focus-visible > img[src*="assets/img/sign"] {
+  transform: translateY(-2px) scale(1.045);
+  filter: saturate(1.03) contrast(1.03);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .story-content a > img[src*="assets/img/sign"] {
+    transition: none;
+  }
+}
+
+@media (hover: none) {
+  .story-content a:hover > img[src*="assets/img/sign"] {
+    transform: none;
+    filter: none;
+  }
+}
+
 .card-icon {
   position: relative;
   display: inline-block;
