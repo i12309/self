@@ -1,0 +1,395 @@
+<!-- scheme-e.html | “Juicy Light” (bright, playful accents) + New-page editor -->
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Carroll UI — Scheme E (Juicy Light)</title>
+  <style>
+    :root{
+      --bg:#F8FAFF;
+      --surface:#FFFFFF;
+      --surface2:#F3F6FF;
+      --border:#E6E8F2;
+
+      --text:#0B1220;
+      --muted:#5A6782;
+
+      --primary:#6D28D9;   /* violet */
+      --pink:#EC4899;
+      --cyan:#06B6D4;
+      --lime:#84CC16;
+      --orange:#F97316;
+
+      --success:#16A34A;
+      --warning:#F59E0B;
+      --danger:#EF4444;
+      --info:#0EA5E9;
+
+      --r-sm:10px; --r-md:14px; --r-lg:20px;
+      --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s6:24px; --s8:32px;
+      --shadow: 0 18px 50px rgba(11,18,32,.10);
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font)}
+    a{color:var(--primary);text-decoration:none}
+    .app{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+    .side{
+      background:
+        radial-gradient(900px 500px at 20% 0%, rgba(109,40,217,.10), transparent 60%),
+        radial-gradient(800px 500px at 80% 10%, rgba(6,182,212,.10), transparent 60%),
+        var(--surface);
+      border-right:1px solid var(--border);
+      padding:var(--s6)
+    }
+    .brand{display:flex;gap:12px;align-items:center;margin-bottom:var(--s6)}
+    .logo{
+      width:40px;height:40px;border-radius:16px;
+      background: conic-gradient(from 210deg, var(--primary), var(--pink), var(--cyan), var(--orange), var(--primary));
+      box-shadow: 0 16px 36px rgba(109,40,217,.18);
+    }
+    .brand h1{margin:0;font-size:16px}
+    .pill{font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:999px;padding:2px 8px;background:rgba(255,255,255,.7)}
+    .nav a{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:12px 12px;border-radius:14px;color:var(--text)
+    }
+    .nav a.active{
+      background: linear-gradient(90deg, rgba(109,40,217,.12), rgba(6,182,212,.10));
+      border:1px solid rgba(109,40,217,.18);
+      font-weight:800;color:var(--primary)
+    }
+    .nav a:hover{background:rgba(11,18,32,.03)}
+    .navgrp{margin-top:var(--s6)}
+    .navgrp h2{font-size:11px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin:0 0 var(--s2)}
+
+    .main{display:flex;flex-direction:column}
+    .topbar{
+      position:sticky;top:0;z-index:10;
+      padding:var(--s4) var(--s6);
+      border-bottom:1px solid var(--border);
+      background:rgba(248,250,255,.85);backdrop-filter: blur(10px);
+      display:flex;align-items:center;justify-content:space-between;gap:var(--s4)
+    }
+    .search{
+      flex:1;max-width:680px;display:flex;align-items:center;gap:10px;
+      padding:12px 14px;border-radius:16px;border:1px solid var(--border);
+      background:var(--surface);box-shadow: 0 10px 26px rgba(11,18,32,.06)
+    }
+    .search input{border:0;outline:0;width:100%;font-size:14px;background:transparent}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:11px 14px;border-radius:16px;border:1px solid var(--border);
+      background:var(--surface);cursor:pointer
+    }
+    .btn:hover{background:rgba(11,18,32,.02)}
+    .btn.primary{
+      border:0;color:white;font-weight:800;
+      background: linear-gradient(90deg, var(--primary), var(--pink));
+      box-shadow: 0 16px 40px rgba(109,40,217,.18);
+    }
+    .btn.primary:hover{filter:brightness(1.03)}
+    .content{padding:var(--s6);display:grid;gap:var(--s6)}
+    .pagehead{display:flex;justify-content:space-between;gap:var(--s6)}
+    .pagehead h1{margin:0;font-size:22px}
+    .pagehead p{margin:6px 0 0;color:var(--muted);font-size:13px;max-width:70ch}
+
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--shadow)}
+    .card .inner{padding:var(--s6)}
+    .filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+    .field{
+      display:flex;align-items:center;gap:10px;
+      padding:12px 12px;border-radius:16px;border:1px solid var(--border);background:var(--surface2)
+    }
+    .field label{font-size:11px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;font-weight:800}
+    .field select,.field input{border:0;outline:0;background:transparent;font-size:14px}
+    .field.big{flex:1;min-width:320px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .chip{
+      display:inline-flex;gap:8px;align-items:center;
+      padding:7px 12px;border-radius:999px;border:1px solid rgba(109,40,217,.18);
+      background: linear-gradient(90deg, rgba(109,40,217,.10), rgba(6,182,212,.08));
+      font-size:12px
+    }
+    .chip b{color:var(--muted);font-weight:900;letter-spacing:.02em}
+    .chip button{border:0;background:transparent;cursor:pointer;color:var(--muted)}
+
+    table{width:100%;border-collapse:separate;border-spacing:0}
+    thead th{
+      text-align:left;font-size:11px;color:var(--muted);
+      font-weight:900;letter-spacing:.12em;text-transform:uppercase;
+      padding:12px 16px;border-bottom:1px solid var(--border)
+    }
+    tbody td{padding:14px 16px;border-bottom:1px solid var(--border);vertical-align:middle}
+    tbody tr:hover{background:rgba(109,40,217,.04)}
+    .badge{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:6px 10px;border-radius:999px;border:1px solid var(--border);background:rgba(255,255,255,.7);font-size:12px
+    }
+    .dot{width:10px;height:10px;border-radius:999px;background:var(--cyan)}
+    .mono{font-family:var(--mono);font-size:12px}
+    .url{max-width:420px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--muted)}
+    .iconbtn{width:36px;height:36px;border-radius:14px;border:1px solid var(--border);background:var(--surface);cursor:pointer}
+    .iconbtn:hover{background:rgba(11,18,32,.02)}
+
+    /* “New page editor” (simulated by hash #edit) */
+    .editor{
+      display:none;
+      position:fixed;inset:0;background:var(--bg);z-index:100;overflow:auto
+    }
+    .editor.open{display:block}
+    .editorTop{
+      position:sticky;top:0;z-index:5;
+      background:rgba(248,250,255,.92);backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--border);
+      padding:var(--s4) var(--s6);
+      display:flex;justify-content:space-between;align-items:center;gap:var(--s4)
+    }
+    .editorWrap{max-width:1200px;margin:0 auto;padding:var(--s6);display:grid;grid-template-columns:1fr 360px;gap:var(--s6)}
+    .panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--shadow)}
+    .panel .p{padding:var(--s6)}
+    .panel h2{margin:0 0 12px;font-size:16px}
+    .formGrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .formGrid .full{grid-column:1/-1}
+    .input{
+      display:grid;gap:6px;padding:12px;border-radius:16px;border:1px solid var(--border);background:var(--surface2)
+    }
+    .input label{font-size:11px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;font-weight:900}
+    .input input,.input textarea,.input select{border:0;outline:0;background:transparent;font-size:14px}
+    .input textarea{min-height:90px;resize:vertical}
+    @media (max-width: 980px){
+      .app{grid-template-columns:1fr}
+      .editorWrap{grid-template-columns:1fr}
+      .formGrid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="app" id="listView">
+    <aside class="side">
+      <div class="brand">
+        <div class="logo"></div>
+        <div>
+          <h1>Carroll</h1>
+          <div class="pill">Juicy light</div>
+        </div>
+      </div>
+      <div class="navgrp">
+        <h2>Configuration</h2>
+        <nav class="nav">
+          <a class="active" href="#">Entities</a>
+          <a href="#">Installations</a>
+          <a href="#">Composite</a>
+        </nav>
+      </div>
+      <div class="navgrp">
+        <h2>Security</h2>
+        <nav class="nav">
+          <a href="#">Tokens</a>
+          <a href="#">Whitelists</a>
+        </nav>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="search">
+          <span style="color:var(--muted)">⌕</span>
+          <input placeholder="Global search..." />
+        </div>
+        <div style="display:flex;gap:10px">
+          <button class="btn">Docs</button>
+          <button class="btn">Profile</button>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="pagehead">
+          <div>
+            <h1>Entities</h1>
+            <p>Светлая “сочная” схема. Редактирование/создание — как отдельная страница (new page), а не drawer.</p>
+          </div>
+          <div style="display:flex;gap:10px">
+            <button class="btn">Export</button>
+            <button class="btn primary" onclick="openEditor('create')">Create</button>
+          </div>
+        </div>
+
+        <section class="card">
+          <div class="inner">
+            <div class="filters">
+              <div class="field">
+                <div style="min-width:78px"><label>Env</label></div>
+                <select><option>All</option><option>Prod</option><option>Preprod</option><option>Dev</option></select>
+              </div>
+              <div class="field">
+                <div style="min-width:78px"><label>Status</label></div>
+                <select><option>All</option><option>OK</option><option>Warning</option><option>Error</option></select>
+              </div>
+              <div class="field big">
+                <div style="min-width:78px"><label>Query</label></div>
+                <input placeholder="service, code, host..." />
+              </div>
+              <button class="btn">Clear</button>
+              <button class="btn primary">Apply</button>
+            </div>
+
+            <div class="chips">
+              <span class="chip"><b>Env</b> Preprod <button>×</button></span>
+              <span class="chip"><b>Status</b> OK <button>×</button></span>
+              <span class="chip"><b>Query</b> appointment <button>×</button></span>
+            </div>
+
+            <div style="overflow:auto;margin-top:16px">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Env</th><th>Entity</th><th>Endpoint</th><th>Status</th><th>Updated</th><th style="width:150px">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr onclick="openEditor('edit')">
+                    <td><span class="badge"><span class="dot"></span> Preprod</span></td>
+                    <td>
+                      <div style="font-weight:900">SelfAppointmentTwo</div>
+                      <div class="mono" style="color:var(--muted)">APPOINTMENT_SELFAPPOINTMENTTWO_V1S</div>
+                    </td>
+                    <td><div class="mono url">srv-esb-vip-main/.../ProxyService</div></td>
+                    <td><span class="badge"><span class="dot" style="background:var(--success)"></span> OK</span></td>
+                    <td class="mono">2026-03-04</td>
+                    <td onclick="event.stopPropagation()">
+                      <button class="iconbtn" title="Edit" onclick="openEditor('edit')">✎</button>
+                      <button class="iconbtn" title="Copy">⧉</button>
+                      <button class="iconbtn" title="Open">↗</button>
+                    </td>
+                  </tr>
+                  <tr onclick="openEditor('edit')">
+                    <td><span class="badge"><span class="dot" style="background:var(--orange)"></span> Prod</span></td>
+                    <td>
+                      <div style="font-weight:900">ESUCheck</div>
+                      <div class="mono" style="color:var(--muted)">ESU_CHECK_V3</div>
+                    </td>
+                    <td><div class="mono url">srv-esu-prod:443/api/check</div></td>
+                    <td><span class="badge"><span class="dot" style="background:var(--warning)"></span> Warning</span></td>
+                    <td class="mono">2026-02-21</td>
+                    <td onclick="event.stopPropagation()">
+                      <button class="iconbtn" onclick="openEditor('edit')">✎</button>
+                      <button class="iconbtn">⧉</button>
+                      <button class="iconbtn">↗</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- New-page editor -->
+  <div class="editor" id="editor">
+    <div class="editorTop">
+      <div>
+        <div style="font-weight:900;font-size:16px" id="editorTitle">Edit entity</div>
+        <div style="color:var(--muted);font-size:12px;margin-top:4px">Breadcrumbs: Entities / SelfAppointmentTwo</div>
+      </div>
+      <div style="display:flex;gap:10px">
+        <button class="btn" onclick="closeEditor()">Back</button>
+        <button class="btn">Validate</button>
+        <button class="btn primary" onclick="closeEditor()">Save</button>
+      </div>
+    </div>
+
+    <div class="editorWrap">
+      <section class="panel">
+        <div class="p">
+          <h2>Configuration</h2>
+          <div class="formGrid">
+            <div class="input">
+              <label>Environment</label>
+              <select><option>Preprod</option><option>Prod</option><option>Dev</option></select>
+            </div>
+            <div class="input">
+              <label>Status</label>
+              <select><option>OK</option><option>Warning</option><option>Error</option></select>
+            </div>
+            <div class="input full">
+              <label>Name</label>
+              <input id="eName" value="SelfAppointmentTwo" />
+            </div>
+            <div class="input full">
+              <label>Code</label>
+              <input class="mono" id="eCode" value="APPOINTMENT_SELFAPPOINTMENTTWO_V1S" style="font-family:var(--mono)" />
+            </div>
+
+            <div class="input full">
+              <label>Endpoint</label>
+              <input class="mono" value="http://srv-esb-vip-main/.../ProxyService" style="font-family:var(--mono)" />
+            </div>
+
+            <div class="input">
+              <label>Read timeout</label>
+              <input class="mono" value="30000" style="font-family:var(--mono)" />
+            </div>
+            <div class="input">
+              <label>Conn timeout</label>
+              <input class="mono" value="5000" style="font-family:var(--mono)" />
+            </div>
+
+            <div class="input full">
+              <label>Description</label>
+              <textarea placeholder="Optional notes..."></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="panel">
+        <div class="p">
+          <h2>Validation</h2>
+          <div style="padding:12px;border-radius:16px;background:linear-gradient(90deg, rgba(22,163,74,.12), rgba(6,182,212,.10));border:1px solid rgba(22,163,74,.18)">
+            <div style="font-weight:900">OK</div>
+            <div style="color:var(--muted);font-size:12px;margin-top:4px">No errors. 1 warning in optional fields.</div>
+          </div>
+
+          <div style="margin-top:14px;padding:12px;border-radius:16px;background:linear-gradient(90deg, rgba(109,40,217,.10), rgba(236,72,153,.08));border:1px solid rgba(109,40,217,.18)">
+            <div style="font-weight:900">Tips</div>
+            <div style="color:var(--muted);font-size:12px;margin-top:4px">Большие формы лучше дробить на вкладки/шаги.</div>
+          </div>
+
+          <div style="margin-top:14px">
+            <button class="btn" style="width:100%">Duplicate</button>
+            <button class="btn" style="width:100%;margin-top:10px;border-color:rgba(239,68,68,.25);color:#b91c1c">Delete</button>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    const editor = document.getElementById('editor');
+    const editorTitle = document.getElementById('editorTitle');
+    const eName = document.getElementById('eName');
+    const eCode = document.getElementById('eCode');
+
+    function openEditor(mode){
+      editor.classList.add('open');
+      if(mode === 'create'){
+        editorTitle.textContent = 'Create entity';
+        eName.value = '';
+        eCode.value = '';
+      } else {
+        editorTitle.textContent = 'Edit entity';
+      }
+      window.scrollTo(0,0);
+    }
+    function closeEditor(){
+      editor.classList.remove('open');
+    }
+  </script>
+</body>
+</html>

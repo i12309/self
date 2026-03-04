@@ -1,0 +1,737 @@
+<!-- scheme-d.html | “Juicy” (Gradient + vivid accents) + Full-page Create/Edit -->
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Carroll UI — Scheme D (Juicy)</title>
+  <style>
+    :root{
+      /* Juicy palette */
+      --bg0:#0B1020;          /* deep navy */
+      --bg1:#0E1B3A;          /* navy */
+      --surface:#0F1730;      /* panel */
+      --surface2:#121C3A;     /* elevated */
+      --border: rgba(255,255,255,.10);
+
+      --text:#EAF0FF;
+      --muted:#A7B1D6;
+
+      --primary:#7C3AED;     /* violet */
+      --primary2:#22D3EE;    /* cyan */
+      --primary3:#F97316;    /* orange */
+
+      --success:#22C55E;
+      --warning:#FBBF24;
+      --danger:#FB7185;      /* rose */
+      --info:#38BDF8;
+
+      --focus: rgba(34,211,238,.55);
+
+      --r-sm:12px; --r-md:16px; --r-lg:22px;
+      --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px; --s8:32px;
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --shadow2: 0 10px 30px rgba(0,0,0,.35);
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;color:var(--text);font-family:var(--font);
+      background:
+        radial-gradient(1200px 600px at 12% 10%, rgba(124,58,237,.35), transparent 60%),
+        radial-gradient(900px 500px at 70% 18%, rgba(34,211,238,.25), transparent 60%),
+        radial-gradient(900px 600px at 60% 85%, rgba(249,115,22,.18), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      min-height:100vh;
+    }
+
+    a{color:var(--primary2);text-decoration:none}
+    a:hover{filter:brightness(1.1)}
+
+    .app{display:grid;grid-template-columns:300px 1fr;min-height:100vh}
+    .glass{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--border);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow2);
+    }
+
+    /* Sidebar */
+    .side{
+      position:sticky;top:0;height:100vh;overflow:auto;
+      padding:var(--s6);
+    }
+    .brand{display:flex;gap:12px;align-items:center;margin-bottom:var(--s6)}
+    .logo{
+      width:42px;height:42px;border-radius:16px;
+      background: conic-gradient(from 200deg, var(--primary), var(--primary2), var(--primary3), var(--primary));
+      box-shadow: 0 12px 30px rgba(124,58,237,.25);
+    }
+    .brand h1{margin:0;font-size:16px;letter-spacing:.02em}
+    .brand small{color:var(--muted)}
+    .navgrp{margin-top:var(--s6)}
+    .navgrp h2{
+      font-size:11px;color:rgba(234,240,255,.65);
+      letter-spacing:.12em;text-transform:uppercase;margin:0 0 var(--s2)
+    }
+    .nav a{
+      display:flex;align-items:center;gap:10px;justify-content:space-between;
+      padding:12px 12px;border-radius:14px;color:var(--text);
+      border:1px solid transparent;
+    }
+    .nav a:hover{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.10)}
+    .nav a.active{
+      background: linear-gradient(90deg, rgba(124,58,237,.25), rgba(34,211,238,.12));
+      border-color: rgba(34,211,238,.30);
+      box-shadow: 0 12px 30px rgba(0,0,0,.25);
+      font-weight:700;
+    }
+    .pill{
+      font-size:11px;color:rgba(234,240,255,.75);
+      border:1px solid rgba(255,255,255,.12);
+      border-bottom-color: rgba(255,255,255,.18);
+      border-radius:999px;padding:3px 10px;background:rgba(255,255,255,.04)
+    }
+
+    /* Main */
+    .main{display:flex;flex-direction:column}
+    .topbar{
+      position:sticky;top:0;z-index:10;
+      padding:var(--s4) var(--s6);
+      border-bottom:1px solid var(--border);
+      background: linear-gradient(180deg, rgba(15,23,48,.75), rgba(15,23,48,.40));
+      backdrop-filter: blur(14px);
+      display:flex;gap:var(--s4);align-items:center;justify-content:space-between
+    }
+    .search{
+      flex:1;max-width:700px;display:flex;align-items:center;gap:10px;
+      padding:12px 14px;border-radius:16px;
+      background: rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+    .search input{border:0;outline:0;width:100%;font-size:14px;background:transparent;color:var(--text)}
+    .kbd{
+      font-size:11px;color:rgba(234,240,255,.75);
+      border:1px solid rgba(255,255,255,.12);border-bottom-width:2px;
+      border-radius:10px;padding:2px 8px;background:rgba(255,255,255,.04)
+    }
+
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:11px 14px;border-radius:16px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      color:var(--text);cursor:pointer;
+      box-shadow: 0 10px 26px rgba(0,0,0,.22);
+    }
+    .btn:hover{background:rgba(255,255,255,.08)}
+    .btn.primary{
+      border:0;
+      background: linear-gradient(90deg, var(--primary), var(--primary2));
+      box-shadow: 0 16px 40px rgba(124,58,237,.20), 0 14px 36px rgba(34,211,238,.10);
+      font-weight:700;
+    }
+    .btn.primary:hover{filter:brightness(1.05)}
+    .btn.danger{
+      border:0;background: linear-gradient(90deg, #FB7185, #F97316);
+      font-weight:700;
+    }
+    .btn:focus{outline:3px solid var(--focus);outline-offset:2px}
+
+    .content{padding:var(--s6);display:grid;gap:var(--s6)}
+    .pagehead{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--s6)}
+    .pagehead h1{margin:0;font-size:22px}
+    .pagehead p{margin:6px 0 0;color:var(--muted);font-size:13px;max-width:70ch}
+
+    .cards{display:grid;grid-template-columns:1.15fr .85fr;gap:var(--s6)}
+    .card{border-radius:var(--r-lg);overflow:hidden}
+    .card .inner{padding:var(--s6)}
+    .cardTitle{
+      display:flex;align-items:center;justify-content:space-between;gap:var(--s4);
+      margin-bottom:var(--s4)
+    }
+    .cardTitle h2{margin:0;font-size:14px;letter-spacing:.02em}
+    .sub{color:var(--muted);font-size:12px}
+
+    /* Filters */
+    .filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+    .field{
+      display:flex;align-items:center;gap:10px;
+      padding:12px 12px;border-radius:16px;
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.10);
+      min-width:190px
+    }
+    .field label{font-size:11px;color:rgba(234,240,255,.70);letter-spacing:.08em;text-transform:uppercase}
+    .field select,.field input{
+      border:0;outline:0;background:transparent;color:var(--text);font-size:14px;min-width:0;width:100%
+    }
+    .field.big{flex:1;min-width:320px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .chip{
+      display:inline-flex;gap:8px;align-items:center;
+      padding:7px 12px;border-radius:999px;
+      border:1px solid rgba(34,211,238,.25);
+      background: linear-gradient(90deg, rgba(124,58,237,.18), rgba(34,211,238,.10));
+      font-size:12px;color:var(--text)
+    }
+    .chip b{color:rgba(234,240,255,.70);font-weight:800;letter-spacing:.02em}
+    .chip button{border:0;background:transparent;cursor:pointer;color:rgba(234,240,255,.75)}
+
+    /* KPIs / status panel */
+    .kpis{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .kpi{
+      border-radius:18px;padding:14px;
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.10);
+    }
+    .kpi .v{font-size:20px;font-weight:800}
+    .kpi .l{font-size:12px;color:var(--muted);margin-top:4px}
+    .spark{
+      height:8px;border-radius:999px;margin-top:12px;
+      background: linear-gradient(90deg, rgba(34,211,238,.9), rgba(124,58,237,.9), rgba(249,115,22,.9));
+      opacity:.85
+    }
+
+    /* Table */
+    .toolbar{
+      display:flex;align-items:center;justify-content:space-between;gap:var(--s4);
+      margin-top:var(--s6);padding-top:var(--s4);border-top:1px solid rgba(255,255,255,.10)
+    }
+    .toolbar .left{color:var(--muted);font-size:13px;display:flex;gap:10px;align-items:center}
+    .seg{
+      display:inline-flex;border:1px solid rgba(255,255,255,.10);
+      border-radius:14px;overflow:hidden;background:rgba(255,255,255,.03)
+    }
+    .seg button{
+      border:0;background:transparent;color:rgba(234,240,255,.80);
+      padding:8px 10px;cursor:pointer;font-size:12px
+    }
+    .seg button.active{background:rgba(34,211,238,.12);color:var(--text);font-weight:800}
+
+    table{width:100%;border-collapse:separate;border-spacing:0}
+    thead th{
+      text-align:left;font-size:11px;color:rgba(234,240,255,.65);
+      font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+      padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.10)
+    }
+    tbody td{
+      padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);
+      vertical-align:middle
+    }
+    tbody tr{
+      transition: transform .08s ease, background .12s ease;
+    }
+    tbody tr:hover{
+      background: rgba(255,255,255,.04);
+      transform: translateY(-1px);
+    }
+
+    .badge{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:6px 10px;border-radius:999px;
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.10);
+      font-size:12px
+    }
+    .dot{width:10px;height:10px;border-radius:999px}
+    .mono{font-family:var(--mono);font-size:12px}
+    .url{max-width:420px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:rgba(234,240,255,.72)}
+    .rowactions{display:flex;gap:8px}
+    .iconbtn{
+      width:36px;height:36px;border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      cursor:pointer
+    }
+    .iconbtn:hover{background:rgba(255,255,255,.07)}
+
+    /* Fullscreen modal for Create/Edit */
+    .modalOverlay{
+      position:fixed;inset:0;background:rgba(0,0,0,.55);
+      display:none;align-items:center;justify-content:center;z-index:100
+    }
+    .modalOverlay.open{display:flex}
+    .modal{
+      width:min(1200px, calc(100vw - 40px));
+      height:min(86vh, 920px);
+      border-radius:26px;overflow:hidden;
+      border:1px solid rgba(255,255,255,.14);
+      background: linear-gradient(180deg, rgba(18,28,58,.98), rgba(15,23,48,.98));
+      box-shadow: var(--shadow);
+      display:grid;grid-template-columns:1fr 340px;
+    }
+    .modalMain{padding:var(--s6);overflow:auto}
+    .modalSide{
+      padding:var(--s6);
+      border-left:1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      overflow:auto
+    }
+    .modalHdr{
+      display:flex;align-items:flex-start;justify-content:space-between;gap:var(--s4);
+      margin-bottom:var(--s6)
+    }
+    .modalHdr h2{margin:0;font-size:18px}
+    .steps{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .step{
+      padding:6px 10px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      font-size:12px;color:rgba(234,240,255,.80)
+    }
+    .step.active{border-color:rgba(34,211,238,.35);background:rgba(34,211,238,.10);font-weight:800;color:var(--text)}
+    .formGrid{
+      display:grid;grid-template-columns:1fr 1fr;gap:14px;
+    }
+    .formGrid .full{grid-column:1 / -1}
+    .input{
+      border-radius:16px;padding:12px 12px;
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.12);
+      display:grid;gap:6px
+    }
+    .input label{
+      font-size:11px;color:rgba(234,240,255,.65);
+      letter-spacing:.12em;text-transform:uppercase;font-weight:800
+    }
+    .input input,.input textarea,.input select{
+      border:0;outline:0;background:transparent;color:var(--text);font-size:14px;
+      font-family:var(--font)
+    }
+    .input textarea{min-height:88px;resize:vertical}
+    .divider{
+      margin:18px 0;border-top:1px solid rgba(255,255,255,.10)
+    }
+    .sideCard{
+      border-radius:18px;padding:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      margin-bottom:12px
+    }
+    .sideCard h3{margin:0 0 8px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(234,240,255,.70)}
+    .sideCard p{margin:0;color:var(--muted);font-size:12px;line-height:1.4}
+    .footerBar{
+      position:sticky;bottom:0;
+      margin-top:var(--s6);padding-top:var(--s4);
+      display:flex;justify-content:space-between;gap:10px;
+      background: linear-gradient(180deg, transparent, rgba(15,23,48,.92));
+      border-top:1px solid rgba(255,255,255,.08);
+      padding-bottom:var(--s2)
+    }
+
+    .toast{
+      position:fixed;left:24px;bottom:24px;
+      padding:12px 14px;border-radius:16px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(15,23,48,.70);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow2);
+      display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(234,240,255,.90)
+    }
+    .toast .ok{
+      width:10px;height:10px;border-radius:999px;
+      background: linear-gradient(90deg, var(--primary2), var(--primary));
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .app{grid-template-columns:1fr}
+      .side{position:relative;height:auto}
+      .cards{grid-template-columns:1fr}
+      .modal{grid-template-columns:1fr}
+      .modalSide{border-left:0;border-top:1px solid rgba(255,255,255,.10)}
+      .formGrid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="side glass">
+      <div class="brand">
+        <div class="logo"></div>
+        <div>
+          <h1>Carroll</h1>
+          <small>Juicy preview (for comparison)</small>
+        </div>
+      </div>
+
+      <div class="navgrp">
+        <h2>Configuration</h2>
+        <nav class="nav">
+          <a class="active" href="#"><span>Entities</span><span class="pill">3</span></a>
+          <a href="#"><span>Installations</span><span class="pill">12</span></a>
+          <a href="#"><span>Composite</span><span class="pill">8</span></a>
+        </nav>
+      </div>
+
+      <div class="navgrp">
+        <h2>Security</h2>
+        <nav class="nav">
+          <a href="#"><span>Tokens</span><span class="pill">New</span></a>
+          <a href="#"><span>Whitelists</span><span class="pill">7</span></a>
+        </nav>
+      </div>
+
+      <div class="navgrp">
+        <h2>Gateways</h2>
+        <nav class="nav">
+          <a href="#"><span>APIGate</span><span class="pill">OK</span></a>
+          <a href="#"><span>Routes</span><span class="pill">Warn</span></a>
+        </nav>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="search">
+          <span style="color:rgba(234,240,255,.75)">⌕</span>
+          <input placeholder="Global search..." />
+          <span class="kbd">Ctrl K</span>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center">
+          <button class="btn">Docs</button>
+          <button class="btn">Profile</button>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="pagehead">
+          <div>
+            <h1>Entities</h1>
+            <p>Более “сочное” оформление: стекло/градиенты/яркие акценты. Только для сравнения визуального восприятия.</p>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center">
+            <button class="btn">Export</button>
+            <button class="btn primary" id="createBtn">Create</button>
+          </div>
+        </div>
+
+        <div class="cards">
+          <section class="card glass">
+            <div class="inner">
+              <div class="cardTitle">
+                <div>
+                  <h2>Filters</h2>
+                  <div class="sub">Базовые + расширенные. Применённые фильтры чипами.</div>
+                </div>
+                <button class="btn" style="padding:10px 12px">More</button>
+              </div>
+
+              <div class="filters">
+                <div class="field">
+                  <div style="min-width:86px">
+                    <label>Env</label>
+                  </div>
+                  <select>
+                    <option>All</option><option>Prod</option><option>Preprod</option><option>Dev</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <div style="min-width:86px">
+                    <label>Status</label>
+                  </div>
+                  <select>
+                    <option>All</option><option>OK</option><option>Warning</option><option>Error</option>
+                  </select>
+                </div>
+                <div class="field big">
+                  <div style="min-width:86px">
+                    <label>Query</label>
+                  </div>
+                  <input placeholder="service name, code, host..." />
+                </div>
+                <button class="btn">Clear</button>
+                <button class="btn primary">Apply</button>
+              </div>
+
+              <div class="chips">
+                <span class="chip"><b>Env</b> Preprod <button>×</button></span>
+                <span class="chip"><b>Status</b> OK <button>×</button></span>
+                <span class="chip"><b>Query</b> appointment <button>×</button></span>
+              </div>
+
+              <div class="toolbar">
+                <div class="left">
+                  <span>128 results</span>
+                  <div class="seg">
+                    <button class="active">Comfort</button>
+                    <button>Compact</button>
+                  </div>
+                </div>
+                <div class="right" style="display:flex;gap:10px">
+                  <button class="btn">Columns</button>
+                  <button class="btn">Refresh</button>
+                </div>
+              </div>
+
+              <div style="overflow:auto;margin-top:12px">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Env</th>
+                      <th>Entity</th>
+                      <th>Endpoint A</th>
+                      <th>Endpoint B</th>
+                      <th>Status</th>
+                      <th>Updated</th>
+                      <th style="width:150px">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr onclick="openEditor('edit')">
+                      <td><span class="badge"><span class="dot" style="background:var(--info)"></span> Preprod</span></td>
+                      <td>
+                        <div style="font-weight:900">SelfAppointmentTwo</div>
+                        <div class="mono" style="color:rgba(234,240,255,.72)">code: APPOINTMENT_SELFAPPOINTMENTTWO_V1S</div>
+                      </td>
+                      <td><div class="mono url">srv-esb-vip-main/.../ProxyService</div></td>
+                      <td><div class="mono url">srv-sappointmentp1-bal01:80/...External</div></td>
+                      <td><span class="badge"><span class="dot" style="background:var(--success)"></span> OK</span></td>
+                      <td class="mono">2026-03-04</td>
+                      <td>
+                        <div class="rowactions" onclick="event.stopPropagation()">
+                          <button class="iconbtn" title="Copy">⧉</button>
+                          <button class="iconbtn" title="Open">↗</button>
+                          <button class="iconbtn" title="Edit" onclick="openEditor('edit')">✎</button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr onclick="openEditor('edit')">
+                      <td><span class="badge"><span class="dot" style="background:var(--warning)"></span> Prod</span></td>
+                      <td>
+                        <div style="font-weight:900">ESUCheck</div>
+                        <div class="mono" style="color:rgba(234,240,255,.72)">code: ESU_CHECK_V3</div>
+                      </td>
+                      <td><div class="mono url">srv-esb-prod/.../ESU/Check/v3</div></td>
+                      <td><div class="mono url">srv-esu-prod:443/api/check</div></td>
+                      <td><span class="badge"><span class="dot" style="background:var(--warning)"></span> Warning</span></td>
+                      <td class="mono">2026-02-21</td>
+                      <td>
+                        <div class="rowactions" onclick="event.stopPropagation()">
+                          <button class="iconbtn">⧉</button>
+                          <button class="iconbtn">↗</button>
+                          <button class="iconbtn" onclick="openEditor('edit')">✎</button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr onclick="openEditor('edit')">
+                      <td><span class="badge"><span class="dot" style="background:var(--danger)"></span> Dev</span></td>
+                      <td>
+                        <div style="font-weight:900">GatewayRoute</div>
+                        <div class="mono" style="color:rgba(234,240,255,.72)">code: GW_ROUTE_1</div>
+                      </td>
+                      <td><div class="mono url">srv-gw-dev/proxy/route/v1</div></td>
+                      <td><div class="mono url">srv-back-dev:8080/service</div></td>
+                      <td><span class="badge"><span class="dot" style="background:var(--danger)"></span> Error</span></td>
+                      <td class="mono">2026-01-15</td>
+                      <td>
+                        <div class="rowactions" onclick="event.stopPropagation()">
+                          <button class="iconbtn">⧉</button>
+                          <button class="iconbtn">↗</button>
+                          <button class="iconbtn" onclick="openEditor('edit')">✎</button>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+          </section>
+
+          <aside class="card glass">
+            <div class="inner">
+              <div class="cardTitle">
+                <div>
+                  <h2>Status</h2>
+                  <div class="sub">Для “сочности” — KPI и яркие индикаторы.</div>
+                </div>
+              </div>
+
+              <div class="kpis">
+                <div class="kpi">
+                  <div class="v">128</div>
+                  <div class="l">Entities found</div>
+                  <div class="spark"></div>
+                </div>
+                <div class="kpi">
+                  <div class="v">6</div>
+                  <div class="l">Warnings</div>
+                  <div class="spark" style="background:linear-gradient(90deg, rgba(251,191,36,.95), rgba(249,115,22,.95))"></div>
+                </div>
+                <div class="kpi">
+                  <div class="v">2</div>
+                  <div class="l">Errors</div>
+                  <div class="spark" style="background:linear-gradient(90deg, rgba(251,113,133,.95), rgba(249,115,22,.95))"></div>
+                </div>
+                <div class="kpi">
+                  <div class="v">OK</div>
+                  <div class="l">Last sync</div>
+                  <div class="spark" style="background:linear-gradient(90deg, rgba(34,197,94,.95), rgba(34,211,238,.95))"></div>
+                </div>
+              </div>
+
+              <div class="divider"></div>
+
+              <div class="sideCard">
+                <h3>UX note</h3>
+                <p>Для реального продукта можно оставить нейтральную базу и применять “сочность” точечно: активные состояния, бейджи статусов, focus, пустые состояния.</p>
+              </div>
+
+              <div class="sideCard">
+                <h3>Primary actions</h3>
+                <p>Важные действия выделяются градиентной primary-кнопкой. Вторичные — прозрачные “glass”.</p>
+              </div>
+
+              <button class="btn primary" style="width:100%" onclick="openEditor('create')">Create new entity</button>
+              <button class="btn danger" style="width:100%;margin-top:10px">Danger action (demo)</button>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Full-page Create/Edit (modal almost full screen) -->
+  <div class="modalOverlay" id="modal">
+    <div class="modal">
+      <div class="modalMain">
+        <div class="modalHdr">
+          <div>
+            <h2 id="modalTitle">Edit entity</h2>
+            <div class="steps">
+              <span class="step active">General</span>
+              <span class="step">Endpoints</span>
+              <span class="step">Security</span>
+              <span class="step">Advanced</span>
+            </div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start">
+            <button class="btn" onclick="closeEditor()">Close</button>
+          </div>
+        </div>
+
+        <div class="formGrid">
+          <div class="input">
+            <label>Environment</label>
+            <select>
+              <option>Preprod</option><option>Prod</option><option>Dev</option>
+            </select>
+          </div>
+
+          <div class="input">
+            <label>Status</label>
+            <select>
+              <option>OK</option><option>Warning</option><option>Error</option>
+            </select>
+          </div>
+
+          <div class="input full">
+            <label>Entity name</label>
+            <input id="fName" value="SelfAppointmentTwo" />
+          </div>
+
+          <div class="input full">
+            <label>Entity code</label>
+            <input id="fCode" class="mono" value="APPOINTMENT_SELFAPPOINTMENTTWO_V1S" style="font-family:var(--mono)" />
+          </div>
+
+          <div class="input full">
+            <label>Endpoint A</label>
+            <input class="mono" value="http://srv-esb-vip-main/.../ProxyService" style="font-family:var(--mono)" />
+          </div>
+
+          <div class="input full">
+            <label>Endpoint B</label>
+            <input class="mono" value="http://srv-sappointmentp1-bal01:80/...External" style="font-family:var(--mono)" />
+          </div>
+
+          <div class="input">
+            <label>Read timeout</label>
+            <input class="mono" value="30000" style="font-family:var(--mono)" />
+          </div>
+
+          <div class="input">
+            <label>Conn timeout</label>
+            <input class="mono" value="5000" style="font-family:var(--mono)" />
+          </div>
+
+          <div class="input full">
+            <label>Description</label>
+            <textarea placeholder="Optional notes..."></textarea>
+          </div>
+        </div>
+
+        <div class="footerBar">
+          <button class="btn" onclick="closeEditor()">Cancel</button>
+          <div style="display:flex;gap:10px">
+            <button class="btn">Validate</button>
+            <button class="btn primary" onclick="saveEditor()">Save</button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="modalSide">
+        <div class="sideCard">
+          <h3>Validation</h3>
+          <p><span style="color:rgba(34,197,94,.95);font-weight:900">OK</span> — no errors found.</p>
+        </div>
+
+        <div class="sideCard">
+          <h3>Quick help</h3>
+          <p>Группируйте большие формы по шагам/табам (General/Endpoints/Security/Advanced), чтобы не “тонуть” в полях.</p>
+        </div>
+
+        <div class="sideCard">
+          <h3>Actions</h3>
+          <button class="btn" style="width:100%">Duplicate</button>
+          <button class="btn danger" style="width:100%;margin-top:10px">Delete</button>
+        </div>
+
+        <div class="sideCard">
+          <h3>Audit</h3>
+          <p class="mono" style="font-family:var(--mono);color:rgba(234,240,255,.72)">
+            updated: 2026-03-04<br/>
+            by: team-core<br/>
+            change: timeout read 30s → 35s
+          </p>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <div class="toast"><span class="ok"></span> UI preview — Juicy scheme + full-page editor</div>
+
+  <script>
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modalTitle');
+
+    function openEditor(mode){
+      modal.classList.add('open');
+      modal.style.display = 'flex';
+      if(mode === 'create'){
+        modalTitle.textContent = 'Create entity';
+        document.getElementById('fName').value = '';
+        document.getElementById('fCode').value = '';
+      } else {
+        modalTitle.textContent = 'Edit entity';
+      }
+    }
+    function closeEditor(){
+      modal.classList.remove('open');
+      modal.style.display = 'none';
+    }
+    function saveEditor(){
+      // Demo-only
+      closeEditor();
+      alert('Saved (demo)');
+    }
+
+    document.getElementById('createBtn').addEventListener('click', () => openEditor('create'));
+  </script>
+</body>
+</html>
