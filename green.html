@@ -1,0 +1,550 @@
+```html
+<!-- scheme-c-green.html | Neutral base + Module accents (WHITE + GREEN) -->
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Carroll UI — Scheme C (White + Green)</title>
+  <style>
+    :root{
+      /* Neutral base */
+      --bg:#F6F8FA;
+      --surface:#FFFFFF;
+      --surface2:#F3F7F5;
+      --border:#E2E8E6;
+
+      --text:#0B1220;
+      --muted:#5C6B77;
+
+      /* Green accent (module) */
+      --accent:#16A34A;          /* primary green */
+      --accentHover:#12803B;
+      --accentSoft: rgba(22,163,74,.10);
+      --accentSoft2: rgba(22,163,74,.06);
+
+      /* Status */
+      --success:#16A34A;
+      --warning:#F59E0B;
+      --danger:#DC2626;
+      --info:#0EA5E9;
+
+      /* Layout */
+      --r-sm:10px; --r-md:14px; --r-lg:18px;
+      --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px; --s8:32px;
+      --shadow: 0 14px 40px rgba(11,18,32,.10);
+
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
+
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font)}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{color:var(--accentHover)}
+
+    .app{display:grid;grid-template-columns:290px 1fr;min-height:100vh}
+
+    /* Sidebar */
+    .side{
+      background: linear-gradient(180deg, #ffffff 0%, #fbfdfc 100%);
+      border-right:1px solid var(--border);
+      padding:var(--s6);
+      position:sticky;top:0;height:100vh;overflow:auto
+    }
+    .brand{display:flex;gap:12px;align-items:center;margin-bottom:var(--s6)}
+    .logo{
+      width:40px;height:40px;border-radius:16px;
+      background: conic-gradient(from 220deg, var(--accent), #34D399, #A7F3D0, var(--accent));
+      box-shadow: 0 18px 34px rgba(22,163,74,.18);
+    }
+    .brand h1{font-size:16px;margin:0}
+    .hint{font-size:12px;color:var(--muted);margin-top:4px}
+    .navgrp{margin-top:var(--s6)}
+    .navgrp h2{
+      font-size:11px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;
+      margin:0 0 var(--s2)
+    }
+    .nav a{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      padding:12px 12px;border-radius:14px;color:var(--text)
+    }
+    .nav a:hover{background:rgba(11,18,32,.03)}
+    .nav a.active{
+      background: linear-gradient(90deg, rgba(22,163,74,.14), rgba(34,197,94,.08));
+      border:1px solid rgba(22,163,74,.18);
+      color:var(--accent);font-weight:800
+    }
+    .pill{
+      font-size:11px;color:var(--muted);
+      border:1px solid var(--border);
+      border-radius:999px;padding:2px 8px;background:#fff
+    }
+
+    /* Main */
+    .main{display:flex;flex-direction:column}
+    .topbar{
+      position:sticky;top:0;z-index:10;
+      padding:var(--s4) var(--s6);
+      border-bottom:1px solid var(--border);
+      background: rgba(246,248,250,.88);
+      backdrop-filter: blur(10px);
+      display:flex;gap:var(--s4);align-items:center;justify-content:space-between
+    }
+    .search{
+      flex:1;max-width:680px;display:flex;align-items:center;gap:10px;
+      padding:12px 14px;border-radius:16px;
+      background:var(--surface);border:1px solid var(--border);
+      box-shadow: 0 10px 22px rgba(11,18,32,.06);
+    }
+    .search input{border:0;outline:0;width:100%;font-size:14px;background:transparent;color:var(--text)}
+
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:11px 14px;border-radius:16px;border:1px solid var(--border);
+      background:var(--surface);color:var(--text);cursor:pointer
+    }
+    .btn:hover{background:rgba(11,18,32,.02)}
+    .btn.primary{
+      border:0;color:white;font-weight:900;
+      background: linear-gradient(90deg, var(--accent), #22C55E);
+      box-shadow: 0 16px 34px rgba(22,163,74,.18);
+    }
+    .btn.primary:hover{filter:brightness(1.03)}
+    .btn:focus{outline:3px solid rgba(34,197,94,.28);outline-offset:2px}
+
+    .content{padding:var(--s6);display:grid;gap:var(--s6)}
+    .pagehead{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--s6)}
+    .pagehead h1{margin:0;font-size:22px}
+    .pagehead p{margin:6px 0 0;color:var(--muted);font-size:13px;max-width:80ch}
+
+    /* Card */
+    .card{
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:var(--r-lg);box-shadow:var(--shadow);overflow:hidden
+    }
+    .card .inner{padding:var(--s6)}
+    .sectionTitle{display:flex;align-items:center;justify-content:space-between;gap:var(--s4);margin-bottom:var(--s4)}
+    .sectionTitle h2{margin:0;font-size:14px;letter-spacing:.02em}
+    .sub{color:var(--muted);font-size:12px}
+
+    /* Filters */
+    .filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+    .field{
+      display:flex;align-items:center;gap:10px;
+      padding:12px 12px;border-radius:16px;border:1px solid var(--border);
+      background:var(--surface2);min-width:190px
+    }
+    .field label{
+      font-size:11px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;font-weight:900
+    }
+    .field select,.field input{border:0;outline:0;background:transparent;font-size:14px;color:var(--text);min-width:0;width:100%}
+    .field.big{flex:1;min-width:320px}
+
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .chip{
+      display:inline-flex;gap:8px;align-items:center;
+      padding:7px 12px;border-radius:999px;
+      border:1px solid rgba(22,163,74,.18);
+      background: linear-gradient(90deg, var(--accentSoft), var(--accentSoft2));
+      font-size:12px
+    }
+    .chip b{color:var(--muted);font-weight:900;letter-spacing:.02em}
+    .chip button{border:0;background:transparent;cursor:pointer;color:var(--muted)}
+
+    .toolbar{
+      display:flex;align-items:center;justify-content:space-between;gap:var(--s4);
+      padding:var(--s4) var(--s6);
+      border-top:1px solid var(--border);
+      background: linear-gradient(180deg, #ffffff, #fbfdfc);
+    }
+    .toolbar .left{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:13px}
+    .toolbar .right{display:flex;gap:10px}
+
+    .seg{
+      display:inline-flex;border:1px solid var(--border);
+      border-radius:14px;overflow:hidden;background:var(--surface)
+    }
+    .seg button{
+      border:0;background:transparent;color:var(--muted);
+      padding:8px 10px;cursor:pointer;font-size:12px
+    }
+    .seg button.active{
+      background: var(--accentSoft);color:var(--accent);font-weight:900
+    }
+
+    /* Table */
+    table{width:100%;border-collapse:separate;border-spacing:0}
+    thead th{
+      text-align:left;font-size:11px;color:var(--muted);
+      font-weight:900;letter-spacing:.12em;text-transform:uppercase;
+      padding:12px 16px;border-bottom:1px solid var(--border)
+    }
+    tbody td{padding:14px 16px;border-bottom:1px solid var(--border);vertical-align:middle}
+    tbody tr:hover{background:rgba(22,163,74,.04)}
+    .badge{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:6px 10px;border-radius:999px;border:1px solid var(--border);
+      background:#fff;font-size:12px
+    }
+    .dot{width:10px;height:10px;border-radius:999px;background:var(--accent)}
+    .mono{font-family:var(--mono);font-size:12px}
+    .url{max-width:440px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--muted)}
+    .rowactions{display:flex;gap:8px}
+    .iconbtn{
+      width:36px;height:36px;border-radius:14px;border:1px solid var(--border);
+      background:var(--surface);cursor:pointer
+    }
+    .iconbtn:hover{background:rgba(11,18,32,.02)}
+
+    /* New-page editor (overlay page) */
+    .editor{
+      display:none;position:fixed;inset:0;background:var(--bg);z-index:100;overflow:auto
+    }
+    .editor.open{display:block}
+    .editorTop{
+      position:sticky;top:0;z-index:5;
+      background: rgba(246,248,250,.92);backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--border);
+      padding:var(--s4) var(--s6);
+      display:flex;justify-content:space-between;align-items:center;gap:var(--s4)
+    }
+    .breadcrumbs{color:var(--muted);font-size:12px;margin-top:4px}
+    .editorWrap{max-width:1200px;margin:0 auto;padding:var(--s6);display:grid;grid-template-columns:1fr 360px;gap:var(--s6)}
+    .panel{
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:var(--r-lg);box-shadow:var(--shadow)
+    }
+    .panel .p{padding:var(--s6)}
+    .panel h2{margin:0 0 12px;font-size:16px}
+    .formGrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .formGrid .full{grid-column:1/-1}
+    .input{
+      display:grid;gap:6px;padding:12px;border-radius:16px;border:1px solid var(--border);background:var(--surface2)
+    }
+    .input label{
+      font-size:11px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;font-weight:900
+    }
+    .input input,.input textarea,.input select{border:0;outline:0;background:transparent;font-size:14px;color:var(--text)}
+    .input textarea{min-height:90px;resize:vertical}
+    .notice{
+      padding:12px;border-radius:16px;
+      background: linear-gradient(90deg, rgba(22,163,74,.10), rgba(34,197,94,.07));
+      border:1px solid rgba(22,163,74,.18)
+    }
+    .notice strong{color:var(--accent)}
+    .dangerBtn{
+      border-color: rgba(220,38,38,.25);
+      color:#B91C1C;
+      background:#fff;
+    }
+    @media (max-width: 980px){
+      .app{grid-template-columns:1fr}
+      .side{position:relative;height:auto}
+      .editorWrap{grid-template-columns:1fr}
+      .formGrid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <!-- LIST PAGE -->
+  <div class="app" id="listView">
+    <aside class="side">
+      <div class="brand">
+        <div class="logo"></div>
+        <div>
+          <h1>Carroll</h1>
+          <div class="hint">Scheme C • White + Green</div>
+        </div>
+      </div>
+
+      <div class="navgrp">
+        <h2>Configuration</h2>
+        <nav class="nav">
+          <a class="active" href="#"><span>Entities</span><span class="pill">128</span></a>
+          <a href="#"><span>Installations</span><span class="pill">12</span></a>
+          <a href="#"><span>Composite</span><span class="pill">8</span></a>
+        </nav>
+      </div>
+
+      <div class="navgrp">
+        <h2>Security</h2>
+        <nav class="nav">
+          <a href="#"><span>Tokens</span><span class="pill">New</span></a>
+          <a href="#"><span>Whitelists</span><span class="pill">7</span></a>
+        </nav>
+      </div>
+
+      <div class="navgrp">
+        <h2>Gateways</h2>
+        <nav class="nav">
+          <a href="#"><span>APIGate</span><span class="pill">OK</span></a>
+          <a href="#"><span>Routes</span><span class="pill">Warn</span></a>
+        </nav>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="search">
+          <span style="color:var(--muted)">⌕</span>
+          <input placeholder="Global search (entities, URLs, codes)..." />
+        </div>
+        <div style="display:flex;gap:10px">
+          <button class="btn">Docs</button>
+          <button class="btn">Profile</button>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="pagehead">
+          <div>
+            <h1>Entities</h1>
+            <p>Список + фильтры. Редактирование/создание — отдельная “страница” (оверлей), чтобы помещались большие формы.</p>
+          </div>
+          <div style="display:flex;gap:10px">
+            <button class="btn">Export</button>
+            <button class="btn primary" onclick="openEditor('create')">Create</button>
+          </div>
+        </div>
+
+        <section class="card">
+          <div class="inner">
+            <div class="sectionTitle">
+              <div>
+                <h2>Filters</h2>
+                <div class="sub">Базовые фильтры + чипы применённых условий.</div>
+              </div>
+              <button class="btn">More filters</button>
+            </div>
+
+            <div class="filters">
+              <div class="field">
+                <div style="min-width:84px"><label>Env</label></div>
+                <select><option>All</option><option>Prod</option><option>Preprod</option><option>Dev</option></select>
+              </div>
+              <div class="field">
+                <div style="min-width:84px"><label>Status</label></div>
+                <select><option>All</option><option>OK</option><option>Warning</option><option>Error</option></select>
+              </div>
+              <div class="field big">
+                <div style="min-width:84px"><label>Query</label></div>
+                <input placeholder="service, code, host..." />
+              </div>
+              <button class="btn">Clear</button>
+              <button class="btn primary">Apply</button>
+            </div>
+
+            <div class="chips">
+              <span class="chip"><b>Env</b> Preprod <button>×</button></span>
+              <span class="chip"><b>Status</b> OK <button>×</button></span>
+              <span class="chip"><b>Query</b> appointment <button>×</button></span>
+            </div>
+          </div>
+
+          <div class="toolbar">
+            <div class="left">
+              <span>128 results</span>
+              <div class="seg">
+                <button class="active">Comfort</button>
+                <button>Compact</button>
+              </div>
+            </div>
+            <div class="right">
+              <button class="btn">Columns</button>
+              <button class="btn">Refresh</button>
+            </div>
+          </div>
+
+          <div style="overflow:auto">
+            <table>
+              <thead>
+                <tr>
+                  <th>Env</th>
+                  <th>Entity</th>
+                  <th>Endpoint A</th>
+                  <th>Endpoint B</th>
+                  <th>Status</th>
+                  <th>Updated</th>
+                  <th style="width:160px">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr onclick="openEditor('edit')">
+                  <td><span class="badge"><span class="dot"></span> Preprod</span></td>
+                  <td>
+                    <div style="font-weight:900">SelfAppointmentTwo</div>
+                    <div class="mono" style="color:var(--muted)">APPOINTMENT_SELFAPPOINTMENTTWO_V1S</div>
+                  </td>
+                  <td><div class="mono url">srv-esb-vip-main/.../ProxyService</div></td>
+                  <td><div class="mono url">srv-sappointmentp1-bal01:80/...External</div></td>
+                  <td><span class="badge"><span class="dot" style="background:var(--success)"></span> OK</span></td>
+                  <td class="mono">2026-03-04</td>
+                  <td onclick="event.stopPropagation()">
+                    <div class="rowactions">
+                      <button class="iconbtn" title="Edit" onclick="openEditor('edit')">✎</button>
+                      <button class="iconbtn" title="Copy">⧉</button>
+                      <button class="iconbtn" title="Open">↗</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr onclick="openEditor('edit')">
+                  <td><span class="badge"><span class="dot" style="background:var(--warning)"></span> Prod</span></td>
+                  <td>
+                    <div style="font-weight:900">ESUCheck</div>
+                    <div class="mono" style="color:var(--muted)">ESU_CHECK_V3</div>
+                  </td>
+                  <td><div class="mono url">srv-esb-prod/.../ESU/Check/v3</div></td>
+                  <td><div class="mono url">srv-esu-prod:443/api/check</div></td>
+                  <td><span class="badge"><span class="dot" style="background:var(--warning)"></span> Warning</span></td>
+                  <td class="mono">2026-02-21</td>
+                  <td onclick="event.stopPropagation()">
+                    <div class="rowactions">
+                      <button class="iconbtn" onclick="openEditor('edit')">✎</button>
+                      <button class="iconbtn">⧉</button>
+                      <button class="iconbtn">↗</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr onclick="openEditor('edit')">
+                  <td><span class="badge"><span class="dot" style="background:var(--danger)"></span> Dev</span></td>
+                  <td>
+                    <div style="font-weight:900">GatewayRoute</div>
+                    <div class="mono" style="color:var(--muted)">GW_ROUTE_1</div>
+                  </td>
+                  <td><div class="mono url">srv-gw-dev/proxy/route/v1</div></td>
+                  <td><div class="mono url">srv-back-dev:8080/service</div></td>
+                  <td><span class="badge"><span class="dot" style="background:var(--danger)"></span> Error</span></td>
+                  <td class="mono">2026-01-15</td>
+                  <td onclick="event.stopPropagation()">
+                    <div class="rowactions">
+                      <button class="iconbtn" onclick="openEditor('edit')">✎</button>
+                      <button class="iconbtn">⧉</button>
+                      <button class="iconbtn">↗</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- EDIT/CREATE PAGE (OVERLAY) -->
+  <div class="editor" id="editor">
+    <div class="editorTop">
+      <div>
+        <div style="font-weight:900;font-size:16px" id="editorTitle">Edit entity</div>
+        <div class="breadcrumbs">Entities / SelfAppointmentTwo</div>
+      </div>
+      <div style="display:flex;gap:10px">
+        <button class="btn" onclick="closeEditor()">Back</button>
+        <button class="btn">Validate</button>
+        <button class="btn primary" onclick="closeEditor()">Save</button>
+      </div>
+    </div>
+
+    <div class="editorWrap">
+      <section class="panel">
+        <div class="p">
+          <h2>Configuration</h2>
+          <div class="formGrid">
+            <div class="input">
+              <label>Environment</label>
+              <select><option>Preprod</option><option>Prod</option><option>Dev</option></select>
+            </div>
+            <div class="input">
+              <label>Status</label>
+              <select><option>OK</option><option>Warning</option><option>Error</option></select>
+            </div>
+
+            <div class="input full">
+              <label>Name</label>
+              <input id="eName" value="SelfAppointmentTwo" />
+            </div>
+
+            <div class="input full">
+              <label>Code</label>
+              <input id="eCode" class="mono" value="APPOINTMENT_SELFAPPOINTMENTTWO_V1S" style="font-family:var(--mono)" />
+            </div>
+
+            <div class="input full">
+              <label>Endpoint A</label>
+              <input class="mono" value="http://srv-esb-vip-main/.../ProxyService" style="font-family:var(--mono)" />
+            </div>
+
+            <div class="input full">
+              <label>Endpoint B</label>
+              <input class="mono" value="http://srv-sappointmentp1-bal01:80/...External" style="font-family:var(--mono)" />
+            </div>
+
+            <div class="input">
+              <label>Read timeout</label>
+              <input class="mono" value="30000" style="font-family:var(--mono)" />
+            </div>
+
+            <div class="input">
+              <label>Conn timeout</label>
+              <input class="mono" value="5000" style="font-family:var(--mono)" />
+            </div>
+
+            <div class="input full">
+              <label>Description</label>
+              <textarea placeholder="Optional notes..."></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="panel">
+        <div class="p">
+          <h2>Validation</h2>
+          <div class="notice">
+            <div style="font-weight:900"><strong>OK</strong> — no errors</div>
+            <div style="color:var(--muted);font-size:12px;margin-top:4px">1 warning in optional fields.</div>
+          </div>
+
+          <div style="margin-top:14px" class="notice">
+            <div style="font-weight:900"><strong>Tip</strong></div>
+            <div style="color:var(--muted);font-size:12px;margin-top:4px">Большие формы дробите на вкладки/шаги (General / Endpoints / Security / Advanced).</div>
+          </div>
+
+          <div style="margin-top:14px">
+            <button class="btn" style="width:100%">Duplicate</button>
+            <button class="btn dangerBtn" style="width:100%;margin-top:10px">Delete</button>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    const editor = document.getElementById('editor');
+    const editorTitle = document.getElementById('editorTitle');
+    const eName = document.getElementById('eName');
+    const eCode = document.getElementById('eCode');
+
+    function openEditor(mode){
+      editor.classList.add('open');
+      if(mode === 'create'){
+        editorTitle.textContent = 'Create entity';
+        eName.value = '';
+        eCode.value = '';
+        document.querySelector('.breadcrumbs').textContent = 'Entities / Create';
+      } else {
+        editorTitle.textContent = 'Edit entity';
+        document.querySelector('.breadcrumbs').textContent = 'Entities / SelfAppointmentTwo';
+      }
+      window.scrollTo(0,0);
+    }
+    function closeEditor(){
+      editor.classList.remove('open');
+    }
+  </script>
+</body>
+</html>
+```
