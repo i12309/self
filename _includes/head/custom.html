@@ -3,8 +3,35 @@ Included by `_includes/head.html`. Keep small hard overrides here so the theme a
 header stay readable even if CSS is cached.
 {% endcomment %}
 
+{% assign _theme = page.theme | default: 'dark' %}
+{% assign _scheme = 'dark' %}
+{% assign _bg = '#2b2f36' %}
+{% assign _border = '#3b424d' %}
+{% assign _text = '#e1e6ef' %}
+{% assign _muted = '#b4bdca' %}
+{% if _theme == 'light' %}
+  {% assign _scheme = 'light' %}
+  {% assign _bg = '#ffffff' %}
+  {% assign _border = '#e6e6e6' %}
+  {% assign _text = '#111827' %}
+  {% assign _muted = '#6b7280' %}
+{% elsif _theme == 'black' %}
+  {% assign _bg = '#0b0d10' %}
+  {% assign _border = '#1f2630' %}
+  {% assign _text = '#f3f6fb' %}
+  {% assign _muted = '#a2acbb' %}
+{% elsif _theme == 'noir' %}
+  {% assign _bg = '#141820' %}
+  {% assign _border = '#2a3444' %}
+  {% assign _text = '#f3f6fb' %}
+  {% assign _muted = '#a2acbb' %}
+{% endif %}
+
+<meta name="color-scheme" content="{{ _scheme }}">
+<meta name="supported-color-schemes" content="{{ _scheme }}">
+<meta name="theme-color" content="{{ _bg }}">
+
 {% if page.catalog %}
-  {% assign _ver = site.github.build_revision | default: site.time | date: '%s' %}
   <link rel="stylesheet" href="{{ '/assets/css/catalog.css' | relative_url }}?v={{ _ver }}">
 {% endif %}
 
@@ -13,20 +40,12 @@ header stay readable even if CSS is cached.
 {% endif %}
 
 <style>
-  {% assign _theme = page.theme | default: 'dark' %}
-  {% if _theme == 'light' %}
-    :root { --bg: #ffffff; --border: #e6e6e6; --text: #111827; --muted: #6b7280; }
-    html, body { color-scheme: light; }
-  {% elsif _theme == 'black' %}
-    :root { --bg: #0b0d10; --border: #1f2630; --text: #f3f6fb; --muted: #a2acbb; }
-    html, body { color-scheme: dark; }
-  {% elsif _theme == 'noir' %}
-    :root { --bg: #141820; --border: #2a3444; --text: #f3f6fb; --muted: #a2acbb; }
-    html, body { color-scheme: dark; }
-  {% else %}
-    :root { --bg: #2b2f36; --border: #3b424d; --text: #e1e6ef; --muted: #b4bdca; }
-    html, body { color-scheme: dark; }
-  {% endif %}
+  :root { --bg: {{ _bg }}; --border: {{ _border }}; --text: {{ _text }}; --muted: {{ _muted }}; }
+  :root, html, body { color-scheme: {{ _scheme }}; }
+
+  @supports (color-scheme: only light) {
+    :root, html, body { color-scheme: only {{ _scheme }}; }
+  }
 
   html, body {
     background-color: var(--bg) !important;
