@@ -87,6 +87,7 @@ cover: "/assets/img/idol/poster_i.png"
 {: .comic-line .comic-whisper}
 
 ![описание]({{ "/assets/img/idol/5_1.png" | relative_url }})
+
 Так Идея становилась вашим Богом. 
 {: .comic-line .comic-slam}
 
