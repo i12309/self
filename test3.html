@@ -1,0 +1,411 @@
+<!-- scheme-c.html  |  Neutral base + Accent per module -->
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Carroll UI — Scheme C (Neutral + Module Accents)</title>
+  <style>
+    :root{
+      /* Neutral base */
+      --bg:#F6F7F9; --surface:#FFFFFF; --border:#E3E6EA;
+      --text:#111827; --muted:#6B7280;
+
+      /* Accents (module-based) */
+      --accent:#2563EB;          /* default (Bus services) */
+      --accentHover:#1D4ED8;
+      --accentSoft: rgba(37,99,235,.10);
+
+      --security:#7C3AED;
+      --gateway:#16A34A;
+      --monitor:#F59E0B;
+
+      --success:#16A34A; --warning:#F59E0B; --danger:#DC2626; --info:#0EA5E9;
+
+      --r-sm:8px; --r-md:12px; --r-lg:16px;
+      --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s6:24px; --s8:32px;
+      --shadow: 0 6px 18px rgba(17,24,39,.08);
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font)}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{color:var(--accentHover)}
+    .app{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+    .side{
+      background:var(--surface);border-right:1px solid var(--border);
+      padding:var(--s6);position:sticky;top:0;height:100vh;overflow:auto
+    }
+    .brand{display:flex;gap:10px;align-items:center;margin-bottom:var(--s6)}
+    .logo{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--info))}
+    .brand h1{font-size:16px;margin:0}
+    .hint{font-size:12px;color:var(--muted);margin-top:4px}
+
+    .navgrp{margin-top:var(--s6)}
+    .navgrp h2{font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin:0 0 var(--s2)}
+    .nav a{
+      display:flex;align-items:center;gap:10px;
+      padding:10px 10px;border-radius:10px;color:var(--text)
+    }
+    .nav a.active{
+      background:var(--accentSoft);color:var(--accent);font-weight:700;
+      border:1px solid rgba(0,0,0,0); /* keeps size */
+    }
+    .nav a:hover{background:rgba(17,24,39,.04)}
+
+    .main{display:flex;flex-direction:column}
+    .topbar{
+      display:flex;gap:var(--s4);align-items:center;justify-content:space-between;
+      padding:var(--s4) var(--s6);border-bottom:1px solid var(--border);
+      background:rgba(246,247,249,.85);backdrop-filter: blur(8px);position:sticky;top:0;z-index:10
+    }
+    .search{
+      flex:1;max-width:560px;display:flex;align-items:center;gap:10px;
+      padding:10px 12px;border:1px solid var(--border);border-radius:12px;background:var(--surface)
+    }
+    .search input{border:0;outline:0;width:100%;font-size:14px;background:transparent;color:var(--text)}
+    .btn{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:10px 12px;border-radius:12px;border:1px solid var(--border);
+      background:var(--surface);color:var(--text);cursor:pointer
+    }
+    .btn:hover{background:rgba(17,24,39,.03)}
+    .btn.primary{background:var(--accent);border-color:var(--accent);color:white}
+    .btn.primary:hover{background:var(--accentHover);border-color:var(--accentHover)}
+    .btn:focus{outline:3px solid rgba(147,197,253,.6);outline-offset:2px}
+
+    .content{padding:var(--s6);display:grid;gap:var(--s6)}
+    .pagehead{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--s6)}
+    .pagehead h1{margin:0;font-size:20px}
+    .pagehead p{margin:6px 0 0;color:var(--muted);font-size:13px}
+    .modulebar{
+      display:flex;gap:10px;flex-wrap:wrap;margin-top:10px
+    }
+    .modchip{
+      display:inline-flex;gap:8px;align-items:center;
+      padding:6px 10px;border-radius:999px;border:1px solid var(--border);
+      font-size:12px;color:var(--text);background:rgba(17,24,39,.02);cursor:pointer
+    }
+    .swatch{width:10px;height:10px;border-radius:999px;background:var(--accent)}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--shadow)}
+    .card .inner{padding:var(--s6)}
+    .filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+    .field{
+      display:flex;align-items:center;gap:8px;
+      padding:10px 12px;border:1px solid var(--border);border-radius:12px;background:#fff
+    }
+    .field label{font-size:12px;color:var(--muted)}
+    .field select,.field input{border:0;outline:0;background:transparent;color:var(--text);font-size:14px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .chip{
+      display:inline-flex;gap:8px;align-items:center;
+      padding:6px 10px;border-radius:999px;border:1px solid rgba(0,0,0,.08);background:var(--accentSoft);
+      font-size:12px;color:var(--text)
+    }
+    .chip b{color:var(--muted);font-weight:700}
+    .chip button{border:0;background:transparent;cursor:pointer;color:var(--muted)}
+
+    .toolbar{
+      display:flex;align-items:center;justify-content:space-between;gap:var(--s4);
+      padding:var(--s4) var(--s6);border-top:1px solid var(--border)
+    }
+    .toolbar .left{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:13px}
+    .toolbar .right{display:flex;gap:10px}
+
+    table{width:100%;border-collapse:separate;border-spacing:0}
+    thead th{text-align:left;font-size:12px;color:var(--muted);font-weight:700;padding:12px 16px;border-bottom:1px solid var(--border)}
+    tbody td{padding:14px 16px;border-bottom:1px solid var(--border);vertical-align:middle}
+    tbody tr:hover{background:rgba(17,24,39,.02)}
+    .badge{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:4px 10px;border-radius:999px;border:1px solid var(--border);font-size:12px;color:var(--text)
+    }
+    .dot{width:8px;height:8px;border-radius:999px;background:var(--accent)}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;font-size:12px}
+    .url{max-width:420px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--muted)}
+    .rowactions{display:flex;gap:8px}
+    .iconbtn{width:34px;height:34px;border-radius:10px;border:1px solid var(--border);background:var(--surface);cursor:pointer}
+    .iconbtn:hover{background:rgba(17,24,39,.03)}
+
+    .drawer{
+      position:fixed;top:0;right:-520px;width:520px;height:100vh;
+      background:var(--surface);border-left:1px solid var(--border);box-shadow:var(--shadow);
+      transition:right .2s ease;z-index:50;display:flex;flex-direction:column
+    }
+    .drawer.open{right:0}
+    .drawer .hd{
+      padding:var(--s6);border-bottom:1px solid var(--border);
+      display:flex;justify-content:space-between;gap:var(--s4);
+      background:linear-gradient(180deg, rgba(255,255,255,1), rgba(255,255,255,.96));
+    }
+    .drawer .hd h3{margin:0;font-size:16px}
+    .drawer .bd{padding:var(--s6);overflow:auto;display:grid;gap:var(--s6)}
+    .section{border:1px solid var(--border);border-radius:var(--r-md)}
+    .section .sh{padding:12px 14px;border-bottom:1px solid var(--border);font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+    .section .sb{padding:14px}
+    .kv{display:grid;grid-template-columns:160px 1fr;gap:10px 14px;font-size:13px}
+    .kv div:nth-child(odd){color:var(--muted)}
+    .overlay{position:fixed;inset:0;background:rgba(17,24,39,.35);opacity:0;pointer-events:none;transition:opacity .2s ease;z-index:40}
+    .overlay.open{opacity:1;pointer-events:auto}
+
+    .toast{
+      position:fixed;left:24px;bottom:24px;padding:12px 14px;border-radius:14px;border:1px solid var(--border);
+      background:var(--surface);box-shadow:var(--shadow);display:flex;gap:10px;align-items:center;font-size:13px
+    }
+    .toast .ok{width:10px;height:10px;border-radius:999px;background:var(--accent)}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="side">
+      <div class="brand">
+        <div class="logo"></div>
+        <div>
+          <h1>Carroll</h1>
+          <div class="hint">Neutral + module accents</div>
+        </div>
+      </div>
+
+      <div class="navgrp">
+        <h2>Modules</h2>
+        <nav class="nav">
+          <a class="active" href="#" onclick="setModule('bus'); return false;">Bus services</a>
+          <a href="#" onclick="setModule('security'); return false;">Security</a>
+          <a href="#" onclick="setModule('gateway'); return false;">Gateways</a>
+          <a href="#" onclick="setModule('monitor'); return false;">Monitoring</a>
+        </nav>
+      </div>
+
+      <div class="navgrp">
+        <h2>Sections</h2>
+        <nav class="nav">
+          <a class="active" href="#">Entities</a>
+          <a href="#">Rules</a>
+          <a href="#">Dictionaries</a>
+        </nav>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="search">
+          <span style="color:var(--muted)">⌕</span>
+          <input placeholder="Global search..." />
+        </div>
+        <div style="display:flex;gap:10px">
+          <button class="btn">Docs</button>
+          <button class="btn">Profile</button>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="pagehead">
+          <div>
+            <h1 id="pageTitle">Bus services</h1>
+            <p>Same neutral UI, but accent color changes by module.</p>
+
+            <div class="modulebar">
+              <div class="modchip" onclick="setModule('bus')"><span class="swatch"></span> Bus (Blue)</div>
+              <div class="modchip" onclick="setModule('security')"><span class="swatch" style="background:var(--security)"></span> Security (Purple)</div>
+              <div class="modchip" onclick="setModule('gateway')"><span class="swatch" style="background:var(--gateway)"></span> Gateways (Green)</div>
+              <div class="modchip" onclick="setModule('monitor')"><span class="swatch" style="background:var(--monitor)"></span> Monitoring (Orange)</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:10px;align-items:center">
+            <button class="btn">Export</button>
+            <button class="btn primary" id="createBtn">Create</button>
+          </div>
+        </div>
+
+        <section class="card">
+          <div class="inner">
+            <div class="filters">
+              <div class="field">
+                <label>Environment</label>
+                <select><option>All</option><option>Prod</option><option>Preprod</option><option>Dev</option></select>
+              </div>
+              <div class="field">
+                <label>Type</label>
+                <select><option>All</option><option>Service</option><option>Route</option><option>Token</option></select>
+              </div>
+              <div class="field" style="min-width:320px;flex:1">
+                <label>Query</label>
+                <input placeholder="search..." />
+              </div>
+              <button class="btn">More filters</button>
+              <button class="btn">Clear</button>
+              <button class="btn primary">Apply</button>
+            </div>
+
+            <div class="chips">
+              <span class="chip"><b>Env</b> Preprod <button>×</button></span>
+              <span class="chip"><b>Type</b> Service <button>×</button></span>
+              <span class="chip"><b>Query</b> proxy <button>×</button></span>
+            </div>
+          </div>
+
+          <div class="toolbar">
+            <div class="left">48 results • Module accent active</div>
+            <div class="right">
+              <button class="btn">Columns</button>
+              <button class="btn">Density</button>
+              <button class="btn">Refresh</button>
+            </div>
+          </div>
+
+          <div style="overflow:auto">
+            <table>
+              <thead>
+                <tr>
+                  <th>Env</th>
+                  <th>Entity</th>
+                  <th>Endpoint</th>
+                  <th>Status</th>
+                  <th>Owner</th>
+                  <th style="width:140px">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr onclick="openDrawer()">
+                  <td><span class="badge"><span class="dot"></span> Preprod</span></td>
+                  <td>
+                    <div style="font-weight:700">Entity A</div>
+                    <div class="mono" style="color:var(--muted)">code: ENTITY_A</div>
+                  </td>
+                  <td><div class="mono url">srv-foo/.../endpoint</div></td>
+                  <td><span class="badge"><span class="dot" style="background:var(--success)"></span> OK</span></td>
+                  <td class="mono">team-core</td>
+                  <td>
+                    <div class="rowactions" onclick="event.stopPropagation()">
+                      <button class="iconbtn">⧉</button>
+                      <button class="iconbtn">↗</button>
+                      <button class="iconbtn" onclick="openDrawer()">›</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr onclick="openDrawer()">
+                  <td><span class="badge"><span class="dot" style="background:var(--warning)"></span> Prod</span></td>
+                  <td>
+                    <div style="font-weight:700">Entity B</div>
+                    <div class="mono" style="color:var(--muted)">code: ENTITY_B</div>
+                  </td>
+                  <td><div class="mono url">srv-bar/.../endpoint</div></td>
+                  <td><span class="badge"><span class="dot" style="background:var(--warning)"></span> Warning</span></td>
+                  <td class="mono">team-sec</td>
+                  <td>
+                    <div class="rowactions" onclick="event.stopPropagation()">
+                      <button class="iconbtn">⧉</button>
+                      <button class="iconbtn">↗</button>
+                      <button class="iconbtn" onclick="openDrawer()">›</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div class="overlay" id="overlay" onclick="closeDrawer()"></div>
+
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <div class="hd">
+      <div>
+        <h3>Entity details</h3>
+        <div style="margin-top:6px;display:flex;gap:8px;flex-wrap:wrap">
+          <span class="badge"><span class="dot"></span> Accent module</span>
+          <span class="badge"><span class="dot" style="background:var(--success)"></span> Valid</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <button class="btn" onclick="toggleEdit()">Edit</button>
+        <button class="btn" onclick="closeDrawer()">Close</button>
+      </div>
+    </div>
+
+    <div class="bd" id="drawerBody">
+      <div class="section">
+        <div class="sh">Identifiers</div>
+        <div class="sb">
+          <div class="kv">
+            <div>ID</div><div class="mono">75ceeb10-d97a-49f1-8931-417910180485</div>
+            <div>Code</div><div class="mono">ENTITY_A</div>
+            <div>Name</div><div>Entity A</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="sh">Settings</div>
+        <div class="sb">
+          <div class="kv">
+            <div>Status</div><div>OK</div>
+            <div>Owner</div><div class="mono">team-core</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="toast"><span class="ok"></span> UI preview — Scheme C</div>
+
+  <script>
+    const drawer = document.getElementById('drawer');
+    const overlay = document.getElementById('overlay');
+    const pageTitle = document.getElementById('pageTitle');
+    let editing = false;
+
+    function openDrawer(){ drawer.classList.add('open'); overlay.classList.add('open'); drawer.setAttribute('aria-hidden','false'); }
+    function closeDrawer(){ drawer.classList.remove('open'); overlay.classList.remove('open'); drawer.setAttribute('aria-hidden','true'); editing=false; renderDrawer(); }
+    function toggleEdit(){ editing=!editing; renderDrawer(); }
+
+    function setAccent(accent){
+      document.documentElement.style.setProperty('--accent', accent);
+      // Derive hover roughly (simple fallback)
+      document.documentElement.style.setProperty('--accentHover', accent);
+      document.documentElement.style.setProperty('--accentSoft', `rgba(${hexToRgb(accent)},.10)`);
+    }
+    function hexToRgb(hex){
+      const h = hex.replace('#','');
+      const r = parseInt(h.substring(0,2),16);
+      const g = parseInt(h.substring(2,4),16);
+      const b = parseInt(h.substring(4,6),16);
+      return `${r},${g},${b}`;
+    }
+    function setModule(m){
+      if(m==='bus'){ setAccent('#2563EB'); pageTitle.textContent='Bus services'; }
+      if(m==='security'){ setAccent(getComputedStyle(document.documentElement).getPropertyValue('--security').trim()); pageTitle.textContent='Security'; }
+      if(m==='gateway'){ setAccent(getComputedStyle(document.documentElement).getPropertyValue('--gateway').trim()); pageTitle.textContent='Gateways'; }
+      if(m==='monitor'){ setAccent(getComputedStyle(document.documentElement).getPropertyValue('--monitor').trim()); pageTitle.textContent='Monitoring'; }
+      // refresh dots color in-place (CSS uses --accent)
+    }
+
+    function renderDrawer(){
+      if(!editing) return;
+      const body = document.getElementById('drawerBody');
+      body.innerHTML = `
+        <div class="section">
+          <div class="sh">Edit entity</div>
+          <div class="sb">
+            <div class="kv">
+              <div>Name</div><div><input style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:12px" value="Entity A"></div>
+              <div>Code</div><div><input style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:12px" value="ENTITY_A"></div>
+              <div>Owner</div><div><input style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:12px" value="team-core"></div>
+            </div>
+            <div style="margin-top:16px;display:flex;gap:10px;justify-content:flex-end">
+              <button class="btn" onclick="toggleEdit()">Cancel</button>
+              <button class="btn primary" onclick="toggleEdit()">Save</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    document.getElementById('createBtn').addEventListener('click', openDrawer);
+    setModule('bus');
+  </script>
+</body>
+</html>

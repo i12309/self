@@ -1,0 +1,418 @@
+<!-- scheme-b.html  |  Graphite + Cyan -->
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Carroll UI — Scheme B (Graphite + Cyan)</title>
+  <style>
+    :root{
+      --bg:#F5F6F8; --surface:#FFFFFF; --border:#DDE1E6;
+      --text:#0B1220; --muted:#546174;
+      --primary:#0F766E; --primaryHover:#115E59; --focus:#5EEAD4;
+      --success:#22C55E; --warning:#FBBF24; --danger:#EF4444; --info:#06B6D4;
+
+      --r-sm:10px; --r-md:14px; --r-lg:18px;
+      --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s6:24px; --s8:32px;
+      --shadow: 0 10px 26px rgba(11,18,32,.10);
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font)}
+    a{color:var(--primary);text-decoration:none}
+    a:hover{color:var(--primaryHover)}
+    .app{display:grid;grid-template-columns:300px 1fr;min-height:100vh}
+    .side{
+      background:linear-gradient(180deg,#ffffff 0%, #fbfcfd 100%);
+      border-right:1px solid var(--border);
+      padding:var(--s6);position:sticky;top:0;height:100vh;overflow:auto
+    }
+    .brand{display:flex;gap:12px;align-items:center;margin-bottom:var(--s6)}
+    .logo{width:38px;height:38px;border-radius:14px;background:linear-gradient(135deg,var(--primary),var(--info))}
+    .brand h1{font-size:16px;margin:0}
+    .brand small{color:var(--muted)}
+    .navgrp{margin-top:var(--s6)}
+    .navgrp h2{font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin:0 0 var(--s2)}
+    .nav a{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      padding:11px 12px;border-radius:14px;color:var(--text)
+    }
+    .nav a.active{
+      background:linear-gradient(90deg, rgba(15,118,110,.14), rgba(6,182,212,.08));
+      color:var(--primary);font-weight:700;border:1px solid rgba(15,118,110,.22)
+    }
+    .nav a:hover{background:rgba(11,18,32,.04)}
+    .kbd{
+      font-size:11px;color:var(--muted);border:1px solid var(--border);
+      border-bottom-width:2px;border-radius:10px;padding:2px 8px;background:#fff
+    }
+
+    .main{display:flex;flex-direction:column}
+    .topbar{
+      display:flex;gap:var(--s4);align-items:center;justify-content:space-between;
+      padding:var(--s4) var(--s6);border-bottom:1px solid var(--border);
+      background:rgba(245,246,248,.85);backdrop-filter: blur(10px);position:sticky;top:0;z-index:10
+    }
+    .search{
+      flex:1;max-width:620px;display:flex;align-items:center;gap:10px;
+      padding:10px 12px;border:1px solid var(--border);border-radius:16px;background:var(--surface);
+      box-shadow: 0 2px 10px rgba(11,18,32,.05)
+    }
+    .search input{border:0;outline:0;width:100%;font-size:14px;background:transparent;color:var(--text)}
+    .btn{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:10px 12px;border-radius:16px;border:1px solid var(--border);
+      background:var(--surface);color:var(--text);cursor:pointer
+    }
+    .btn:hover{background:rgba(11,18,32,.03)}
+    .btn.primary{
+      background:linear-gradient(90deg,var(--primary),var(--info));
+      border:0;color:white
+    }
+    .btn.primary:hover{filter:saturate(1.05) brightness(.98)}
+    .btn:focus{outline:3px solid rgba(94,234,212,.55);outline-offset:2px}
+
+    .content{padding:var(--s6);display:grid;gap:var(--s6)}
+    .pagehead{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--s6)}
+    .pagehead h1{margin:0;font-size:22px}
+    .pagehead p{margin:6px 0 0;color:var(--muted);font-size:13px}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--shadow)}
+    .card .inner{padding:var(--s6)}
+    .filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+    .field{
+      display:flex;align-items:center;gap:8px;
+      padding:10px 12px;border:1px solid var(--border);border-radius:16px;background:#fff
+    }
+    .field label{font-size:12px;color:var(--muted)}
+    .field select,.field input{border:0;outline:0;background:transparent;color:var(--text);font-size:14px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .chip{
+      display:inline-flex;gap:8px;align-items:center;
+      padding:6px 10px;border-radius:999px;border:1px solid rgba(15,118,110,.25);
+      background:rgba(15,118,110,.08);font-size:12px;color:var(--text)
+    }
+    .chip b{color:var(--muted);font-weight:700}
+    .chip button{border:0;background:transparent;cursor:pointer;color:var(--muted)}
+    .toolbar{
+      display:flex;align-items:center;justify-content:space-between;gap:var(--s4);
+      padding:var(--s4) var(--s6);border-top:1px solid var(--border)
+    }
+    .toolbar .left{color:var(--muted);font-size:13px}
+    .toolbar .right{display:flex;gap:10px}
+
+    table{width:100%;border-collapse:separate;border-spacing:0}
+    thead th{
+      text-align:left;font-size:12px;color:var(--muted);font-weight:700;
+      padding:12px 16px;border-bottom:1px solid var(--border)
+    }
+    tbody td{padding:14px 16px;border-bottom:1px solid var(--border);vertical-align:middle}
+    tbody tr:hover{background:rgba(15,118,110,.04)}
+    .badge{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:4px 10px;border-radius:999px;border:1px solid var(--border);font-size:12px;color:var(--text)
+    }
+    .dot{width:8px;height:8px;border-radius:999px;background:var(--info)}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;font-size:12px}
+    .url{max-width:420px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--muted)}
+    .rowactions{display:flex;gap:8px}
+    .iconbtn{
+      width:34px;height:34px;border-radius:12px;border:1px solid var(--border);
+      background:var(--surface);cursor:pointer
+    }
+    .iconbtn:hover{background:rgba(11,18,32,.03)}
+
+    .drawer{
+      position:fixed;top:0;right:-560px;width:560px;height:100vh;
+      background:var(--surface);border-left:1px solid var(--border);box-shadow:var(--shadow);
+      transition:right .22s ease;z-index:50;display:flex;flex-direction:column
+    }
+    .drawer.open{right:0}
+    .drawer .hd{padding:var(--s6);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;gap:var(--s4)}
+    .drawer .hd h3{margin:0;font-size:16px}
+    .drawer .bd{padding:var(--s6);overflow:auto;display:grid;gap:var(--s6)}
+    .section{border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden}
+    .section .sh{
+      padding:12px 14px;background:rgba(11,18,32,.02);
+      border-bottom:1px solid var(--border);font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em
+    }
+    .section .sb{padding:14px}
+    .kv{display:grid;grid-template-columns:160px 1fr;gap:10px 14px;font-size:13px}
+    .kv div:nth-child(odd){color:var(--muted)}
+    .overlay{
+      position:fixed;inset:0;background:rgba(11,18,32,.38);
+      opacity:0;pointer-events:none;transition:opacity .22s ease;z-index:40
+    }
+    .overlay.open{opacity:1;pointer-events:auto}
+    .toast{
+      position:fixed;left:24px;bottom:24px;
+      padding:12px 14px;border-radius:16px;border:1px solid var(--border);background:var(--surface);box-shadow:var(--shadow);
+      display:flex;gap:10px;align-items:center;color:var(--text);font-size:13px
+    }
+    .toast .ok{width:10px;height:10px;border-radius:999px;background:var(--info)}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="side">
+      <div class="brand">
+        <div class="logo"></div>
+        <div>
+          <h1>Carroll</h1>
+          <small>Graphite + Cyan</small>
+        </div>
+      </div>
+
+      <div class="search" style="max-width:none;margin:0 0 16px 0">
+        <span style="color:var(--muted)">⌕</span>
+        <input placeholder="Search menu..." />
+        <span class="kbd">Ctrl K</span>
+      </div>
+
+      <div class="navgrp">
+        <h2>Configuration</h2>
+        <nav class="nav">
+          <a class="active" href="#"><span>Entities</span><span class="kbd">E</span></a>
+          <a href="#"><span>Installations</span><span class="kbd">I</span></a>
+          <a href="#"><span>Composite</span><span class="kbd">C</span></a>
+        </nav>
+      </div>
+
+      <div class="navgrp">
+        <h2>Security</h2>
+        <nav class="nav">
+          <a href="#"><span>Tokens</span><span class="kbd">T</span></a>
+          <a href="#"><span>Whitelists</span><span class="kbd">W</span></a>
+        </nav>
+      </div>
+
+      <div class="navgrp">
+        <h2>Gateways</h2>
+        <nav class="nav">
+          <a href="#"><span>APIGate</span><span class="kbd">A</span></a>
+          <a href="#"><span>Routes</span><span class="kbd">R</span></a>
+        </nav>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="search">
+          <span style="color:var(--muted)">⌕</span>
+          <input placeholder="Global search (entities, URLs, codes)..." />
+        </div>
+        <div style="display:flex;gap:10px">
+          <button class="btn">Docs</button>
+          <button class="btn">Profile</button>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="pagehead">
+          <div>
+            <h1>Entities</h1>
+            <p>Modern, higher-contrast look. Click a row to open details.</p>
+          </div>
+          <div style="display:flex;gap:10px">
+            <button class="btn">Export</button>
+            <button class="btn primary" id="createBtn">Create</button>
+          </div>
+        </div>
+
+        <section class="card">
+          <div class="inner">
+            <div class="filters">
+              <div class="field">
+                <label>Environment</label>
+                <select><option>All</option><option>Prod</option><option>Preprod</option><option>Dev</option></select>
+              </div>
+              <div class="field">
+                <label>Status</label>
+                <select><option>All</option><option>Valid</option><option>Warning</option><option>Error</option></select>
+              </div>
+              <div class="field" style="min-width:320px;flex:1">
+                <label>Query</label>
+                <input placeholder="service, code, host..." />
+              </div>
+              <button class="btn">More</button>
+              <button class="btn">Clear</button>
+              <button class="btn primary">Apply</button>
+            </div>
+
+            <div class="chips">
+              <span class="chip"><b>Env</b> Preprod <button>×</button></span>
+              <span class="chip"><b>Status</b> Valid <button>×</button></span>
+              <span class="chip"><b>Query</b> appointment <button>×</button></span>
+            </div>
+          </div>
+
+          <div class="toolbar">
+            <div class="left">128 results • Sorted by Updated desc</div>
+            <div class="right">
+              <button class="btn">Columns</button>
+              <button class="btn">Density</button>
+              <button class="btn">Refresh</button>
+            </div>
+          </div>
+
+          <div style="overflow:auto">
+            <table>
+              <thead>
+                <tr>
+                  <th>Env</th>
+                  <th>Entity</th>
+                  <th>Endpoint A</th>
+                  <th>Endpoint B</th>
+                  <th>Status</th>
+                  <th>Updated</th>
+                  <th style="width:140px">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr onclick="openDrawer()">
+                  <td><span class="badge"><span class="dot"></span> Preprod</span></td>
+                  <td>
+                    <div style="font-weight:700">SelfAppointmentTwo</div>
+                    <div class="mono" style="color:var(--muted)">code: APPOINTMENT_SELFAPPOINTMENTTWO_V1S</div>
+                  </td>
+                  <td><div class="mono url">srv-esb-vip-main/.../ProxyService</div></td>
+                  <td><div class="mono url">srv-sappointmentp1-bal01:80/...External</div></td>
+                  <td><span class="badge"><span class="dot" style="background:var(--success)"></span> Valid</span></td>
+                  <td class="mono">2026-03-04</td>
+                  <td>
+                    <div class="rowactions" onclick="event.stopPropagation()">
+                      <button class="iconbtn">⧉</button>
+                      <button class="iconbtn">↗</button>
+                      <button class="iconbtn" onclick="openDrawer()">›</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr onclick="openDrawer()">
+                  <td><span class="badge"><span class="dot" style="background:var(--warning)"></span> Prod</span></td>
+                  <td>
+                    <div style="font-weight:700">ESUCheck</div>
+                    <div class="mono" style="color:var(--muted)">code: ESU_CHECK_V3</div>
+                  </td>
+                  <td><div class="mono url">srv-esb-prod/.../ESU/Check/v3</div></td>
+                  <td><div class="mono url">srv-esu-prod:443/api/check</div></td>
+                  <td><span class="badge"><span class="dot" style="background:var(--warning)"></span> Warning</span></td>
+                  <td class="mono">2026-02-21</td>
+                  <td>
+                    <div class="rowactions" onclick="event.stopPropagation()">
+                      <button class="iconbtn">⧉</button>
+                      <button class="iconbtn">↗</button>
+                      <button class="iconbtn" onclick="openDrawer()">›</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr onclick="openDrawer()">
+                  <td><span class="badge"><span class="dot" style="background:var(--danger)"></span> Dev</span></td>
+                  <td>
+                    <div style="font-weight:700">GatewayRoute</div>
+                    <div class="mono" style="color:var(--muted)">code: GW_ROUTE_1</div>
+                  </td>
+                  <td><div class="mono url">srv-gw-dev/proxy/route/v1</div></td>
+                  <td><div class="mono url">srv-back-dev:8080/service</div></td>
+                  <td><span class="badge"><span class="dot" style="background:var(--danger)"></span> Error</span></td>
+                  <td class="mono">2026-01-15</td>
+                  <td>
+                    <div class="rowactions" onclick="event.stopPropagation()">
+                      <button class="iconbtn">⧉</button>
+                      <button class="iconbtn">↗</button>
+                      <button class="iconbtn" onclick="openDrawer()">›</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div class="overlay" id="overlay" onclick="closeDrawer()"></div>
+
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <div class="hd">
+      <div>
+        <h3>Entity details</h3>
+        <div style="margin-top:6px;display:flex;gap:8px;flex-wrap:wrap">
+          <span class="badge"><span class="dot"></span> Preprod</span>
+          <span class="badge"><span class="dot" style="background:var(--success)"></span> Valid</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <button class="btn" onclick="toggleEdit()">Edit</button>
+        <button class="btn" onclick="closeDrawer()">Close</button>
+      </div>
+    </div>
+
+    <div class="bd" id="drawerBody">
+      <div class="section">
+        <div class="sh">Identifiers</div>
+        <div class="sb">
+          <div class="kv">
+            <div>ID</div><div class="mono">75ceeb10-d97a-49f1-8931-417910180485</div>
+            <div>Code</div><div class="mono">APPOINTMENT_SELFAPPOINTMENTTWO_V1S</div>
+            <div>Name</div><div>SelfAppointmentTwo</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="sh">Endpoints</div>
+        <div class="sb">
+          <div class="kv">
+            <div>Endpoint A</div><div class="mono">srv-esb-vip-main/.../ProxyService</div>
+            <div>Endpoint B</div><div class="mono">srv-sappointmentp1-bal01:80/...External</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="sh">Settings</div>
+        <div class="sb">
+          <div class="kv">
+            <div>Auth</div><div>Enabled</div>
+            <div>Timeout</div><div class="mono">read 30000 / conn 5000</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="toast"><span class="ok"></span> UI preview — Scheme B</div>
+
+  <script>
+    const drawer = document.getElementById('drawer');
+    const overlay = document.getElementById('overlay');
+    let editing = false;
+
+    function openDrawer(){ drawer.classList.add('open'); overlay.classList.add('open'); drawer.setAttribute('aria-hidden','false'); }
+    function closeDrawer(){ drawer.classList.remove('open'); overlay.classList.remove('open'); drawer.setAttribute('aria-hidden','true'); editing=false; renderDrawer(); }
+    function toggleEdit(){ editing=!editing; renderDrawer(); }
+    function renderDrawer(){
+      const body = document.getElementById('drawerBody');
+      if(!editing) return;
+      body.innerHTML = `
+        <div class="section">
+          <div class="sh">Edit entity</div>
+          <div class="sb">
+            <div class="kv">
+              <div>Name</div><div><input style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:16px" value="SelfAppointmentTwo"></div>
+              <div>Code</div><div><input style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:16px" value="APPOINTMENT_SELFAPPOINTMENTTWO_V1S"></div>
+              <div>Endpoint A</div><div><input style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:16px" value="srv-esb-vip-main/.../ProxyService"></div>
+              <div>Endpoint B</div><div><input style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:16px" value="srv-sappointmentp1-bal01:80/...External"></div>
+            </div>
+            <div style="margin-top:16px;display:flex;gap:10px;justify-content:flex-end">
+              <button class="btn" onclick="toggleEdit()">Cancel</button>
+              <button class="btn primary" onclick="toggleEdit()">Save</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+    document.getElementById('createBtn').addEventListener('click', openDrawer);
+  </script>
+</body>
+</html>

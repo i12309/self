@@ -1,0 +1,435 @@
+<!-- scheme-a.html  |  Neutral + Blue -->
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Carroll UI — Scheme A (Neutral + Blue)</title>
+  <style>
+    :root{
+      --bg:#F6F7F9; --surface:#FFFFFF; --border:#E3E6EA;
+      --text:#111827; --muted:#6B7280;
+      --primary:#2563EB; --primaryHover:#1D4ED8; --focus:#93C5FD;
+      --success:#16A34A; --warning:#F59E0B; --danger:#DC2626; --info:#0EA5E9;
+
+      --r-sm:8px; --r-md:12px; --r-lg:16px;
+      --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px; --s8:32px;
+      --shadow: 0 6px 18px rgba(17,24,39,.08);
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font)}
+    a{color:var(--primary);text-decoration:none}
+    a:hover{color:var(--primaryHover)}
+    .app{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+    .side{
+      background:var(--surface);border-right:1px solid var(--border);
+      padding:var(--s6);position:sticky;top:0;height:100vh;overflow:auto
+    }
+    .brand{display:flex;gap:10px;align-items:center;margin-bottom:var(--s6)}
+    .logo{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--primary),var(--info))}
+    .brand h1{font-size:16px;margin:0}
+    .navgrp{margin-top:var(--s6)}
+    .navgrp h2{font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin:0 0 var(--s2)}
+    .nav a{
+      display:flex;align-items:center;gap:10px;
+      padding:10px 10px;border-radius:10px;color:var(--text)
+    }
+    .nav a.active{background:rgba(37,99,235,.10);color:var(--primary);font-weight:600}
+    .nav a:hover{background:rgba(17,24,39,.04)}
+    .pill{font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:999px;padding:2px 8px}
+    .main{display:flex;flex-direction:column}
+    .topbar{
+      display:flex;gap:var(--s4);align-items:center;justify-content:space-between;
+      padding:var(--s4) var(--s6);border-bottom:1px solid var(--border);
+      background:rgba(246,247,249,.85);backdrop-filter: blur(8px);position:sticky;top:0;z-index:10
+    }
+    .search{
+      flex:1;max-width:560px;display:flex;align-items:center;gap:10px;
+      padding:10px 12px;border:1px solid var(--border);border-radius:12px;background:var(--surface)
+    }
+    .search input{border:0;outline:0;width:100%;font-size:14px;background:transparent;color:var(--text)}
+    .actions{display:flex;align-items:center;gap:10px}
+    .btn{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:10px 12px;border-radius:12px;border:1px solid var(--border);
+      background:var(--surface);color:var(--text);cursor:pointer
+    }
+    .btn:hover{background:rgba(17,24,39,.03)}
+    .btn.primary{background:var(--primary);border-color:var(--primary);color:white}
+    .btn.primary:hover{background:var(--primaryHover);border-color:var(--primaryHover)}
+    .btn:focus{outline:3px solid rgba(147,197,253,.6);outline-offset:2px}
+    .content{padding:var(--s6);display:grid;gap:var(--s6)}
+    .pagehead{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--s6)}
+    .pagehead h1{margin:0;font-size:20px}
+    .pagehead p{margin:6px 0 0;color:var(--muted);font-size:13px}
+    .card{
+      background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);
+      box-shadow:var(--shadow)
+    }
+    .card .inner{padding:var(--s6)}
+    .filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+    .field{
+      display:flex;align-items:center;gap:8px;
+      padding:10px 12px;border:1px solid var(--border);border-radius:12px;background:#fff
+    }
+    .field label{font-size:12px;color:var(--muted)}
+    .field select,.field input{border:0;outline:0;background:transparent;color:var(--text);font-size:14px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .chip{
+      display:inline-flex;gap:8px;align-items:center;
+      padding:6px 10px;border-radius:999px;border:1px solid var(--border);background:rgba(17,24,39,.02);
+      font-size:12px;color:var(--text)
+    }
+    .chip b{color:var(--muted);font-weight:600}
+    .chip button{border:0;background:transparent;cursor:pointer;color:var(--muted)}
+    .toolbar{
+      display:flex;align-items:center;justify-content:space-between;gap:var(--s4);
+      padding:var(--s4) var(--s6);border-top:1px solid var(--border)
+    }
+    .toolbar .left{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:13px}
+    .toolbar .right{display:flex;gap:10px}
+    table{width:100%;border-collapse:separate;border-spacing:0}
+    thead th{
+      text-align:left;font-size:12px;color:var(--muted);font-weight:600;
+      padding:12px 16px;border-bottom:1px solid var(--border)
+    }
+    tbody td{padding:14px 16px;border-bottom:1px solid var(--border);vertical-align:middle}
+    tbody tr:hover{background:rgba(17,24,39,.02)}
+    .badge{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:4px 10px;border-radius:999px;border:1px solid var(--border);font-size:12px;color:var(--text)
+    }
+    .dot{width:8px;height:8px;border-radius:999px;background:var(--info)}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;font-size:12px}
+    .url{max-width:420px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--muted)}
+    .rowactions{display:flex;gap:8px}
+    .iconbtn{
+      width:34px;height:34px;border-radius:10px;border:1px solid var(--border);
+      background:var(--surface);cursor:pointer
+    }
+    .iconbtn:hover{background:rgba(17,24,39,.03)}
+    /* Drawer */
+    .drawer{
+      position:fixed;top:0;right:-520px;width:520px;height:100vh;
+      background:var(--surface);border-left:1px solid var(--border);box-shadow:var(--shadow);
+      transition:right .2s ease;z-index:50;display:flex;flex-direction:column
+    }
+    .drawer.open{right:0}
+    .drawer .hd{padding:var(--s6);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;gap:var(--s4)}
+    .drawer .hd h3{margin:0;font-size:16px}
+    .drawer .bd{padding:var(--s6);overflow:auto;display:grid;gap:var(--s6)}
+    .section{border:1px solid var(--border);border-radius:var(--r-md)}
+    .section .sh{padding:12px 14px;border-bottom:1px solid var(--border);font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+    .section .sb{padding:14px}
+    .kv{display:grid;grid-template-columns:160px 1fr;gap:10px 14px;font-size:13px}
+    .kv div:nth-child(odd){color:var(--muted)}
+    .overlay{
+      position:fixed;inset:0;background:rgba(17,24,39,.35);
+      opacity:0;pointer-events:none;transition:opacity .2s ease;z-index:40
+    }
+    .overlay.open{opacity:1;pointer-events:auto}
+    .toast{
+      position:fixed;left:24px;bottom:24px;
+      padding:12px 14px;border-radius:14px;border:1px solid var(--border);background:var(--surface);box-shadow:var(--shadow);
+      display:flex;gap:10px;align-items:center;color:var(--text);font-size:13px
+    }
+    .toast .ok{width:10px;height:10px;border-radius:999px;background:var(--success)}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="side">
+      <div class="brand">
+        <div class="logo"></div>
+        <div>
+          <h1>Carroll</h1>
+          <div class="pill">Enterprise UI</div>
+        </div>
+      </div>
+
+      <div class="navgrp">
+        <h2>Configuration</h2>
+        <nav class="nav">
+          <a class="active" href="#">Bus services</a>
+          <a href="#">Installations</a>
+          <a href="#">Composite services</a>
+        </nav>
+      </div>
+
+      <div class="navgrp">
+        <h2>Security</h2>
+        <nav class="nav">
+          <a href="#">Auth tokens</a>
+          <a href="#">Whitelists</a>
+        </nav>
+      </div>
+
+      <div class="navgrp">
+        <h2>Gateways</h2>
+        <nav class="nav">
+          <a href="#">APIGate</a>
+          <a href="#">Routes</a>
+        </nav>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="search">
+          <span style="color:var(--muted)">⌕</span>
+          <input placeholder="Search anything (entities, URLs, codes)..." />
+        </div>
+        <div class="actions">
+          <button class="btn">Docs</button>
+          <button class="btn">Profile</button>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="pagehead">
+          <div>
+            <h1>Entities</h1>
+            <p>List, filter, create and edit entities. Click a row to open details.</p>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center">
+            <button class="btn">Export CSV</button>
+            <button class="btn primary" id="createBtn">Create</button>
+          </div>
+        </div>
+
+        <section class="card">
+          <div class="inner">
+            <div class="filters">
+              <div class="field">
+                <label>Environment</label>
+                <select>
+                  <option>All</option><option>Prod</option><option>Preprod</option><option>Dev</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Product</label>
+                <select>
+                  <option>All</option><option>SelfAppointment</option><option>ESU</option><option>APIGate</option>
+                </select>
+              </div>
+              <div class="field" style="min-width:320px;flex:1">
+                <label>Query</label>
+                <input placeholder="service name, code, host, url..." />
+              </div>
+              <button class="btn">More filters</button>
+              <button class="btn">Clear</button>
+              <button class="btn primary">Apply</button>
+            </div>
+
+            <div class="chips">
+              <span class="chip"><b>Env</b> Preprod <button aria-label="remove">×</button></span>
+              <span class="chip"><b>Product</b> SelfAppointment <button aria-label="remove">×</button></span>
+              <span class="chip"><b>Query</b> appointment <button aria-label="remove">×</button></span>
+            </div>
+          </div>
+
+          <div class="toolbar">
+            <div class="left">128 results • Sorted by Updated desc</div>
+            <div class="right">
+              <button class="btn">Columns</button>
+              <button class="btn">Density</button>
+              <button class="btn">Refresh</button>
+            </div>
+          </div>
+
+          <div style="overflow:auto">
+            <table>
+              <thead>
+                <tr>
+                  <th>Environment</th>
+                  <th>Service</th>
+                  <th>Bus endpoint</th>
+                  <th>Product endpoint</th>
+                  <th>Auth</th>
+                  <th>Timeouts</th>
+                  <th style="width:140px">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr onclick="openDrawer()">
+                  <td><span class="badge"><span class="dot"></span> Preprod</span></td>
+                  <td>
+                    <div style="font-weight:600">SelfAppointmentTwo</div>
+                    <div class="mono" style="color:var(--muted)">version 1S • proxy APPOINTMENT_SELFAPPOINTMENTTWO_V1S</div>
+                  </td>
+                  <td>
+                    <div class="mono url">srv-esb-vip-main/proxy/Appointment/SelfAppointmentTwo/v1S/ProxyService</div>
+                  </td>
+                  <td>
+                    <div class="mono url">srv-sappointmentp1-bal01:80/SelfAppointment/SelfAppointmentServiceExternal</div>
+                  </td>
+                  <td><span class="badge"><span class="dot" style="background:var(--success)"></span> enabled</span></td>
+                  <td class="mono">read 30000 • conn 5000</td>
+                  <td>
+                    <div class="rowactions" onclick="event.stopPropagation()">
+                      <button class="iconbtn" title="Copy">⧉</button>
+                      <button class="iconbtn" title="Open">↗</button>
+                      <button class="iconbtn" title="Details" onclick="openDrawer()">›</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr onclick="openDrawer()">
+                  <td><span class="badge"><span class="dot" style="background:var(--warning)"></span> Prod</span></td>
+                  <td>
+                    <div style="font-weight:600">ESUCheck</div>
+                    <div class="mono" style="color:var(--muted)">version 3 • proxy ESU_CHECK_V3</div>
+                  </td>
+                  <td><div class="mono url">srv-esb-prod/proxy/ESU/Check/v3/ProxyService</div></td>
+                  <td><div class="mono url">srv-esu-prod:443/api/check</div></td>
+                  <td><span class="badge"><span class="dot" style="background:var(--danger)"></span> disabled</span></td>
+                  <td class="mono">read 20000 • conn 3000</td>
+                  <td>
+                    <div class="rowactions" onclick="event.stopPropagation()">
+                      <button class="iconbtn" title="Copy">⧉</button>
+                      <button class="iconbtn" title="Open">↗</button>
+                      <button class="iconbtn" title="Details" onclick="openDrawer()">›</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr onclick="openDrawer()">
+                  <td><span class="badge"><span class="dot" style="background:var(--info)"></span> Dev</span></td>
+                  <td>
+                    <div style="font-weight:600">GatewayRoute</div>
+                    <div class="mono" style="color:var(--muted)">version 1 • route GW_ROUTE_1</div>
+                  </td>
+                  <td><div class="mono url">srv-gw-dev/proxy/route/v1</div></td>
+                  <td><div class="mono url">srv-back-dev:8080/service</div></td>
+                  <td><span class="badge"><span class="dot" style="background:var(--success)"></span> enabled</span></td>
+                  <td class="mono">read 15000 • conn 2000</td>
+                  <td>
+                    <div class="rowactions" onclick="event.stopPropagation()">
+                      <button class="iconbtn" title="Copy">⧉</button>
+                      <button class="iconbtn" title="Open">↗</button>
+                      <button class="iconbtn" title="Details" onclick="openDrawer()">›</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div class="overlay" id="overlay" onclick="closeDrawer()"></div>
+
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <div class="hd">
+      <div>
+        <h3>SelfAppointmentTwo · 1S</h3>
+        <div style="margin-top:6px;display:flex;gap:8px;flex-wrap:wrap">
+          <span class="badge"><span class="dot"></span> Preprod</span>
+          <span class="badge"><span class="dot" style="background:var(--info)"></span> SelfAppointment</span>
+          <span class="badge"><span class="dot" style="background:var(--success)"></span> Valid</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <button class="btn" onclick="toggleEdit()">Edit</button>
+        <button class="btn" onclick="closeDrawer()">Close</button>
+      </div>
+    </div>
+
+    <div class="bd" id="drawerBody">
+      <div class="section">
+        <div class="sh">Identifiers</div>
+        <div class="sb">
+          <div class="kv">
+            <div>ID</div><div class="mono">75ceeb10-d97a-49f1-8931-417910180485</div>
+            <div>Product code</div><div class="mono">selfappointment</div>
+            <div>Proxy code</div><div class="mono">APPOINTMENT_SELFAPPOINTMENTTWO_V1S_PROXYSERVICE</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="sh">Endpoints</div>
+        <div class="sb">
+          <div class="kv">
+            <div>Bus URL</div><div class="mono">http://srv-esb-vip-main/.../ProxyService</div>
+            <div>Product URL</div><div class="mono">http://srv-sappointmentp1-bal01:80/...External</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="sh">Timeouts & protocol</div>
+        <div class="sb">
+          <div class="kv">
+            <div>Read timeout</div><div class="mono">30000</div>
+            <div>Connection timeout</div><div class="mono">5000</div>
+            <div>Protocol</div><div class="mono">SOAP 1.1</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="sh">Security</div>
+        <div class="sb">
+          <div class="kv">
+            <div>Authentication</div><div>Enabled</div>
+            <div>Cut product token</div><div>True</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="toast"><span class="ok"></span> UI preview — Scheme A</div>
+
+  <script>
+    const drawer = document.getElementById('drawer');
+    const overlay = document.getElementById('overlay');
+    let editing = false;
+
+    function openDrawer(){
+      drawer.classList.add('open');
+      overlay.classList.add('open');
+      drawer.setAttribute('aria-hidden','false');
+    }
+    function closeDrawer(){
+      drawer.classList.remove('open');
+      overlay.classList.remove('open');
+      drawer.setAttribute('aria-hidden','true');
+      editing = false;
+      renderDrawer();
+    }
+    function toggleEdit(){
+      editing = !editing;
+      renderDrawer();
+    }
+    function renderDrawer(){
+      const body = document.getElementById('drawerBody');
+      if(!editing){
+        body.innerHTML = document.querySelector('#drawerBody').innerHTML;
+        return;
+      }
+      body.innerHTML = `
+        <div class="section">
+          <div class="sh">Edit entity</div>
+          <div class="sb">
+            <div class="kv">
+              <div>Service name</div><div><input style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:12px" value="SelfAppointmentTwo"></div>
+              <div>Version</div><div><input style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:12px" value="1S"></div>
+              <div>Bus URL</div><div><input style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:12px" value="http://srv-esb-vip-main/.../ProxyService"></div>
+              <div>Product URL</div><div><input style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:12px" value="http://srv-sappointmentp1-bal01:80/...External"></div>
+            </div>
+            <div style="margin-top:16px;display:flex;gap:10px;justify-content:flex-end">
+              <button class="btn" onclick="toggleEdit()">Cancel</button>
+              <button class="btn primary" onclick="toggleEdit()">Save</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    document.getElementById('createBtn').addEventListener('click', openDrawer);
+  </script>
+</body>
+</html>
