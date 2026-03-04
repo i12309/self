@@ -1,0 +1,647 @@
+<!-- scheme-c-green-sharp.html | White + Green base, SHARP corners, straight lines, color accents (yellow/blue/red) -->
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Carroll UI — White/Green (Sharp) + Color Accents</title>
+  <style>
+    :root{
+      /* Base */
+      --bg:#F6F8FA;
+      --surface:#FFFFFF;
+      --surface2:#F1F6F3;
+      --border:#D7E0DC;
+
+      --text:#0B1220;
+      --muted:#556575;
+
+      /* Primary (green) */
+      --accent:#1E9B4B;
+      --accentHover:#157A39;
+      --accentSoft: rgba(30,155,75,.10);
+
+      /* Accent colors (requested) */
+      --blue:#2563EB;
+      --blueSoft: rgba(37,99,235,.10);
+
+      --yellow:#F59E0B;
+      --yellowSoft: rgba(245,158,11,.14);
+
+      --red:#DC2626;
+      --redSoft: rgba(220,38,38,.10);
+
+      --success:#16A34A;
+      --warning:#F59E0B;
+      --danger:#DC2626;
+      --info:#0EA5E9;
+
+      /* Sharp geometry */
+      --r:0px;          /* all corners straight */
+      --r2:0px;
+
+      /* Spacing / type */
+      --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px; --s8:32px;
+      --shadow: 0 10px 26px rgba(11,18,32,.08);
+
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
+
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font)}
+    a{color:var(--blue);text-decoration:none}
+    a:hover{filter:brightness(.95)}
+
+    .app{display:grid;grid-template-columns:290px 1fr;min-height:100vh}
+
+    /* Sidebar */
+    .side{
+      background:var(--surface);
+      border-right:2px solid var(--border);
+      padding:var(--s6);
+      position:sticky;top:0;height:100vh;overflow:auto
+    }
+    .brand{display:flex;gap:12px;align-items:center;margin-bottom:var(--s6)}
+    .logo{
+      width:40px;height:40px;background:
+        linear-gradient(90deg, var(--blue) 0 25%, var(--yellow) 25% 50%, var(--accent) 50% 75%, var(--red) 75% 100%);
+      border:2px solid var(--border);
+    }
+    .brand h1{margin:0;font-size:16px;letter-spacing:.02em}
+    .hint{margin-top:4px;font-size:12px;color:var(--muted)}
+    .navgrp{margin-top:var(--s6)}
+    .navgrp h2{
+      font-size:11px;color:var(--muted);
+      letter-spacing:.14em;text-transform:uppercase;margin:0 0 var(--s2)
+    }
+    .nav a{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      padding:10px 10px;color:var(--text);
+      border:1px solid transparent;
+    }
+    .nav a:hover{background:rgba(11,18,32,.02);border-color:var(--border)}
+    .nav a.active{
+      background: linear-gradient(90deg, var(--accentSoft), rgba(255,255,255,0));
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight:800;
+    }
+    .pill{
+      font-size:11px;color:var(--muted);
+      border:1px solid var(--border);
+      padding:2px 8px;background:var(--surface2)
+    }
+
+    /* Main */
+    .main{display:flex;flex-direction:column}
+    .topbar{
+      position:sticky;top:0;z-index:10;
+      padding:var(--s4) var(--s6);
+      border-bottom:2px solid var(--border);
+      background:var(--bg);
+      display:flex;gap:var(--s4);align-items:center;justify-content:space-between
+    }
+    .search{
+      flex:1;max-width:720px;display:flex;align-items:center;gap:10px;
+      padding:10px 12px;
+      background:var(--surface);
+      border:2px solid var(--border);
+    }
+    .search input{border:0;outline:0;width:100%;font-size:14px;background:transparent;color:var(--text)}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 12px;border:2px solid var(--border);
+      background:var(--surface);color:var(--text);cursor:pointer;
+      box-shadow:none
+    }
+    .btn:hover{background:rgba(11,18,32,.02)}
+    .btn.primary{
+      border-color: var(--accent);
+      background: var(--accent);
+      color:#fff;
+      font-weight:900;
+    }
+    .btn.primary:hover{background:var(--accentHover);border-color:var(--accentHover)}
+    .btn.blue{border-color:var(--blue);background:var(--blue);color:#fff;font-weight:900}
+    .btn.blue:hover{filter:brightness(.95)}
+    .btn.warn{border-color:var(--yellow);background:var(--yellow);color:#111827;font-weight:900}
+    .btn.danger{border-color:var(--red);background:var(--red);color:#fff;font-weight:900}
+    .btn:focus{outline:3px solid rgba(37,99,235,.25);outline-offset:2px}
+
+    .content{padding:var(--s6);display:grid;gap:var(--s6)}
+    .pagehead{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--s6)}
+    .pagehead h1{margin:0;font-size:22px}
+    .pagehead p{margin:6px 0 0;color:var(--muted);font-size:13px;max-width:80ch}
+
+    /* Cards / panels (sharp) */
+    .card{
+      background:var(--surface);
+      border:2px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+    .card .inner{padding:var(--s6)}
+    .sectionTitle{
+      display:flex;align-items:flex-start;justify-content:space-between;gap:var(--s4);
+      margin-bottom:var(--s4)
+    }
+    .sectionTitle h2{margin:0;font-size:14px;letter-spacing:.02em}
+    .sub{color:var(--muted);font-size:12px}
+
+    /* Color strips (requested inserts) */
+    .stripe{
+      height:6px;
+      background: linear-gradient(90deg, var(--blue), var(--yellow), var(--accent), var(--red));
+      border-bottom:2px solid var(--border);
+    }
+    .callouts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:var(--s4)}
+    .callout{
+      border:2px solid var(--border);
+      background:var(--surface2);
+      padding:12px;
+    }
+    .callout .t{font-weight:900;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+    .callout.blue{border-left:10px solid var(--blue)}
+    .callout.yellow{border-left:10px solid var(--yellow)}
+    .callout.red{border-left:10px solid var(--red)}
+    .callout p{margin:8px 0 0;color:var(--muted);font-size:12px;line-height:1.4}
+
+    /* Filters */
+    .filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+    .field{
+      display:flex;align-items:center;gap:10px;
+      padding:10px 12px;
+      border:2px solid var(--border);
+      background:var(--surface2);
+      min-width:190px
+    }
+    .field label{
+      font-size:11px;color:var(--muted);
+      letter-spacing:.14em;text-transform:uppercase;font-weight:900
+    }
+    .field select,.field input{border:0;outline:0;background:transparent;font-size:14px;color:var(--text);min-width:0;width:100%}
+    .field.big{flex:1;min-width:320px}
+
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .chip{
+      display:inline-flex;gap:8px;align-items:center;
+      padding:6px 10px;
+      border:2px solid var(--border);
+      background:#fff;
+      font-size:12px
+    }
+    .chip.env{border-left:10px solid var(--accent)}
+    .chip.status{border-left:10px solid var(--yellow)}
+    .chip.query{border-left:10px solid var(--blue)}
+    .chip b{color:var(--muted);font-weight:900;letter-spacing:.02em}
+    .chip button{border:0;background:transparent;cursor:pointer;color:var(--muted);font-size:14px;line-height:1}
+
+    /* Toolbar */
+    .toolbar{
+      display:flex;align-items:center;justify-content:space-between;gap:var(--s4);
+      padding:var(--s4) var(--s6);
+      border-top:2px solid var(--border);
+      background: #fff;
+    }
+    .toolbar .left{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:13px}
+    .toolbar .right{display:flex;gap:10px}
+
+    .seg{
+      display:inline-flex;border:2px solid var(--border);
+      overflow:hidden;background:#fff
+    }
+    .seg button{
+      border:0;background:transparent;color:var(--muted);
+      padding:8px 10px;cursor:pointer;font-size:12px
+    }
+    .seg button.active{
+      background: var(--blueSoft);
+      color: var(--blue);
+      font-weight:900;
+    }
+
+    /* Table */
+    table{width:100%;border-collapse:separate;border-spacing:0}
+    thead th{
+      text-align:left;font-size:11px;color:var(--muted);
+      font-weight:900;letter-spacing:.14em;text-transform:uppercase;
+      padding:12px 16px;border-bottom:2px solid var(--border);
+      background: #fff;
+    }
+    tbody td{padding:14px 16px;border-bottom:1px solid var(--border);vertical-align:middle;background:#fff}
+    tbody tr:hover td{background:rgba(37,99,235,.04)}
+    .badge{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:6px 10px;border:2px solid var(--border);
+      background:#fff;font-size:12px
+    }
+    .dot{width:10px;height:10px;background:var(--accent)}
+    .mono{font-family:var(--mono);font-size:12px}
+    .url{max-width:440px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--muted)}
+    .rowactions{display:flex;gap:8px}
+    .iconbtn{
+      width:36px;height:36px;border:2px solid var(--border);
+      background:#fff;cursor:pointer
+    }
+    .iconbtn:hover{background:rgba(11,18,32,.02)}
+    .iconbtn.blue{border-color:var(--blue);color:var(--blue)}
+    .iconbtn.yellow{border-color:var(--yellow);color:#9A5B00}
+    .iconbtn.red{border-color:var(--red);color:var(--red)}
+
+    /* New-page editor (overlay page) */
+    .editor{
+      display:none;position:fixed;inset:0;background:var(--bg);z-index:100;overflow:auto
+    }
+    .editor.open{display:block}
+    .editorTop{
+      position:sticky;top:0;z-index:5;
+      background:var(--bg);
+      border-bottom:2px solid var(--border);
+      padding:var(--s4) var(--s6);
+      display:flex;justify-content:space-between;align-items:center;gap:var(--s4)
+    }
+    .breadcrumbs{color:var(--muted);font-size:12px;margin-top:4px}
+    .editorWrap{
+      max-width:1200px;margin:0 auto;padding:var(--s6);
+      display:grid;grid-template-columns:1fr 360px;gap:var(--s6)
+    }
+    .panel{background:#fff;border:2px solid var(--border);box-shadow:var(--shadow)}
+    .panel .p{padding:var(--s6)}
+    .panel h2{margin:0 0 12px;font-size:16px}
+    .formGrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .formGrid .full{grid-column:1/-1}
+    .input{
+      display:grid;gap:6px;padding:10px 12px;border:2px solid var(--border);background:var(--surface2)
+    }
+    .input label{
+      font-size:11px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;font-weight:900
+    }
+    .input input,.input textarea,.input select{border:0;outline:0;background:transparent;font-size:14px;color:var(--text)}
+    .input textarea{min-height:90px;resize:vertical}
+    .tabs{
+      display:flex;gap:0;border:2px solid var(--border);background:#fff;overflow:auto
+    }
+    .tabs button{
+      border:0;background:#fff;padding:10px 12px;cursor:pointer;color:var(--muted);
+      border-right:2px solid var(--border);font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase
+    }
+    .tabs button.active{background:var(--accentSoft);color:var(--accent)}
+    .tabs button:last-child{border-right:0}
+
+    .notice{
+      padding:12px;border:2px solid var(--border);background:#fff;
+    }
+    .notice.blue{border-left:10px solid var(--blue);background:linear-gradient(90deg,var(--blueSoft),#fff)}
+    .notice.yellow{border-left:10px solid var(--yellow);background:linear-gradient(90deg,var(--yellowSoft),#fff)}
+    .notice.red{border-left:10px solid var(--red);background:linear-gradient(90deg,var(--redSoft),#fff)}
+    .notice strong{font-weight:900}
+
+    @media (max-width: 980px){
+      .app{grid-template-columns:1fr}
+      .side{position:relative;height:auto}
+      .editorWrap{grid-template-columns:1fr}
+      .formGrid{grid-template-columns:1fr}
+      .callouts{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <!-- LIST PAGE -->
+  <div class="app">
+    <aside class="side">
+      <div class="brand">
+        <div class="logo"></div>
+        <div>
+          <h1>Carroll</h1>
+          <div class="hint">White + Green • sharp lines • extra colors</div>
+        </div>
+      </div>
+
+      <div class="navgrp">
+        <h2>Configuration</h2>
+        <nav class="nav">
+          <a class="active" href="#"><span>Entities</span><span class="pill">128</span></a>
+          <a href="#"><span>Installations</span><span class="pill">12</span></a>
+          <a href="#"><span>Composite</span><span class="pill">8</span></a>
+        </nav>
+      </div>
+
+      <div class="navgrp">
+        <h2>Security</h2>
+        <nav class="nav">
+          <a href="#"><span>Tokens</span><span class="pill">New</span></a>
+          <a href="#"><span>Whitelists</span><span class="pill">7</span></a>
+        </nav>
+      </div>
+
+      <div class="navgrp">
+        <h2>Gateways</h2>
+        <nav class="nav">
+          <a href="#"><span>APIGate</span><span class="pill">OK</span></a>
+          <a href="#"><span>Routes</span><span class="pill">Warn</span></a>
+        </nav>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="search">
+          <span style="color:var(--muted)">⌕</span>
+          <input placeholder="Global search (entities, URLs, codes)..." />
+        </div>
+        <div style="display:flex;gap:10px">
+          <button class="btn">Docs</button>
+          <button class="btn blue">Support</button>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="pagehead">
+          <div>
+            <h1>Entities</h1>
+            <p>Жёсткая геометрия (без скруглений), прямые линии, и цветовые вставки (синий/жёлтый/красный) для выделения смысловых зон.</p>
+          </div>
+          <div style="display:flex;gap:10px">
+            <button class="btn">Export</button>
+            <button class="btn primary" onclick="openEditor('create')">Create</button>
+          </div>
+        </div>
+
+        <section class="card">
+          <div class="stripe"></div>
+
+          <div class="inner">
+            <div class="sectionTitle">
+              <div>
+                <h2>Filters</h2>
+                <div class="sub">Шаблон: базовые фильтры + расширенные. Цветом отмечаем важные состояния.</div>
+              </div>
+              <div style="display:flex;gap:10px">
+                <button class="btn">More filters</button>
+                <button class="btn warn">Attention</button>
+              </div>
+            </div>
+
+            <div class="filters">
+              <div class="field">
+                <div style="min-width:84px"><label>Env</label></div>
+                <select><option>All</option><option>Prod</option><option>Preprod</option><option>Dev</option></select>
+              </div>
+              <div class="field">
+                <div style="min-width:84px"><label>Status</label></div>
+                <select><option>All</option><option>OK</option><option>Warning</option><option>Error</option></select>
+              </div>
+              <div class="field big">
+                <div style="min-width:84px"><label>Query</label></div>
+                <input placeholder="service, code, host..." />
+              </div>
+              <button class="btn">Clear</button>
+              <button class="btn primary">Apply</button>
+            </div>
+
+            <div class="chips">
+              <span class="chip env"><b>Env</b> Preprod <button>×</button></span>
+              <span class="chip status"><b>Status</b> Warning <button>×</button></span>
+              <span class="chip query"><b>Query</b> appointment <button>×</button></span>
+            </div>
+
+            <div class="callouts">
+              <div class="callout blue">
+                <div class="t">Blue</div>
+                <p>Синим — навигация/поиск/инфо. Хорошо для “глобальных” действий.</p>
+              </div>
+              <div class="callout yellow">
+                <div class="t">Yellow</div>
+                <p>Жёлтым — предупреждения, “нужно внимание”, неполные настройки.</p>
+              </div>
+              <div class="callout red">
+                <div class="t">Red</div>
+                <p>Красным — ошибки и опасные операции (delete, disable).</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="toolbar">
+            <div class="left">
+              <span>128 results</span>
+              <div class="seg">
+                <button class="active">Comfort</button>
+                <button>Compact</button>
+              </div>
+            </div>
+            <div class="right">
+              <button class="btn">Columns</button>
+              <button class="btn blue">Refresh</button>
+            </div>
+          </div>
+
+          <div style="overflow:auto">
+            <table>
+              <thead>
+                <tr>
+                  <th>Env</th>
+                  <th>Entity</th>
+                  <th>Endpoint A</th>
+                  <th>Endpoint B</th>
+                  <th>Status</th>
+                  <th>Updated</th>
+                  <th style="width:180px">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr onclick="openEditor('edit')">
+                  <td><span class="badge"><span class="dot"></span> Preprod</span></td>
+                  <td>
+                    <div style="font-weight:900">SelfAppointmentTwo</div>
+                    <div class="mono" style="color:var(--muted)">APPOINTMENT_SELFAPPOINTMENTTWO_V1S</div>
+                  </td>
+                  <td><div class="mono url">srv-esb-vip-main/.../ProxyService</div></td>
+                  <td><div class="mono url">srv-sappointmentp1-bal01:80/...External</div></td>
+                  <td><span class="badge"><span class="dot" style="background:var(--warning)"></span> Warning</span></td>
+                  <td class="mono">2026-03-04</td>
+                  <td onclick="event.stopPropagation()">
+                    <div class="rowactions">
+                      <button class="iconbtn blue" title="Open">↗</button>
+                      <button class="iconbtn" title="Copy">⧉</button>
+                      <button class="iconbtn yellow" title="Edit" onclick="openEditor('edit')">✎</button>
+                      <button class="iconbtn red" title="Delete">🗑</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr onclick="openEditor('edit')">
+                  <td><span class="badge"><span class="dot" style="background:var(--blue)"></span> Prod</span></td>
+                  <td>
+                    <div style="font-weight:900">ESUCheck</div>
+                    <div class="mono" style="color:var(--muted)">ESU_CHECK_V3</div>
+                  </td>
+                  <td><div class="mono url">srv-esb-prod/.../ESU/Check/v3</div></td>
+                  <td><div class="mono url">srv-esu-prod:443/api/check</div></td>
+                  <td><span class="badge"><span class="dot" style="background:var(--success)"></span> OK</span></td>
+                  <td class="mono">2026-02-21</td>
+                  <td onclick="event.stopPropagation()">
+                    <div class="rowactions">
+                      <button class="iconbtn blue">↗</button>
+                      <button class="iconbtn">⧉</button>
+                      <button class="iconbtn yellow" onclick="openEditor('edit')">✎</button>
+                      <button class="iconbtn red">🗑</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr onclick="openEditor('edit')">
+                  <td><span class="badge"><span class="dot" style="background:var(--red)"></span> Dev</span></td>
+                  <td>
+                    <div style="font-weight:900">GatewayRoute</div>
+                    <div class="mono" style="color:var(--muted)">GW_ROUTE_1</div>
+                  </td>
+                  <td><div class="mono url">srv-gw-dev/proxy/route/v1</div></td>
+                  <td><div class="mono url">srv-back-dev:8080/service</div></td>
+                  <td><span class="badge"><span class="dot" style="background:var(--danger)"></span> Error</span></td>
+                  <td class="mono">2026-01-15</td>
+                  <td onclick="event.stopPropagation()">
+                    <div class="rowactions">
+                      <button class="iconbtn blue">↗</button>
+                      <button class="iconbtn">⧉</button>
+                      <button class="iconbtn yellow" onclick="openEditor('edit')">✎</button>
+                      <button class="iconbtn red">🗑</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- EDIT/CREATE PAGE (OVERLAY) -->
+  <div class="editor" id="editor">
+    <div class="editorTop">
+      <div>
+        <div style="font-weight:900;font-size:16px" id="editorTitle">Edit entity</div>
+        <div class="breadcrumbs" id="crumbs">Entities / SelfAppointmentTwo</div>
+      </div>
+      <div style="display:flex;gap:10px">
+        <button class="btn" onclick="closeEditor()">Back</button>
+        <button class="btn blue">Validate</button>
+        <button class="btn primary" onclick="closeEditor()">Save</button>
+      </div>
+    </div>
+
+    <div class="editorWrap">
+      <section class="panel">
+        <div class="stripe"></div>
+        <div class="p">
+          <div class="tabs" style="margin-bottom:14px">
+            <button class="active">General</button>
+            <button>Endpoints</button>
+            <button>Security</button>
+            <button>Advanced</button>
+          </div>
+
+          <h2>Configuration</h2>
+          <div class="formGrid">
+            <div class="input">
+              <label>Environment</label>
+              <select><option>Preprod</option><option>Prod</option><option>Dev</option></select>
+            </div>
+            <div class="input">
+              <label>Status</label>
+              <select><option>OK</option><option>Warning</option><option>Error</option></select>
+            </div>
+
+            <div class="input full">
+              <label>Name</label>
+              <input id="eName" value="SelfAppointmentTwo" />
+            </div>
+
+            <div class="input full">
+              <label>Code</label>
+              <input id="eCode" class="mono" value="APPOINTMENT_SELFAPPOINTMENTTWO_V1S" style="font-family:var(--mono)" />
+            </div>
+
+            <div class="input full">
+              <label>Endpoint A</label>
+              <input class="mono" value="http://srv-esb-vip-main/.../ProxyService" style="font-family:var(--mono)" />
+            </div>
+
+            <div class="input full">
+              <label>Endpoint B</label>
+              <input class="mono" value="http://srv-sappointmentp1-bal01:80/...External" style="font-family:var(--mono)" />
+            </div>
+
+            <div class="input">
+              <label>Read timeout</label>
+              <input class="mono" value="30000" style="font-family:var(--mono)" />
+            </div>
+
+            <div class="input">
+              <label>Conn timeout</label>
+              <input class="mono" value="5000" style="font-family:var(--mono)" />
+            </div>
+
+            <div class="input full">
+              <label>Description</label>
+              <textarea placeholder="Optional notes..."></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="panel">
+        <div class="stripe"></div>
+        <div class="p">
+          <h2>Validation</h2>
+
+          <div class="notice blue">
+            <div style="font-weight:900"><strong>Info:</strong> Looks good</div>
+            <div style="color:var(--muted);font-size:12px;margin-top:4px">All required fields are filled.</div>
+          </div>
+
+          <div class="notice yellow" style="margin-top:12px">
+            <div style="font-weight:900"><strong>Warning:</strong> Optional mismatch</div>
+            <div style="color:var(--muted);font-size:12px;margin-top:4px">Timeout differs from recommended profile.</div>
+          </div>
+
+          <div class="notice red" style="margin-top:12px">
+            <div style="font-weight:900"><strong>Danger:</strong> Delete is irreversible</div>
+            <div style="color:var(--muted);font-size:12px;margin-top:4px">Use only if you are sure.</div>
+          </div>
+
+          <div style="margin-top:14px">
+            <button class="btn" style="width:100%">Duplicate</button>
+            <button class="btn danger" style="width:100%;margin-top:10px">Delete</button>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    const editor = document.getElementById('editor');
+    const editorTitle = document.getElementById('editorTitle');
+    const crumbs = document.getElementById('crumbs');
+    const eName = document.getElementById('eName');
+    const eCode = document.getElementById('eCode');
+
+    function openEditor(mode){
+      editor.classList.add('open');
+      if(mode === 'create'){
+        editorTitle.textContent = 'Create entity';
+        crumbs.textContent = 'Entities / Create';
+        eName.value = '';
+        eCode.value = '';
+      } else {
+        editorTitle.textContent = 'Edit entity';
+        crumbs.textContent = 'Entities / SelfAppointmentTwo';
+      }
+      window.scrollTo(0,0);
+    }
+    function closeEditor(){
+      editor.classList.remove('open');
+    }
+  </script>
+</body>
+</html>
