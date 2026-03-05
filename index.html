@@ -11,7 +11,9 @@ hide_header: true
 {% assign stories_without_order = site.stories | where_exp: "s", "s.order == nil" | sort: "title" %}
 {% assign stories = stories_with_order | concat: stories_without_order %}
 
-![описание]({{ "/assets/img/sign2.png" | relative_url }})
+<p>
+  <img src="{{ '/assets/img/sign2.png' | relative_url }}" alt="описание" loading="lazy" decoding="async">
+</p>
 
 <div class="catalog">
   <header class="catalog__header">
