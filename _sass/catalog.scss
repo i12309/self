@@ -1,5 +1,14 @@
 /* Atmosferny catalog (hero cards, noir). */
 
+.catalog-sign {
+  margin: 6px 0 18px;
+
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
 .catalog {
   max-width: 980px;
   margin: 0 auto;
