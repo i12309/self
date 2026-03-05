@@ -160,4 +160,4 @@ cover: "/assets/img/triumph/poster.png"
 
 > Торжество справедливости — мужчина **одинок**, женщина **свободна**!
 
-[![описание]({{ "/assets/img/sign2.png" | relative_url }})]({{ "/" | relative_url }})
+[![описание]({{ "/assets/img/sign3_i.png" | relative_url }})]({{ "/" | relative_url }})
