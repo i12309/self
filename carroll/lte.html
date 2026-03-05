@@ -3,56 +3,52 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Carroll (AdminLTE-based) — Strict Accents</title>
+  <title>Carroll — AdminLTE v3 style mock</title>
 
-  <!-- Bootstrap 5 (AdminLTE 4 is Bootstrap 5-based) -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/[email protected]/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    crossorigin="anonymous"
-  />
+  <!-- Font Awesome (AdminLTE v3 commonly uses it) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-  <!-- AdminLTE 4 (use rc tag; docs show jsDelivr pattern) -->
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/[email protected]/dist/css/adminlte.min.css"
-    crossorigin="anonymous"
-  />
+  <!-- Bootstrap 4 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.2/css/bootstrap.min.css">
 
+  <!-- AdminLTE 3 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/css/adminlte.min.css">
+
+  <!-- Strict accents (minimal overrides, keep AdminLTE look) -->
   <style>
-    /* ===== Carroll strict theme (overrides) ===== */
     :root{
-      --c-bg:#F6F7F9;
-      --c-border:#E3E6EA;
-      --c-text:#111827;
-      --c-muted:#6B7280;
-
-      --c-primary:#16A34A;  /* green */
-      --c-blue:#2563EB;
-      --c-yellow:#F59E0B;
-      --c-red:#DC2626;
-
-      --c-r:6px;            /* minimal rounding */
-      --c-accent:2px;       /* thin accent line */
+      --c-primary:#28a745; /* AdminLTE success green */
+      --c-blue:#007bff;
+      --c-yellow:#ffc107;
+      --c-red:#dc3545;
+      --c-border:#dee2e6;
+      --c-r: .2rem; /* less rounded, but not square */
+      --c-accent: 2px;
     }
 
-    body{ background:var(--c-bg); color:var(--c-text); }
-
-    /* Reduce AdminLTE rounding everywhere */
-    .btn, .form-control, .form-select, .card, .modal-content, .nav-sidebar .nav-link{
+    /* Reduce rounding globally (strict) */
+    .btn, .card, .form-control, .custom-select, .nav-pills .nav-link, .info-box, .small-box, .modal-content {
       border-radius: var(--c-r) !important;
     }
 
-    /* Make borders a bit more "engineering" and consistent */
-    .card, .form-control, .form-select, .btn, .modal-content, .main-header, .main-sidebar{
-      border-color: var(--c-border) !important;
+    /* Thin accent lines (strict) */
+    .card.accent-green{ position:relative; }
+    .card.accent-green::before,
+    .card.accent-blue::before,
+    .card.accent-yellow::before,
+    .card.accent-red::before{
+      content:"";
+      position:absolute; left:0; right:0; top:0;
+      height: var(--c-accent);
     }
+    .card.accent-green::before{ background: var(--c-primary); }
+    .card.accent-blue::before{ background: var(--c-blue); }
+    .card.accent-yellow::before{ background: var(--c-yellow); }
+    .card.accent-red::before{ background: var(--c-red); }
 
-    /* Sidebar: strict active marker (thin left bar) */
+    /* Sidebar active marker – thin left bar (AdminLTE-like, strict) */
     .nav-sidebar .nav-link.active{
-      background: rgba(22,163,74,.08) !important;
-      color: var(--c-text) !important;
-      position: relative;
+      position:relative;
     }
     .nav-sidebar .nav-link.active::before{
       content:"";
@@ -62,44 +58,28 @@
       background: var(--c-primary);
     }
 
-    /* Cards: thin top accent line (by “meaning”) */
-    .card.accent-green{ position:relative; }
-    .card.accent-green::before,
-    .card.accent-blue::before,
-    .card.accent-yellow::before,
-    .card.accent-red::before{
-      content:"";
-      position:absolute;
-      left:0; right:0; top:0;
-      height: var(--c-accent);
-    }
-    .card.accent-green::before{ background: var(--c-primary); }
-    .card.accent-blue::before{ background: var(--c-blue); }
-    .card.accent-yellow::before{ background: var(--c-yellow); }
-    .card.accent-red::before{ background: var(--c-red); }
-
-    /* Chips: strict pill + thin left color */
+    /* Small “chip” tags like in strict version */
     .chip{
       display:inline-flex; align-items:center; gap:.5rem;
-      padding:.25rem .5rem .25rem .7rem;
+      padding:.2rem .55rem .2rem .75rem;
       border:1px solid var(--c-border);
-      border-radius: 999px;
       background:#fff;
-      font-size:.825rem;
+      border-radius: 999px;
+      font-size:.8rem;
       position:relative;
+      margin-right:.35rem;
+      margin-bottom:.35rem;
     }
     .chip::before{
       content:"";
-      position:absolute;
-      left:.35rem; top:.35rem; bottom:.35rem;
+      position:absolute; left:.35rem; top:.3rem; bottom:.3rem;
       width:2px; background: var(--c-primary);
     }
     .chip.blue::before{ background: var(--c-blue); }
     .chip.yellow::before{ background: var(--c-yellow); }
     .chip.red::before{ background: var(--c-red); }
-    .chip b{ color:var(--c-muted); font-weight:600; }
 
-    /* Action icons: strict squares + thin bottom accent */
+    /* Icon actions – strict with thin bottom color */
     .iconbtn{
       width:34px; height:34px;
       display:inline-flex; align-items:center; justify-content:center;
@@ -112,216 +92,258 @@
     .iconbtn.blue{ border-bottom:2px solid var(--c-blue); }
     .iconbtn.yellow{ border-bottom:2px solid var(--c-yellow); }
     .iconbtn.red{ border-bottom:2px solid var(--c-red); }
-
-    /* Table: keep it clean */
-    .table thead th{
-      font-weight:600;
-      color: var(--c-muted);
-      border-bottom-color: var(--c-border) !important;
-    }
-    .table td{ border-top-color: var(--c-border) !important; }
-
-    /* Primary button: strict green */
-    .btn-primary{
-      background: var(--c-primary) !important;
-      border-color: var(--c-primary) !important;
-    }
-    .btn-outline-primary{
-      color: var(--c-primary) !important;
-      border-color: rgba(22,163,74,.35) !important;
-    }
-
-    /* Modal header: thin accent line */
-    .modal-content{ position:relative; }
-    .modal-content::before{
-      content:"";
-      position:absolute; left:0; right:0; top:0;
-      height: var(--c-accent);
-      background: var(--c-blue);
-    }
-
-    /* Optional: slightly “straighter” look */
-    .card-header{ background:#fff; }
-    .content-wrapper{ background: var(--c-bg) !important; }
   </style>
 </head>
 
-<body class="layout-fixed sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light border-bottom">
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button">☰</a>
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Entities</a>
       </li>
     </ul>
 
-    <form class="form-inline ms-3" style="width:min(560px, 60vw);">
-      <div class="input-group input-group-sm w-100">
-        <input class="form-control" type="search" placeholder="Search (name, code, host, url)..." />
-        <button class="btn btn-outline-secondary" type="button">Search</button>
+    <!-- Search -->
+    <form class="form-inline ml-3">
+      <div class="input-group input-group-sm">
+        <input class="form-control form-control-navbar" type="search" placeholder="Search (name, code, host)" aria-label="Search">
+        <div class="input-group-append">
+          <button class="btn btn-navbar" type="button"><i class="fas fa-search"></i></button>
+        </div>
       </div>
     </form>
 
-    <ul class="navbar-nav ms-auto">
-      <li class="nav-item">
-        <button class="btn btn-sm btn-outline-primary me-2">Docs</button>
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item mr-2">
+        <button class="btn btn-sm btn-outline-success">Docs</button>
       </li>
       <li class="nav-item">
-        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">Create</button>
+        <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#editModal">Create</button>
       </li>
     </ul>
   </nav>
+  <!-- /.navbar -->
 
-  <!-- Sidebar -->
-  <aside class="main-sidebar sidebar-light-primary border-end">
-    <a href="#" class="brand-link border-bottom">
-      <span class="brand-text fw-semibold">Carroll</span>
-      <span class="ms-2 text-muted small">AdminLTE</span>
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-2">
+    <!-- Brand Logo -->
+    <a href="#" class="brand-link">
+      <span class="brand-text font-weight-semibold">Carroll</span>
+      <span class="text-muted" style="font-size:.85rem;"> AdminLTE v3</span>
     </a>
 
+    <!-- Sidebar -->
     <div class="sidebar">
+      <!-- Sidebar Menu -->
       <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" role="menu">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
             <a href="#" class="nav-link active">
-              <p>Entities <span class="badge bg-light text-dark float-end border">128</span></p>
+              <i class="nav-icon fas fa-list"></i>
+              <p>Entities <span class="right badge badge-light">128</span></p>
             </a>
           </li>
-          <li class="nav-item"><a href="#" class="nav-link"><p>Installations</p></a></li>
-          <li class="nav-item"><a href="#" class="nav-link"><p>Composite services</p></a></li>
 
-          <li class="nav-header mt-3">SECURITY</li>
-          <li class="nav-item"><a href="#" class="nav-link"><p>Tokens</p></a></li>
-          <li class="nav-item"><a href="#" class="nav-link"><p>Whitelists</p></a></li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-download"></i>
+              <p>Installations</p>
+            </a>
+          </li>
 
-          <li class="nav-header mt-3">GATEWAYS</li>
-          <li class="nav-item"><a href="#" class="nav-link"><p>APIGate</p></a></li>
-          <li class="nav-item"><a href="#" class="nav-link"><p>Routes</p></a></li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-layer-group"></i>
+              <p>Composite services</p>
+            </a>
+          </li>
+
+          <li class="nav-header">SECURITY</li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-key"></i>
+              <p>Tokens</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-shield-alt"></i>
+              <p>Whitelists</p>
+            </a>
+          </li>
+
+          <li class="nav-header">GATEWAYS</li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-random"></i>
+              <p>APIGate</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-route"></i>
+              <p>Routes</p>
+            </a>
+          </li>
+
         </ul>
       </nav>
+      <!-- /.sidebar-menu -->
     </div>
+    <!-- /.sidebar -->
   </aside>
 
-  <!-- Content -->
+  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <section class="content pt-3">
+    <!-- Content Header -->
+    <div class="content-header">
       <div class="container-fluid">
-
-        <div class="d-flex align-items-start justify-content-between mb-3">
-          <div>
-            <h1 class="h5 mb-1">Entities</h1>
-            <div class="text-muted small">Strict accents: thin lines and small color markers (no “decor”).</div>
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Entities</h1>
           </div>
-          <div class="d-flex gap-2">
-            <button class="btn btn-sm btn-outline-secondary">Export</button>
-            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">Create</button>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Entities</li>
+            </ol>
           </div>
         </div>
+      </div>
+    </div>
 
-        <!-- Filters card (blue = “info/control zone”) -->
-        <div class="card accent-blue mb-3">
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+
+        <!-- Filters card -->
+        <div class="card accent-blue">
           <div class="card-header">
-            <div class="d-flex align-items-center justify-content-between">
-              <div class="fw-semibold">Filters</div>
-              <button class="btn btn-sm btn-outline-secondary">More</button>
+            <h3 class="card-title">Filters</h3>
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
             </div>
           </div>
 
           <div class="card-body">
-            <div class="row g-2">
-              <div class="col-12 col-md-3">
-                <label class="form-label small text-muted mb-1">Environment</label>
-                <select class="form-select form-select-sm">
+            <div class="form-row">
+              <div class="col-md-3 mb-2">
+                <label class="text-muted mb-1" style="font-size:.85rem;">Environment</label>
+                <select class="custom-select">
                   <option>All</option><option>Prod</option><option>Preprod</option><option>Dev</option>
                 </select>
               </div>
-              <div class="col-12 col-md-3">
-                <label class="form-label small text-muted mb-1">Status</label>
-                <select class="form-select form-select-sm">
+              <div class="col-md-3 mb-2">
+                <label class="text-muted mb-1" style="font-size:.85rem;">Status</label>
+                <select class="custom-select">
                   <option>All</option><option>OK</option><option>Warning</option><option>Error</option>
                 </select>
               </div>
-              <div class="col-12 col-md-6">
-                <label class="form-label small text-muted mb-1">Query</label>
-                <input class="form-control form-control-sm" placeholder="service, code, host..." />
+              <div class="col-md-6 mb-2">
+                <label class="text-muted mb-1" style="font-size:.85rem;">Query</label>
+                <input class="form-control" placeholder="service, code, host..." />
               </div>
             </div>
 
-            <div class="mt-3 d-flex flex-wrap gap-2">
+            <div class="mt-2">
               <span class="chip"><b>Env</b> Preprod</span>
               <span class="chip blue"><b>Product</b> SelfAppointment</span>
               <span class="chip yellow"><b>Status</b> Warning</span>
             </div>
 
-            <div class="mt-3 d-flex gap-2">
-              <button class="btn btn-sm btn-outline-secondary">Clear</button>
-              <button class="btn btn-sm btn-primary">Apply</button>
+            <div class="mt-3">
+              <button class="btn btn-default">Clear</button>
+              <button class="btn btn-success">Apply</button>
+              <button class="btn btn-outline-secondary float-right">Columns</button>
             </div>
           </div>
         </div>
 
-        <!-- List card (green = “primary content zone”) -->
+        <!-- List card -->
         <div class="card accent-green">
           <div class="card-header">
-            <div class="d-flex align-items-center justify-content-between">
-              <div class="fw-semibold">List</div>
-              <div class="text-muted small">128 results • sorted by Updated desc</div>
+            <h3 class="card-title">List</h3>
+            <div class="card-tools text-muted" style="font-size:.9rem;">
+              128 results • sorted by Updated desc
             </div>
           </div>
 
           <div class="card-body p-0">
             <div class="table-responsive">
-              <table class="table table-hover mb-0">
+              <table class="table table-hover text-nowrap mb-0">
                 <thead>
                   <tr>
-                    <th style="width:120px">Env</th>
+                    <th>Env</th>
                     <th>Entity</th>
                     <th>Endpoint A</th>
                     <th>Endpoint B</th>
-                    <th style="width:140px">Status</th>
-                    <th style="width:150px">Updated</th>
+                    <th>Status</th>
+                    <th>Updated</th>
                     <th style="width:160px">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr style="cursor:pointer" data-bs-toggle="modal" data-bs-target="#editModal">
-                    <td><span class="badge bg-light text-dark border">Preprod</span></td>
+                  <tr style="cursor:pointer" data-toggle="modal" data-target="#editModal">
+                    <td><span class="badge badge-light border">Preprod</span></td>
                     <td>
-                      <div class="fw-semibold">SelfAppointmentTwo</div>
-                      <div class="text-muted small font-monospace">APPOINTMENT_SELFAPPOINTMENTTWO_V1S</div>
+                      <div class="font-weight-semibold">SelfAppointmentTwo</div>
+                      <div class="text-muted" style="font-size:.85rem;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;">
+                        APPOINTMENT_SELFAPPOINTMENTTWO_V1S
+                      </div>
                     </td>
-                    <td class="text-muted small font-monospace">srv-esb-vip-main/.../ProxyService</td>
-                    <td class="text-muted small font-monospace">srv-sappointmentp1-bal01:80/...External</td>
-                    <td><span class="badge bg-light text-dark border">OK</span></td>
-                    <td class="text-muted small font-monospace">2026-03-04</td>
-                    <td>
-                      <div class="d-flex gap-2" onclick="event.stopPropagation()">
+                    <td class="text-muted" style="font-size:.85rem;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;">
+                      srv-esb-vip-main/.../ProxyService
+                    </td>
+                    <td class="text-muted" style="font-size:.85rem;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;">
+                      srv-sappointmentp1-bal01:80/...External
+                    </td>
+                    <td><span class="badge badge-light border">OK</span></td>
+                    <td class="text-muted" style="font-size:.85rem;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;">
+                      2026-03-04
+                    </td>
+                    <td onclick="event.stopPropagation()">
+                      <div class="d-flex" style="gap:.5rem;">
                         <button class="iconbtn blue" title="Open">↗</button>
                         <button class="iconbtn" title="Copy">⧉</button>
-                        <button class="iconbtn yellow" title="Edit" data-bs-toggle="modal" data-bs-target="#editModal">✎</button>
+                        <button class="iconbtn yellow" title="Edit" data-toggle="modal" data-target="#editModal">✎</button>
                       </div>
                     </td>
                   </tr>
 
-                  <tr style="cursor:pointer" data-bs-toggle="modal" data-bs-target="#editModal">
-                    <td><span class="badge bg-light text-dark border">Prod</span></td>
+                  <tr style="cursor:pointer" data-toggle="modal" data-target="#editModal">
+                    <td><span class="badge badge-light border">Prod</span></td>
                     <td>
-                      <div class="fw-semibold">ESUCheck</div>
-                      <div class="text-muted small font-monospace">ESU_CHECK_V3</div>
+                      <div class="font-weight-semibold">ESUCheck</div>
+                      <div class="text-muted" style="font-size:.85rem;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;">
+                        ESU_CHECK_V3
+                      </div>
                     </td>
-                    <td class="text-muted small font-monospace">srv-esb-prod/.../ESU/Check/v3</td>
-                    <td class="text-muted small font-monospace">srv-esu-prod:443/api/check</td>
-                    <td><span class="badge bg-light text-dark border">Warning</span></td>
-                    <td class="text-muted small font-monospace">2026-02-21</td>
-                    <td>
-                      <div class="d-flex gap-2" onclick="event.stopPropagation()">
-                        <button class="iconbtn blue">↗</button>
-                        <button class="iconbtn">⧉</button>
+                    <td class="text-muted" style="font-size:.85rem;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;">
+                      srv-esb-prod/.../ESU/Check/v3
+                    </td>
+                    <td class="text-muted" style="font-size:.85rem;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;">
+                      srv-esu-prod:443/api/check
+                    </td>
+                    <td><span class="badge badge-warning">Warning</span></td>
+                    <td class="text-muted" style="font-size:.85rem;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;">
+                      2026-02-21
+                    </td>
+                    <td onclick="event.stopPropagation()">
+                      <div class="d-flex" style="gap:.5rem;">
+                        <button class="iconbtn blue" title="Open">↗</button>
+                        <button class="iconbtn" title="Copy">⧉</button>
                         <button class="iconbtn red" title="Danger">!</button>
                       </div>
                     </td>
@@ -336,125 +358,123 @@
       </div>
     </section>
   </div>
+  <!-- /.content-wrapper -->
 
-  <footer class="main-footer border-top small">
-    <strong>Carroll</strong> • AdminLTE-based prototype
+  <footer class="main-footer">
+    <div class="float-right d-none d-sm-inline">v0.1 mock</div>
+    <strong>Carroll</strong> • AdminLTE v3 style
   </footer>
 </div>
 
-<!-- Full-screen-ish modal (large) for Create/Edit -->
+<!-- Modal (AdminLTE v3 + Bootstrap 4) -->
 <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
         <div>
-          <div class="fw-semibold">Edit entity</div>
-          <div class="text-muted small">Entities / SelfAppointmentTwo</div>
+          <div class="font-weight-semibold">Edit entity</div>
+          <div class="text-muted" style="font-size:.9rem;">Entities / SelfAppointmentTwo</div>
         </div>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
       </div>
 
       <div class="modal-body">
-        <div class="row g-3">
-          <div class="col-12 col-lg-8">
+        <div class="row">
+          <div class="col-lg-8">
             <div class="card accent-green mb-0">
-              <div class="card-header"><div class="fw-semibold">Configuration</div></div>
+              <div class="card-header"><h3 class="card-title">Configuration</h3></div>
               <div class="card-body">
-                <div class="row g-2">
-                  <div class="col-12 col-md-6">
-                    <label class="form-label small text-muted mb-1">Environment</label>
-                    <select class="form-select form-select-sm">
+                <div class="form-row">
+                  <div class="col-md-6 mb-2">
+                    <label class="text-muted mb-1" style="font-size:.85rem;">Environment</label>
+                    <select class="custom-select">
                       <option>Preprod</option><option>Prod</option><option>Dev</option>
                     </select>
                   </div>
-                  <div class="col-12 col-md-6">
-                    <label class="form-label small text-muted mb-1">Status</label>
-                    <select class="form-select form-select-sm">
+                  <div class="col-md-6 mb-2">
+                    <label class="text-muted mb-1" style="font-size:.85rem;">Status</label>
+                    <select class="custom-select">
                       <option>OK</option><option>Warning</option><option>Error</option>
                     </select>
                   </div>
 
-                  <div class="col-12">
-                    <label class="form-label small text-muted mb-1">Name</label>
-                    <input class="form-control form-control-sm" value="SelfAppointmentTwo" />
+                  <div class="col-12 mb-2">
+                    <label class="text-muted mb-1" style="font-size:.85rem;">Name</label>
+                    <input class="form-control" value="SelfAppointmentTwo">
+                  </div>
+
+                  <div class="col-12 mb-2">
+                    <label class="text-muted mb-1" style="font-size:.85rem;">Code</label>
+                    <input class="form-control" value="APPOINTMENT_SELFAPPOINTMENTTWO_V1S">
+                  </div>
+
+                  <div class="col-12 mb-2">
+                    <label class="text-muted mb-1" style="font-size:.85rem;">Endpoint A</label>
+                    <input class="form-control" value="http://srv-esb-vip-main/.../ProxyService">
+                  </div>
+
+                  <div class="col-12 mb-2">
+                    <label class="text-muted mb-1" style="font-size:.85rem;">Endpoint B</label>
+                    <input class="form-control" value="http://srv-sappointmentp1-bal01:80/...External">
+                  </div>
+
+                  <div class="col-md-6 mb-2">
+                    <label class="text-muted mb-1" style="font-size:.85rem;">Read timeout</label>
+                    <input class="form-control" value="30000">
+                  </div>
+                  <div class="col-md-6 mb-2">
+                    <label class="text-muted mb-1" style="font-size:.85rem;">Conn timeout</label>
+                    <input class="form-control" value="5000">
                   </div>
 
                   <div class="col-12">
-                    <label class="form-label small text-muted mb-1">Code</label>
-                    <input class="form-control form-control-sm font-monospace" value="APPOINTMENT_SELFAPPOINTMENTTWO_V1S" />
-                  </div>
-
-                  <div class="col-12">
-                    <label class="form-label small text-muted mb-1">Endpoint A</label>
-                    <input class="form-control form-control-sm font-monospace" value="http://srv-esb-vip-main/.../ProxyService" />
-                  </div>
-
-                  <div class="col-12">
-                    <label class="form-label small text-muted mb-1">Endpoint B</label>
-                    <input class="form-control form-control-sm font-monospace" value="http://srv-sappointmentp1-bal01:80/...External" />
-                  </div>
-
-                  <div class="col-12 col-md-6">
-                    <label class="form-label small text-muted mb-1">Read timeout</label>
-                    <input class="form-control form-control-sm font-monospace" value="30000" />
-                  </div>
-                  <div class="col-12 col-md-6">
-                    <label class="form-label small text-muted mb-1">Conn timeout</label>
-                    <input class="form-control form-control-sm font-monospace" value="5000" />
-                  </div>
-
-                  <div class="col-12">
-                    <label class="form-label small text-muted mb-1">Description</label>
-                    <textarea class="form-control form-control-sm" rows="4" placeholder="Optional notes..."></textarea>
+                    <label class="text-muted mb-1" style="font-size:.85rem;">Description</label>
+                    <textarea class="form-control" rows="4" placeholder="Optional notes..."></textarea>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="col-12 col-lg-4">
-            <div class="card accent-yellow mb-3">
-              <div class="card-header"><div class="fw-semibold">Validation</div></div>
-              <div class="card-body small text-muted">
-                Yellow/Red/Blue используются только как маркеры смыслов:
+          <div class="col-lg-4">
+            <div class="card accent-yellow">
+              <div class="card-header"><h3 class="card-title">Validation</h3></div>
+              <div class="card-body text-muted" style="font-size:.9rem;">
+                Тонкие цветовые линии:
                 <ul class="mb-0">
-                  <li>Blue — инфо/навигация</li>
+                  <li>Green — основной поток</li>
+                  <li>Blue — навигация/инфо</li>
                   <li>Yellow — предупреждения</li>
-                  <li>Red — риск/опасные действия</li>
+                  <li>Red — риск/опасно</li>
                 </ul>
               </div>
             </div>
 
             <div class="card accent-red">
-              <div class="card-header"><div class="fw-semibold">Danger zone</div></div>
+              <div class="card-header"><h3 class="card-title">Danger zone</h3></div>
               <div class="card-body">
-                <button class="btn btn-sm btn-outline-danger w-100">Delete</button>
+                <button class="btn btn-outline-danger btn-block">Delete</button>
               </div>
             </div>
           </div>
-
         </div>
       </div>
 
       <div class="modal-footer">
-        <button class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button class="btn btn-sm btn-outline-primary">Validate</button>
-        <button class="btn btn-sm btn-primary">Save</button>
+        <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button class="btn btn-outline-success">Validate</button>
+        <button class="btn btn-success">Save</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Bootstrap bundle -->
-<script
-  src="https://cdn.jsdelivr.net/npm/[email protected]/dist/js/bootstrap.bundle.min.js"
-  crossorigin="anonymous"
-></script>
+<!-- Scripts (AdminLTE v3 requires jQuery + Bootstrap 4 bundle) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/js/adminlte.min.js"></script>
 
-<!-- AdminLTE -->
-<script
-  src="https://cdn.jsdelivr.net/npm/[email protected]/dist/js/adminlte.min.js"
-  crossorigin="anonymous"
-></script>
 </body>
 </html>
