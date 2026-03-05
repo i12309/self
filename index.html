@@ -11,16 +11,18 @@ hide_header: true
 {% assign stories_without_order = site.stories | where_exp: "s", "s.order == nil" | sort: "title" %}
 {% assign stories = stories_with_order | concat: stories_without_order %}
 
-<p class="catalog-sign">
-  <img src="{{ '/assets/img/sign3_i_s.png' | relative_url }}" alt="описание" loading="lazy" decoding="async">
-</p>
-
 <div class="catalog">
-  <header class="catalog__header">
-    <h1 class="catalog__title">{{ page.title }}</h1>
+  <div class="catalog__top">
+    <header class="catalog__header">
+      <h1 class="catalog__title">{{ page.title }}</h1>
     <p class="catalog__subtitle">Разные истории, аллегории, метафоры: Все совпадения случайны.</p>
-    <br/>
-  </header>
+      <br/>
+    </header>
+
+    <p class="catalog-sign">
+      <img src="{{ '/assets/img/sign3_i_s.png' | relative_url }}" alt="описание" loading="lazy" decoding="async">
+    </p>
+  </div>
 
   {% if stories.size > 0 %}
     <ul class="catalog-list">

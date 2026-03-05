@@ -1,11 +1,16 @@
 /* Atmosferny catalog (hero cards, noir). */
 
 .catalog-sign {
-  margin: 6px 0 18px;
+  margin: 10px 0 18px;
+  flex: 0 0 auto;
+  align-self: center;
+  margin-left: auto;
 
   img {
     display: block;
-    margin: 0 auto;
+    margin: 0;
+    max-width: min(240px, 42vw);
+    height: auto;
   }
 }
 
@@ -15,8 +20,16 @@
   padding: 12px 0 28px;
 }
 
+.catalog__top {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
 .catalog__header {
   margin: 10px 0 18px;
+  flex: 1 1 520px;
 }
 
 .catalog__title {
@@ -172,6 +185,20 @@ body.theme-light .catalog-card:focus-visible .catalog-card__cta {
 .catalog-card:focus-visible {
   outline: 2px solid rgba(138, 180, 255, 0.85);
   outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .catalog__top {
+    flex-direction: column;
+  }
+
+  .catalog-sign {
+    margin-left: 0;
+
+    img {
+      margin: 0 auto;
+    }
+  }
 }
 
 @media (min-width: 900px) {
